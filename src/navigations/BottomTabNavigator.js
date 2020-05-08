@@ -19,6 +19,7 @@ export default function BottomTabNavigator() {
         activeTintColor: '#0084bd',
         activeBackgroundColor: '#0D0F12',
         inactiveBackgroundColor: '#0D0F12',
+        keyboardHidesTabBar: true,
       }}>
       <Tab.Screen
         name={HOME}
