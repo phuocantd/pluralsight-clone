@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image, Text, StyleSheet, ScrollView} from 'react-native';
+import {Image, StyleSheet, ScrollView} from 'react-native';
 
 import {globalStyles} from 'styles/global';
-import Section from 'components/section';
+import ScrollHorizontal from 'components/scrollHorizontal';
 import {
   softwareDevelopment,
   IToperations,
@@ -22,21 +22,25 @@ export default function Home() {
             'https://www.stevejgordon.co.uk/wp-content/uploads/2020/04/Pluralsight-Free-April-2020-Wide.jpg',
         }}
       />
-      <Section
+      <ScrollHorizontal
+        component="course"
         title={softwareDevelopment.title}
-        listCourse={softwareDevelopment.listCourse}
+        items={softwareDevelopment.listCourse}
       />
-      <Section
+      <ScrollHorizontal
+        component="course"
         title={IToperations.title}
-        listCourse={IToperations.listCourse}
+        items={IToperations.listCourse}
       />
-      <Section
+      <ScrollHorizontal
+        component="course"
         title={dataProfessional.title}
-        listCourse={dataProfessional.listCourse}
+        items={dataProfessional.listCourse}
       />
-      <Section
+      <ScrollHorizontal
+        component="course"
         title={securityProfessional.title}
-        listCourse={securityProfessional.listCourse}
+        items={securityProfessional.listCourse}
       />
     </ScrollView>
   );

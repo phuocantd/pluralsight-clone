@@ -1,10 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function SectionItem({item}) {
   return (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => console.log(`${item.courseTitle} clicked!!!`)}>
       <Image
         style={styles.image}
         source={{
@@ -30,7 +32,7 @@ export default function SectionItem({item}) {
           </View>
         )}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
