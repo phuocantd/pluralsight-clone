@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import {globalStyles} from 'styles/global';
+import {globalStyles} from 'global/styles';
 import Recent from 'components/recent';
 
 const recents = [

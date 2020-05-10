@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-import {globalStyles} from 'styles/global';
+import {globalStyles} from 'global/styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Downloads() {

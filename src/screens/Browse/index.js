@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 
-import {globalStyles} from 'styles/global';
+import {globalStyles} from 'global/styles';
 import ImageButton from 'components/imageButtonMedium';
 import ScrollImage from 'components/scrollImage';
 import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';

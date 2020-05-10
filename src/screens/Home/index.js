@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, ScrollView} from 'react-native';
 
-import {globalStyles} from 'styles/global';
+import {globalStyles} from 'global/styles';
 import ScrollHorizontal from 'components/scrollHorizontal';
 import {
   softwareDevelopment,

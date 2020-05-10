@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {HOME, LOGIN} from 'global/constants';
-import BottomTab from './BottomTabNavigator';
-import AuthStack from './authStack';
+import {SEARCH} from 'global/constants';
+import SearchScreen from 'screens/Search';
 
 const Stack = createStackNavigator();
 
@@ -13,8 +12,7 @@ export default function SearchStack() {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={HOME} component={BottomTab} />
-      <Stack.Screen name={LOGIN} component={AuthStack} />
+      <Stack.Screen name={SEARCH} component={SearchScreen} />
     </Stack.Navigator>
   );
 }

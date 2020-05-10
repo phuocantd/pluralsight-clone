@@ -5,11 +5,11 @@ import IconFontisto from 'react-native-vector-icons/Fontisto';
 
 const Tab = createBottomTabNavigator();
 
-import HomeScreen from 'screens/Home';
-import DownloadsScreen from 'screens/Downloads';
-import BrowseScreen from 'screens/Browse';
-import SearchScreen from 'screens/Search';
-import {HOME, DOWNLOADS, BROWSE, SEARCH} from 'constants';
+import HomeStack from './homeStack';
+import DownloadsStack from './downloadsStack';
+import BrowseStack from './browseStack';
+import SearchStack from './searchStack';
+import {HOME, DOWNLOADS, BROWSE, SEARCH} from 'global/constants';
 
 export default function BottomTabNavigator() {
   return (
@@ -23,7 +23,7 @@ export default function BottomTabNavigator() {
       }}>
       <Tab.Screen
         name={HOME}
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <IconMaterial name="home-outline" size={size} color={color} />
@@ -32,7 +32,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name={DOWNLOADS}
-        component={DownloadsScreen}
+        component={DownloadsStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <IconMaterial
@@ -45,7 +45,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name={BROWSE}
-        component={BrowseScreen}
+        component={BrowseStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <IconFontisto name="nav-icon-grid" size={size} color={color} />
@@ -54,7 +54,7 @@ export default function BottomTabNavigator() {
       />
       <Tab.Screen
         name={SEARCH}
-        component={SearchScreen}
+        component={SearchStack}
         options={{
           tabBarIcon: ({color, size}) => (
             <IconFontisto name="search" size={size} color={color} />
