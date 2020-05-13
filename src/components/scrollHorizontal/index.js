@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const course = React.lazy(() => import('../course'));
+const course = React.lazy(() => import('../course/vertical'));
 const path = React.lazy(() => import('../path'));
 const skill = React.lazy(() => import('../skill'));
 const author = React.lazy(() => import('../author'));
@@ -19,14 +19,14 @@ const lazyMap = {
   author,
 };
 
-export default function Section({title, items, component}) {
+export default function Section({title, items, component, handleSeeAll}) {
   const ItemComponent = lazyMap[component];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleSeeAll(title, items)}>
           <Text style={styles.seeAll}>See all ></Text>
         </TouchableOpacity>
       </View>

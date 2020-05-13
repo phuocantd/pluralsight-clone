@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, ScrollView} from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {LISTCOURSE} from 'global/constants';
 import ScrollHorizontal from 'components/scrollHorizontal';
 import {
   softwareDevelopment,
@@ -10,7 +11,10 @@ import {
   securityProfessional,
 } from 'data/home';
 
-export default function Home() {
+export default function Home({navigation}) {
+  const handleSeeAll = (title, items) =>
+    navigation.navigate(LISTCOURSE, {items, title});
+
   return (
     <ScrollView
       style={globalStyles.container}
@@ -26,21 +30,25 @@ export default function Home() {
         component="course"
         title={softwareDevelopment.title}
         items={softwareDevelopment.listCourse}
+        handleSeeAll={handleSeeAll}
       />
       <ScrollHorizontal
         component="course"
         title={IToperations.title}
         items={IToperations.listCourse}
+        handleSeeAll={handleSeeAll}
       />
       <ScrollHorizontal
         component="course"
         title={dataProfessional.title}
         items={dataProfessional.listCourse}
+        handleSeeAll={handleSeeAll}
       />
       <ScrollHorizontal
         component="course"
         title={securityProfessional.title}
         items={securityProfessional.listCourse}
+        handleSeeAll={handleSeeAll}
       />
     </ScrollView>
   );
