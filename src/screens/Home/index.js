@@ -15,6 +15,8 @@ export default function Home({navigation}) {
   const handleSeeAll = (title, items) =>
     navigation.navigate(LISTCOURSE, {items, title});
 
+  const handleDetailCourse = screen => navigation.navigate(screen);
+
   return (
     <ScrollView
       style={globalStyles.container}
@@ -31,24 +33,28 @@ export default function Home({navigation}) {
         title={softwareDevelopment.title}
         items={softwareDevelopment.listCourse}
         handleSeeAll={handleSeeAll}
+        handleDetailCourse={handleDetailCourse}
       />
       <ScrollHorizontal
         component="course"
         title={IToperations.title}
         items={IToperations.listCourse}
         handleSeeAll={handleSeeAll}
+        handleDetailCourse={handleDetailCourse}
       />
       <ScrollHorizontal
         component="course"
         title={dataProfessional.title}
         items={dataProfessional.listCourse}
         handleSeeAll={handleSeeAll}
+        handleDetailCourse={handleDetailCourse}
       />
       <ScrollHorizontal
         component="course"
         title={securityProfessional.title}
         items={securityProfessional.listCourse}
         handleSeeAll={handleSeeAll}
+        handleDetailCourse={handleDetailCourse}
       />
     </ScrollView>
   );

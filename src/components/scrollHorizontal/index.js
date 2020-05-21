@@ -19,7 +19,13 @@ const lazyMap = {
   author,
 };
 
-export default function Section({title, items, component, handleSeeAll}) {
+export default function Section({
+  title,
+  items,
+  component,
+  handleSeeAll,
+  handleDetailCourse,
+}) {
   const ItemComponent = lazyMap[component];
 
   return (
@@ -33,7 +39,7 @@ export default function Section({title, items, component, handleSeeAll}) {
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {items.map(item => (
           <Suspense fallback={null} key={Math.random().toString()}>
-            <ItemComponent item={item} />
+            <ItemComponent item={item} handleDetail={handleDetailCourse} />
           </Suspense>
         ))}
       </ScrollView>

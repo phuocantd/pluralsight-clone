@@ -1,6 +1,7 @@
 //Home stack
 export const HOME = 'Home';
 export const LISTCOURSE = 'ListCourse';
+export const COURSEDETAIL = 'CourseDetail';
 
 export const DOWNLOADS = 'Downloads';
 

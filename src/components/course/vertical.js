@@ -1,12 +1,14 @@
 import React from 'react';
 import {StyleSheet, Image, TouchableOpacity} from 'react-native';
+
+import {COURSEDETAIL} from 'global/constants';
 import InfoCourse from './info';
 
-export default function Course({item}) {
+export default function Course({item, handleDetail}) {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => console.log(`${item.courseTitle} clicked!!!`)}>
+      onPress={() => handleDetail(COURSEDETAIL)}>
       <Image
         style={styles.image}
         source={{
