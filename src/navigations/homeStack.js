@@ -6,21 +6,19 @@ import HomeScreen from 'screens/Home';
 import ListCourseScreen from 'screens/ListCourse';
 import ProfileScreen from 'screens/Profile';
 import CourseDetailScreen from '../screens/courseDetail';
-import {screenOptionHeader} from 'global/navigation';
+import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
 
 const Stack = createStackNavigator();
 
 export default function HomeStack() {
   return (
     <Stack.Navigator initialRouteName={HOME} screenOptions={screenOptionHeader}>
-      <Stack.Screen name={HOME} component={HomeScreen} />
       <Stack.Screen
-        name={PROFILE}
-        component={ProfileScreen}
-        options={{
-          headerRight: () => null,
-        }}
+        name={HOME}
+        component={HomeScreen}
+        options={optionHeaderRight}
       />
+      <Stack.Screen name={PROFILE} component={ProfileScreen} />
       <Stack.Screen
         name={LISTCOURSE}
         component={ListCourseScreen}

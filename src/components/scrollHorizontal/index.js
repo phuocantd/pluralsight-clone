@@ -23,8 +23,9 @@ export default function Section({
   title,
   items,
   component,
+  isSeeAll,
   handleSeeAll,
-  handleDetailCourse,
+  handleDetail,
 }) {
   const ItemComponent = lazyMap[component];
 
@@ -32,14 +33,16 @@ export default function Section({
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity onPress={() => handleSeeAll(title, items)}>
-          <Text style={styles.seeAll}>See all ></Text>
-        </TouchableOpacity>
+        {isSeeAll && (
+          <TouchableOpacity onPress={() => handleSeeAll(title, items)}>
+            <Text style={styles.seeAll}>See all ></Text>
+          </TouchableOpacity>
+        )}
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {items.map(item => (
           <Suspense fallback={null} key={Math.random().toString()}>
-            <ItemComponent item={item} handleDetail={handleDetailCourse} />
+            <ItemComponent item={item} handleDetail={handleDetail} />
           </Suspense>
         ))}
       </ScrollView>

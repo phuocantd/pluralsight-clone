@@ -1,11 +1,13 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
-export default function Path({item}) {
+import {PATHDETAIL} from 'global/constants';
+
+export default function Path({item, handleDetail}) {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => console.log(`${item.title} clicked!!!`)}>
+      onPress={() => handleDetail(PATHDETAIL, 'Angular denver 2019')}>
       <View style={styles.center}>
         <Image
           style={styles.image}

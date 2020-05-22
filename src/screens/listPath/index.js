@@ -1,23 +1,23 @@
 import React from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 
 import {globalStyles} from 'global/styles';
-import {COURSEDETAIL} from '../../global/constants';
-import Course from 'components/course/horizontal';
+import {PATHDETAIL} from '../../global/constants';
+import Path from 'components/path/horizontal';
 
-export default function ListCourse({route, navigation}) {
-  const {title, items} = route.params;
+export default function ListPath({route, navigation}) {
+  const {items} = route.params;
 
-  const handleDetailCourse = () => navigation.navigate(COURSEDETAIL);
+  const handleDetail = () =>
+    navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
 
   return (
     <View style={globalStyles.container}>
-      <Text style={styles.title}>{title}</Text>
       <FlatList
         style={styles.list}
         data={items}
         renderItem={({item}) => (
-          <Course item={item} handleDetail={handleDetailCourse} />
+          <Path item={item} handleDetail={handleDetail} />
         )}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={() => <View style={styles.seperator} />}

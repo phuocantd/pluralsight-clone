@@ -6,6 +6,9 @@ export const COURSEDETAIL = 'CourseDetail';
 export const DOWNLOADS = 'Downloads';
 
 export const BROWSE = 'Browse';
+export const PATHS = 'Paths';
+export const LISTPATH = 'ListPath';
+export const PATHDETAIL = 'PathDetail';
 
 export const SEARCH = 'Search';
 

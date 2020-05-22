@@ -32,29 +32,33 @@ export default function Home({navigation}) {
         component="course"
         title={softwareDevelopment.title}
         items={softwareDevelopment.listCourse}
+        isSeeAll={true}
         handleSeeAll={handleSeeAll}
-        handleDetailCourse={handleDetailCourse}
+        handleDetail={handleDetailCourse}
       />
       <ScrollHorizontal
         component="course"
         title={IToperations.title}
         items={IToperations.listCourse}
+        isSeeAll={true}
         handleSeeAll={handleSeeAll}
-        handleDetailCourse={handleDetailCourse}
+        handleDetail={handleDetailCourse}
       />
       <ScrollHorizontal
         component="course"
         title={dataProfessional.title}
         items={dataProfessional.listCourse}
+        isSeeAll={true}
         handleSeeAll={handleSeeAll}
-        handleDetailCourse={handleDetailCourse}
+        handleDetail={handleDetailCourse}
       />
       <ScrollHorizontal
         component="course"
         title={securityProfessional.title}
         items={securityProfessional.listCourse}
+        isSeeAll={true}
         handleSeeAll={handleSeeAll}
-        handleDetailCourse={handleDetailCourse}
+        handleDetail={handleDetailCourse}
       />
     </ScrollView>
   );

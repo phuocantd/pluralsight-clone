@@ -20,6 +20,9 @@ export const screenOptionHeader = ({navigation}) => ({
   headerTitleStyle: {
     color: '#fff',
   },
+});
+
+export const optionHeaderRight = ({navigation}) => ({
   headerRight: () => (
     <View style={styles.headerRight}>
       <TouchableOpacity onPress={() => navigation.navigate(PROFILE)}>

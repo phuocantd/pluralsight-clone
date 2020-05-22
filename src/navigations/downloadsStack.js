@@ -3,8 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {DOWNLOADS, PROFILE} from 'global/constants';
 import DownloadsScreen from 'screens/Downloads';
-import AuthStack from './authStack';
-import {screenOptionHeader} from 'global/navigation';
+import ProfileScreen from 'screens/Profile';
+import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
 
 const Stack = createStackNavigator();
 
@@ -13,12 +13,12 @@ export default function DownloadsStack() {
     <Stack.Navigator
       initialRouteName={DOWNLOADS}
       screenOptions={screenOptionHeader}>
-      <Stack.Screen name={DOWNLOADS} component={DownloadsScreen} />
-      {/* <Stack.Screen
-        name={PROFILE}
-        component={AuthStack}
-        options={{headerShown: false}}
-      /> */}
+      <Stack.Screen
+        name={DOWNLOADS}
+        component={DownloadsScreen}
+        options={optionHeaderRight}
+      />
+      <Stack.Screen name={PROFILE} component={ProfileScreen} />
     </Stack.Navigator>
   );
 }

@@ -6,8 +6,15 @@ import ImageButton from 'components/imageButtonMedium';
 import ScrollImage from 'components/scrollImage';
 import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';
 import ScrollHorizontal from 'components/scrollHorizontal';
+import {PATHS, PATHDETAIL} from 'global/constants';
 
-export default function Browse() {
+export default function Browse({navigation}) {
+  const seeAllPath = (title, items) =>
+    navigation.navigate(PATHS, {items, title});
+
+  const handleDetailPath = () =>
+    navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
+
   return (
     <View style={globalStyles.container}>
       <ScrollView>
@@ -27,6 +34,9 @@ export default function Browse() {
         />
         <ScrollHorizontal
           component="path"
+          isSeeAll={true}
+          handleSeeAll={seeAllPath}
+          handleDetail={handleDetailPath}
           title={listPath.title}
           items={listPath.list}
         />

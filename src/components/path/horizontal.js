@@ -1,8 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
-import InfoCourse from './info';
 
-export default function Course({item, handleDetail}) {
+import InforPath from './info';
+
+export default function Path({item, handleDetail}) {
   return (
     <TouchableOpacity style={styles.item} onPress={handleDetail}>
       <Image
@@ -12,14 +13,7 @@ export default function Course({item, handleDetail}) {
         }}
       />
       <View style={styles.info}>
-        <InfoCourse
-          title={item.courseTitle}
-          author={item.author}
-          duration={item.duration}
-          level={item.level}
-          updated={item.updated}
-          rating={item.rating}
-        />
+        <InforPath title={item.title} count={item.count} />
       </View>
     </TouchableOpacity>
   );
