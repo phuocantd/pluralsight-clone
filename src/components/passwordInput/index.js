@@ -19,13 +19,15 @@ export default function PasswordInput({onChange, value}) {
         onChangeText={e => onChange(e)}
         value={value}
       />
-      <Icon
-        style={styles.searchIcon}
-        name={icon}
-        color="#fff"
-        size={18}
-        onPress={changeIcon}
-      />
+      {value !== '' && (
+        <Icon
+          style={styles.searchIcon}
+          name={icon}
+          color="#fff"
+          size={18}
+          onPress={changeIcon}
+        />
+      )}
     </View>
   );
 }

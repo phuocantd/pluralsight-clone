@@ -10,21 +10,25 @@ import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {globalStyles} from 'global/styles';
 import Recent from 'components/recent';
+import NotFound from './notFound';
 
 const recents = [
   {
     id: '1',
     text: 'react',
+    success: true,
   },
   {
     id: '2',
-    text: 'javascript',
+    text: 'zxczxc',
+    success: false,
   },
 ];
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState('');
   const [listRecent, setListRecent] = useState(recents);
+  const [isRecent, setIsRecent] = useState(true);
 
   const handleEnter = () => {
     if (searchValue !== '') {
@@ -32,8 +36,8 @@ export default function Search() {
         {id: Math.random().toString(), text: searchValue},
         ...listRecent,
       ]);
-      setSearchValue('');
       Keyboard.dismiss();
+      setIsRecent(false);
     }
   };
 
@@ -46,7 +50,12 @@ export default function Search() {
           placeholderTextColor="#fff"
           autoFocus={true}
           value={searchValue}
-          onChangeText={text => setSearchValue(text)}
+          onChangeText={text => {
+            setSearchValue(text);
+            if (text === '') {
+              setIsRecent(true);
+            }
+          }}
           onSubmitEditing={handleEnter}
           blurOnSubmit={false}
         />
@@ -54,15 +63,22 @@ export default function Search() {
           style={styles.iconClear}
           onPress={() => {
             setSearchValue('');
+            setIsRecent(true);
           }}>
           {searchValue !== '' && (
             <IconMaterialIcons name="clear" color="#fff" size={23} />
           )}
         </TouchableOpacity>
       </View>
-      {searchValue === '' && (
-        <Recent list={listRecent} setList={setListRecent} />
-      )}
+      <View style={styles.content}>
+        {isRecent ? (
+          searchValue === '' && (
+            <Recent list={listRecent} setList={setListRecent} />
+          )
+        ) : (
+          <NotFound name={searchValue} />
+        )}
+      </View>
     </View>
   );
 }
@@ -113,4 +129,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
   },
+  content: {flex: 1},
 });
