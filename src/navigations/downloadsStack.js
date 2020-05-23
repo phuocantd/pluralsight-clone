@@ -1,10 +1,19 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {DOWNLOADS, PROFILE} from 'global/constants';
+import {
+  DOWNLOADS,
+  PROFILE,
+  SETTINGS,
+  CONTACT,
+  FEEDBACK,
+} from 'global/constants';
+import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
 import DownloadsScreen from 'screens/Downloads';
 import ProfileScreen from 'screens/Profile';
-import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
+import SettingsScreen from 'screens/setting';
+import ContactScreen from 'screens/contact';
+import FeedbackScreen from 'screens/feedback';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +28,9 @@ export default function DownloadsStack() {
         options={optionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
+      <Stack.Screen name={SETTINGS} component={SettingsScreen} />
+      <Stack.Screen name={FEEDBACK} component={FeedbackScreen} />
+      <Stack.Screen name={CONTACT} component={ContactScreen} />
     </Stack.Navigator>
   );
 }

@@ -1,12 +1,23 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {HOME, PROFILE, LISTCOURSE, COURSEDETAIL} from 'global/constants';
+import {
+  HOME,
+  LISTCOURSE,
+  COURSEDETAIL,
+  PROFILE,
+  SETTINGS,
+  CONTACT,
+  FEEDBACK,
+} from 'global/constants';
+import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
 import HomeScreen from 'screens/Home';
 import ListCourseScreen from 'screens/ListCourse';
+import CourseDetailScreen from 'screens/courseDetail';
 import ProfileScreen from 'screens/Profile';
-import CourseDetailScreen from '../screens/courseDetail';
-import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
+import SettingsScreen from 'screens/setting';
+import ContactScreen from 'screens/contact';
+import FeedbackScreen from 'screens/feedback';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +30,9 @@ export default function HomeStack() {
         options={optionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
+      <Stack.Screen name={SETTINGS} component={SettingsScreen} />
+      <Stack.Screen name={FEEDBACK} component={FeedbackScreen} />
+      <Stack.Screen name={CONTACT} component={ContactScreen} />
       <Stack.Screen
         name={LISTCOURSE}
         component={ListCourseScreen}

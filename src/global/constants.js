@@ -13,9 +13,11 @@ export const PATHDETAIL = 'PathDetail';
 export const SEARCH = 'Search';
 
 export const LOGIN = 'Login';
-
 export const REGISTER = 'Register';
-
 export const FORGOTPASSWORD = 'ForgotPassword';
 
 export const PROFILE = 'Profile';
+
+export const SETTINGS = 'Settings';
+export const FEEDBACK = 'Feedback';
+export const CONTACT = 'Contact';
