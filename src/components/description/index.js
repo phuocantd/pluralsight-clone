@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-export default function Desciption({desciption}) {
+export default function Description({description}) {
   const [isExpand, setIsExpand] = useState(false);
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        {isExpand ? desciption : desciption.substring(0, 117)}
+        {isExpand ? description : description.substring(0, 150)}
       </Text>
       <TouchableOpacity
         style={styles.btn}

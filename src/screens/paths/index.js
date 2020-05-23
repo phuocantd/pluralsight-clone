@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, ScrollView} from 'react-native';
 
 import {globalStyles} from 'global/styles';
 import {LISTPATH} from 'global/constants';
-import ScrollHorizontal from 'components/scrollHorizontal';
+import PathScroll from 'components/scrollHorizontal/paths';
 
 export default function Paths({route, navigation}) {
   const {items} = route.params;
@@ -17,80 +17,67 @@ export default function Paths({route, navigation}) {
   return (
     <View style={globalStyles.container}>
       <ScrollView>
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Conference"
           items={items}
           handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Software Development"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="IT Ops"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Information Security"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Data Professional"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Bussiness Professional"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Creative Professional"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Manufacturing abd Design"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Architecture $ Construction"
           items={items}
+          handleDetail={handleDetailPath}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={handleSeeAll}
           title="Certifications"
           items={items}
+          handleDetail={handleDetailPath}
         />
       </ScrollView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

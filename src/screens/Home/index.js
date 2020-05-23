@@ -3,7 +3,7 @@ import {Image, StyleSheet, ScrollView} from 'react-native';
 
 import {globalStyles} from 'global/styles';
 import {LISTCOURSE} from 'global/constants';
-import ScrollHorizontal from 'components/scrollHorizontal';
+import CourseScroll from 'components/scrollHorizontal/courses';
 import {
   softwareDevelopment,
   IToperations,
@@ -28,35 +28,27 @@ export default function Home({navigation}) {
             'https://www.stevejgordon.co.uk/wp-content/uploads/2020/04/Pluralsight-Free-April-2020-Wide.jpg',
         }}
       />
-      <ScrollHorizontal
-        component="course"
+      <CourseScroll
         title={softwareDevelopment.title}
         items={softwareDevelopment.listCourse}
-        isSeeAll={true}
         handleSeeAll={handleSeeAll}
         handleDetail={handleDetailCourse}
       />
-      <ScrollHorizontal
-        component="course"
+      <CourseScroll
         title={IToperations.title}
         items={IToperations.listCourse}
-        isSeeAll={true}
         handleSeeAll={handleSeeAll}
         handleDetail={handleDetailCourse}
       />
-      <ScrollHorizontal
-        component="course"
+      <CourseScroll
         title={dataProfessional.title}
         items={dataProfessional.listCourse}
-        isSeeAll={true}
         handleSeeAll={handleSeeAll}
         handleDetail={handleDetailCourse}
       />
-      <ScrollHorizontal
-        component="course"
+      <CourseScroll
         title={securityProfessional.title}
         items={securityProfessional.listCourse}
-        isSeeAll={true}
         handleSeeAll={handleSeeAll}
         handleDetail={handleDetailCourse}
       />

@@ -10,6 +10,8 @@ export const PATHS = 'Paths';
 export const LISTPATH = 'ListPath';
 export const PATHDETAIL = 'PathDetail';
 
+export const AUTHORDETAIL = 'AuthorDetail';
+
 export const SEARCH = 'Search';
 export const ALLSEARCHRESULT = 'AllSearchResult';
 export const COURSESSEARCHRESULT = 'CoursesSearchResult';

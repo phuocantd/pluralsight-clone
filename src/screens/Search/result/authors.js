@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {AUTHORDETAIL} from 'global/constants';
 import {listTopAuthor} from 'data/browse';
 import ListAuthor from 'components/lists/authors';
 
@@ -11,7 +12,7 @@ export default function Authors({navigation}) {
       <Text style={styles.result}>{listTopAuthor.list.length} Result</Text>
       <ListAuthor
         items={listTopAuthor.list}
-        handleDetail={() => console.log('clicked')}
+        handleDetail={() => navigation.navigate(AUTHORDETAIL)}
       />
     </View>
   );

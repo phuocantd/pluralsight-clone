@@ -2,11 +2,13 @@ import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {PATHS, PATHDETAIL, AUTHORDETAIL} from 'global/constants';
+import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';
 import ImageButton from 'components/imageButtonMedium';
 import ScrollImage from 'components/scrollImage';
-import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';
-import ScrollHorizontal from 'components/scrollHorizontal';
-import {PATHS, PATHDETAIL} from 'global/constants';
+import SkillScroll from 'components/scrollHorizontal/skills';
+import PathScroll from 'components/scrollHorizontal/paths';
+import AuthorScroll from 'components/scrollHorizontal/authors';
 
 export default function Browse({navigation}) {
   const seeAllPath = (title, items) =>
@@ -14,6 +16,8 @@ export default function Browse({navigation}) {
 
   const handleDetailPath = () =>
     navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
+
+  const handleDetailAuthor = () => navigation.navigate(AUTHORDETAIL);
 
   return (
     <View style={globalStyles.container}>
@@ -27,21 +31,19 @@ export default function Browse({navigation}) {
           title="recommended for you"
         />
         <ScrollImage items={imageScroll} />
-        <ScrollHorizontal
-          component="skill"
+        <SkillScroll
           title={listSkill.title}
           items={listSkill.list}
+          handleDetail={() => console.log('skill clicked')}
         />
-        <ScrollHorizontal
-          component="path"
-          isSeeAll={true}
+        <PathScroll
           handleSeeAll={seeAllPath}
           handleDetail={handleDetailPath}
           title={listPath.title}
           items={listPath.list}
         />
-        <ScrollHorizontal
-          component="author"
+        <AuthorScroll
+          handleDetail={handleDetailAuthor}
           title={listTopAuthor.title}
           items={listTopAuthor.list}
         />

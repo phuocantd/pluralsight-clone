@@ -10,6 +10,8 @@ import {
   SETTINGS,
   CONTACT,
   FEEDBACK,
+  AUTHORDETAIL,
+  COURSEDETAIL,
 } from 'global/constants';
 import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
 import BrowseScreen from 'screens/Browse';
@@ -20,6 +22,8 @@ import PathDetailScreen from 'screens/pathDetail';
 import SettingsScreen from 'screens/setting';
 import ContactScreen from 'screens/contact';
 import FeedbackScreen from 'screens/feedback';
+import AuthorDetailScreen from 'screens/authorDetail';
+import CourseDetailScreen from 'screens/courseDetail';
 
 const Stack = createStackNavigator();
 
@@ -45,12 +49,18 @@ export default function BrowseStack() {
           title: route.params.title,
         })}
       />
+      <Stack.Screen name={PATHDETAIL} component={PathDetailScreen} />
       <Stack.Screen
-        name={PATHDETAIL}
-        component={PathDetailScreen}
+        name={AUTHORDETAIL}
+        component={AuthorDetailScreen}
         options={({navigation, route}) => ({
-          title: route.params.title,
+          title: 'Author',
         })}
+      />
+      <Stack.Screen
+        name={COURSEDETAIL}
+        component={CourseDetailScreen}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

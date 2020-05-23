@@ -1,11 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
-export default function Path({item}) {
+export default function Path({item, handleDetail}) {
   return (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => console.log(`${item.name} clicked!!!`)}>
+    <TouchableOpacity style={styles.item} onPress={handleDetail}>
       <Image
         style={styles.image}
         source={{
