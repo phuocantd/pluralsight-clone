@@ -138,47 +138,57 @@ export const listTopAuthor = {
       image:
         'https://pluralsight.imgix.net/author/lg/deborah-kurata-v1.jpg?w=200',
       name: 'Deborah Kurata',
+      count: 8,
     },
     {
       image:
         'https://pluralsight.imgix.net/author/lg/44cb43b3-83e4-4458-9b39-a7ded3411616.jpg',
       name: 'Scott Allen',
+      count: 11,
     },
     {
       image:
         'https://pluralsight.imgix.net/author/lg/e5c9da13-6fe1-4662-8ee1-5a78800537a3.jpg',
       name: 'Samer Buna',
+      count: 3,
     },
     {
       image: 'https://pluralsight.imgix.net/author/lg/mark-zamoyta-v1.jpg',
       name: 'Mark Zamoyta',
+      count: 5,
     },
     {
       image: 'https://pluralsight.imgix.net/author/lg/jim-wilson-v5.jpg?w=200',
       name: 'Jim Wilson',
+      count: 13,
     },
     {
       image:
         'https://pluralsight.imgix.net/author/lg/ross-bagurdes-v2.jpg?w=200',
       name: 'Ross Bagurdes',
+      count: 8,
     },
     {
       image:
         'https://pluralsight.imgix.net/author/lg/austin-bingham-v1.jpg?w=200',
       name: 'Austin Bingham',
+      count: 7,
     },
     {
       image:
         'https://pluralsight.imgix.net/author/lg/robert-smallshire-v1.jpg?w=200',
       name: 'Robert Smallshire',
+      count: 6,
     },
     {
       image: 'https://pluralsight.imgix.net/author/lg/joe-eames-v1.jpg?w=200',
       name: 'Joe Eames',
+      count: 8,
     },
     {
       image: 'https://pluralsight.imgix.net/author/lg/jim-cooper-v1.jpg?w=200',
       name: 'Jim Cooper',
+      count: 9,
     },
   ],
 };

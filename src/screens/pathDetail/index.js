@@ -38,7 +38,7 @@ export default function PathDetail({navigation, route}) {
               duration: 24,
             }))
             .map(item => (
-              <View>
+              <View key={Math.random().toString()}>
                 <View style={styles.seperator} />
                 <Course key={Math.random().toString()} item={item} />
               </View>

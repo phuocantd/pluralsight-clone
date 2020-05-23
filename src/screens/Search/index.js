@@ -11,6 +11,7 @@ import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {globalStyles} from 'global/styles';
 import Recent from 'components/recent';
 import NotFound from './notFound';
+import ResultSearch from './result';
 
 const recents = [
   {
@@ -29,6 +30,7 @@ export default function Search() {
   const [searchValue, setSearchValue] = useState('');
   const [listRecent, setListRecent] = useState(recents);
   const [isRecent, setIsRecent] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(true);
 
   const handleEnter = () => {
     if (searchValue !== '') {
@@ -75,6 +77,8 @@ export default function Search() {
           searchValue === '' && (
             <Recent list={listRecent} setList={setListRecent} />
           )
+        ) : isSuccess ? (
+          <ResultSearch />
         ) : (
           <NotFound name={searchValue} />
         )}

@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
 import {globalStyles} from 'global/styles';
-import {COURSEDETAIL} from '../../global/constants';
-import Course from 'components/course/horizontal';
+import {COURSEDETAIL} from 'global/constants';
+import ListCourse from 'components/lists/courses';
 
-export default function ListCourse({route, navigation}) {
+export default function ListCourseScreen({route, navigation}) {
   const {title, items} = route.params;
 
   const handleDetailCourse = () => navigation.navigate(COURSEDETAIL);
@@ -13,15 +13,7 @@ export default function ListCourse({route, navigation}) {
   return (
     <View style={globalStyles.container}>
       <Text style={styles.title}>{title}</Text>
-      <FlatList
-        style={styles.list}
-        data={items}
-        renderItem={({item}) => (
-          <Course item={item} handleDetail={handleDetailCourse} />
-        )}
-        keyExtractor={(item, index) => index.toString()}
-        ItemSeparatorComponent={() => <View style={styles.seperator} />}
-      />
+      <ListCourse items={items} handleDetail={handleDetailCourse} />
     </View>
   );
 }
@@ -32,14 +24,5 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginLeft: 10,
     marginTop: 20,
-  },
-  list: {
-    flex: 1,
-    marginTop: 20,
-  },
-  seperator: {
-    backgroundColor: '#fff',
-    height: 0.5,
-    margin: 5,
   },
 });
