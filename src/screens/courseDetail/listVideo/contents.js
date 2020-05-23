@@ -12,19 +12,11 @@ function Item({title}) {
 export default function Contents() {
   return (
     <View>
-      <Text>Contents</Text>
-      {/* <FlatList
-        data={DATA}
-        renderItem={({item}) => <Item title={item.title} />}
-        keyExtractor={item => item.id}
-      /> */}
-      <ScrollView>
-        {Array(50)
-          .fill(null)
-          .map((item, index) => (
-            <Item key={Math.random().toString()} title={index} />
-          ))}
-      </ScrollView>
+      {Array(50)
+        .fill(null)
+        .map((item, index) => (
+          <Item key={Math.random().toString()} title={index} />
+        ))}
     </View>
   );
 }

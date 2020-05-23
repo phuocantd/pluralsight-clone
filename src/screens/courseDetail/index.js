@@ -1,5 +1,12 @@
-import React from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 
 import AuthorInfo from './author';
 import MoreInfo from './moreInfo';
@@ -33,73 +40,86 @@ const data = {
 };
 
 export default function CourseDetail() {
+  const [isContent, setIsContent] = useState(true);
   return (
     <View style={styles.container}>
       <View>
         <Video image={data.image} />
       </View>
-      <ScrollView style={styles.info}>
-        <Text style={styles.title}>{data.title}</Text>
-        <View style={styles.authors}>
-          {data.authors.map(author => (
-            <AuthorInfo
-              key={Math.random().toString()}
-              name={author.name}
-              image={author.image}
+      <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
+        <View style={{marginHorizontal: 20}}>
+          <Text style={styles.title}>{data.title}</Text>
+          <View style={styles.authors}>
+            {data.authors.map(author => (
+              <AuthorInfo
+                key={Math.random().toString()}
+                name={author.name}
+                image={author.image}
+              />
+            ))}
+          </View>
+          <View style={styles.moreInfo}>
+            <MoreInfo
+              level={data.level}
+              updated={data.updated}
+              duration={data.duration}
+              rating={data.rating}
             />
-          ))}
-        </View>
-        <View style={styles.moreInfo}>
-          <MoreInfo
-            level={data.level}
-            updated={data.updated}
-            duration={data.duration}
-            rating={data.rating}
-          />
-        </View>
-        <View style={styles.btnControl}>
-          <ButtonControl />
-        </View>
-        <View style={styles.description}>
-          <Description description={data.description} />
+          </View>
+          <View style={styles.btnControl}>
+            <ButtonControl />
+          </View>
+          <View style={styles.description}>
+            <Description description={data.description} />
+          </View>
+          <View>
+            <ButtonItem />
+          </View>
         </View>
         <View>
-          <ButtonItem />
+          <View style={styles.tabs}>
+            <TouchableOpacity
+              style={styles.tab}
+              onPress={() => setIsContent(true)}>
+              <Text style={isContent ? styles.textTabActive : styles.textTab}>
+                Contents
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.tab}
+              onPress={() => setIsContent(false)}>
+              <Text style={!isContent ? styles.textTabActive : styles.textTab}>
+                Transcript
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.listVideo}>
-          <ListVideo />
-        </View>
+        <ListVideo isContent={isContent} />
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: {flex: 1, backgroundColor: '#181C20'},
+  info: {flex: 1},
+  title: {color: '#fff', fontSize: 25},
+  authors: {flexDirection: 'row'},
+  moreInfo: {marginTop: 5},
+  btnControl: {marginTop: 10},
+  description: {marginTop: 20},
+  tabs: {flexDirection: 'row'},
+  tab: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: '#181C20',
+    paddingBottom: 10,
+    paddingTop: 20,
   },
-  info: {
-    flex: 1,
-    marginHorizontal: 10,
-  },
-  title: {
-    color: '#fff',
-    fontSize: 25,
-  },
-  authors: {
-    flexDirection: 'row',
-  },
-  moreInfo: {
-    marginTop: 5,
-  },
-  btnControl: {
-    marginTop: 10,
-  },
-  description: {
-    marginTop: 20,
-  },
-  listVideo: {
-    marginTop: 20,
+  textTab: {color: '#fff', textTransform: 'uppercase', fontSize: 20},
+  textTabActive: {
+    color: '#0084BD',
+    textTransform: 'uppercase',
+    fontSize: 20,
   },
 });

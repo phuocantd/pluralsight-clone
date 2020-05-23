@@ -1,15 +1,14 @@
 import React from 'react';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {View} from 'react-native';
 
-const Tab = createMaterialTopTabNavigator();
 import Contents from './contents';
 import Transcript from './transcript';
 
-export default function MyTabs() {
+export default function MyTabs({isContent}) {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Contents" component={Contents} />
-      <Tab.Screen name="Transcript" component={Transcript} />
-    </Tab.Navigator>
+    // eslint-disable-next-line react-native/no-inline-styles
+    <View style={{backgroundColor: '#000', paddingHorizontal: 20}}>
+      {isContent ? <Contents /> : <Transcript />}
+    </View>
   );
 }
