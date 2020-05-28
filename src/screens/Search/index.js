@@ -9,6 +9,7 @@ import {
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
 import Recent from 'components/recent';
 import NotFound from './notFound';
 import ResultSearch from './result';
@@ -27,6 +28,8 @@ const recents = [
 ];
 
 export default function Search() {
+  const {colors} = React.useContext(ThemeContext);
+
   const [searchValue, setSearchValue] = useState('');
   const [listRecent, setListRecent] = useState(recents);
   const [isRecent, setIsRecent] = useState(true);
@@ -44,7 +47,11 @@ export default function Search() {
   };
 
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <View style={styles.searchBar}>
         <TextInput
           style={styles.searchInput}

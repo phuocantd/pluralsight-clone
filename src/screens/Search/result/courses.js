@@ -9,15 +9,22 @@ import {
 
 import {globalStyles} from 'global/styles';
 import {COURSEDETAIL} from 'global/constants';
+import {ThemeContext} from 'tools/context/theme';
 import {dataProfessional} from 'data/home';
 import ListCourse from 'components/lists/courses';
 
 export default function Courses({navigation}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const [timeFilter, setTimeFilter] = useState('Newest');
 
   const handleDetailCourse = () => navigation.navigate(COURSEDETAIL);
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <Text style={styles.selectLevel}>Skill level</Text>
       <View style={styles.info}>
         <Text style={styles.result}>

@@ -10,7 +10,7 @@ import {
   CONTACT,
   FEEDBACK,
 } from 'global/constants';
-import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
+import {screenOptionHeader, OptionHeaderRight} from 'global/navigation';
 import HomeScreen from 'screens/Home';
 import ListCourseScreen from 'screens/ListCourse';
 import CourseDetailScreen from 'screens/courseDetail';
@@ -27,7 +27,7 @@ export default function HomeStack() {
       <Stack.Screen
         name={HOME}
         component={HomeScreen}
-        options={optionHeaderRight}
+        options={OptionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
       <Stack.Screen name={SETTINGS} component={SettingsScreen} />

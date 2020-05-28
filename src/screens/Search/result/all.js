@@ -15,6 +15,7 @@ import {
   AUTHORSSEARCHRESULT,
 } from 'global/constants';
 import {COURSEDETAIL, PATHDETAIL, AUTHORDETAIL} from 'global/constants';
+import {ThemeContext} from 'tools/context/theme';
 import {dataProfessional} from 'data/home';
 import {listPath, listTopAuthor} from 'data/browse';
 import Course from 'components/course/horizontal';
@@ -22,13 +23,19 @@ import Path from 'components/path/horizontal';
 import Author from 'components/author/horizontal';
 
 export default function All({navigation}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const handleDetailCourse = () => navigation.navigate(COURSEDETAIL);
   const handleDetailPath = () =>
     navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
   const handleDetailAuthor = () => navigation.navigate(AUTHORDETAIL);
 
   return (
-    <ScrollView style={globalStyles.container}>
+    <ScrollView
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <View style={styles.tab}>
         <View style={styles.info}>
           <Text style={styles.title}>Courses</Text>

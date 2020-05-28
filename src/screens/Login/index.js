@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -11,13 +11,33 @@ import {
 
 import {globalStyles} from 'global/styles';
 import {REGISTER, FORGOTPASSWORD} from 'global/constants';
+import {ThemeContext} from 'tools/context/theme';
 import PasswordInput from 'components/passwordInput';
+import {AuthContext} from 'tools/context/auth';
 
 export default function Login({navigation}) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+
+  const {state, authContext} = useContext(AuthContext);
+  const {colors} = React.useContext(ThemeContext);
+
+  React.useEffect(() => {
+    if (state.isAuth) {
+      navigation.goBack();
+    }
+  }, [state, navigation]);
+
+  const handleLogin = () => {
+    authContext.signIn('phuocantd');
+  };
+
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <ScrollView>
         <View style={styles.center}>
           <Text style={styles.label}>Email or username</Text>
@@ -28,7 +48,7 @@ export default function Login({navigation}) {
           />
           <Text style={styles.label}>Password</Text>
           <PasswordInput value={password} onChange={setPassword} />
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={handleLogin}>
             <Text style={styles.btnText}>sign in</Text>
           </TouchableOpacity>
           <View style={styles.mt}>

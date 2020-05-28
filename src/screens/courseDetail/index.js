@@ -1,12 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 
 import AuthorInfo from './author';
 import MoreInfo from './moreInfo';
@@ -78,20 +72,20 @@ export default function CourseDetail() {
         </View>
         <View>
           <View style={styles.tabs}>
-            <TouchableOpacity
-              style={styles.tab}
-              onPress={() => setIsContent(true)}>
-              <Text style={isContent ? styles.textTabActive : styles.textTab}>
+            <View style={isContent ? styles.tabActive : styles.tab}>
+              <Text
+                onPress={() => setIsContent(true)}
+                style={isContent ? styles.textTabActive : styles.textTab}>
                 Contents
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.tab}
-              onPress={() => setIsContent(false)}>
-              <Text style={!isContent ? styles.textTabActive : styles.textTab}>
+            </View>
+            <View style={!isContent ? styles.tabActive : styles.tab}>
+              <Text
+                onPress={() => setIsContent(false)}
+                style={!isContent ? styles.textTabActive : styles.textTab}>
                 Transcript
               </Text>
-            </TouchableOpacity>
+            </View>
           </View>
         </View>
         <ListVideo isContent={isContent} />
@@ -115,6 +109,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#181C20',
     paddingBottom: 10,
     paddingTop: 20,
+  },
+  tabActive: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#181C20',
+    paddingBottom: 10,
+    paddingTop: 20,
+    borderBottomWidth: 3,
+    borderBottomColor: '#0084BD',
   },
   textTab: {color: '#fff', textTransform: 'uppercase', fontSize: 20},
   textTabActive: {

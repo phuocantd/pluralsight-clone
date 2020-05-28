@@ -5,15 +5,23 @@ import IconFeather from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import {globalStyles} from 'global/styles';
-import {COURSEDETAIL} from '../../global/constants';
+import {COURSEDETAIL} from 'global/constants';
+import {ThemeContext} from 'tools/context/theme';
 import {softwareDevelopment} from 'data/home';
 import Description from 'components/description';
 import ListCourse from 'components/lists/courses';
 
 export default function AuthorDetail({navigation}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const handleDetailCourse = () => navigation.navigate(COURSEDETAIL);
+
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <ListCourse
         headerComponent={
           <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useLayoutEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -17,9 +17,12 @@ import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
+import {AuthContext} from '../../tools/context/auth';
 
 export default function Feedback({navigation}) {
-  const [isAuth, setIsAuth] = useState(true);
+  const {colors} = useContext(ThemeContext);
+  const {state} = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [feedback, setFeedback] = useState('');
   const [typeFeedback, setTypeFeedback] = useState('General feedback');
@@ -40,9 +43,13 @@ export default function Feedback({navigation}) {
   }, [navigation]);
 
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <View style={styles.content}>
-        {!isAuth && (
+        {!state.isAuth && (
           <TextInput
             style={styles.input}
             value={email}

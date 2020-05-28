@@ -2,11 +2,18 @@ import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
 import Course from 'components/course/horizontal';
 
 export default function ListCourse({items, handleDetail, headerComponent}) {
+  const {colors} = React.useContext(ThemeContext);
+
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <FlatList
         style={styles.list}
         data={items}

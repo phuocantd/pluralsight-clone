@@ -2,13 +2,20 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
 import Description from 'components/description';
 import Course from 'components/course/horizontal';
 
 export default function PathDetail({navigation, route}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const {title} = route.params;
   return (
-    <ScrollView style={globalStyles.container}>
+    <ScrollView
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <View style={styles.container}>
         <View style={styles.title}>
           <Image

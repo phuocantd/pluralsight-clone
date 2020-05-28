@@ -8,7 +8,7 @@ import {
   CONTACT,
   FEEDBACK,
 } from 'global/constants';
-import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
+import {screenOptionHeader, OptionHeaderRight} from 'global/navigation';
 import DownloadsScreen from 'screens/Downloads';
 import ProfileScreen from 'screens/Profile';
 import SettingsScreen from 'screens/setting';
@@ -25,7 +25,7 @@ export default function DownloadsStack() {
       <Stack.Screen
         name={DOWNLOADS}
         component={DownloadsScreen}
-        options={optionHeaderRight}
+        options={OptionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
       <Stack.Screen name={SETTINGS} component={SettingsScreen} />

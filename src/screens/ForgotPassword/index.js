@@ -10,12 +10,19 @@ import {
 } from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
 
 export default function Login({navigation}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const [email, setEmail] = useState('');
 
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <ScrollView>
         <View style={styles.center}>
           <Text style={styles.title}>

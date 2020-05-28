@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
 import {LISTPATH} from 'global/constants';
 import PathScroll from 'components/scrollHorizontal/paths';
 
 export default function Paths({route, navigation}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const {items} = route.params;
 
   const handleSeeAll = (title, itemsPath) =>
@@ -15,7 +18,11 @@ export default function Paths({route, navigation}) {
     navigation.navigate(screen, {title});
 
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <ScrollView>
         <PathScroll
           handleSeeAll={handleSeeAll}

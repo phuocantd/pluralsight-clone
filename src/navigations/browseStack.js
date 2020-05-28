@@ -13,7 +13,7 @@ import {
   AUTHORDETAIL,
   COURSEDETAIL,
 } from 'global/constants';
-import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
+import {screenOptionHeader, OptionHeaderRight} from 'global/navigation';
 import BrowseScreen from 'screens/Browse';
 import ProfileScreen from 'screens/Profile';
 import PathsScreen from 'screens/paths';
@@ -35,7 +35,7 @@ export default function BrowseStack() {
       <Stack.Screen
         name={BROWSE}
         component={BrowseScreen}
-        options={optionHeaderRight}
+        options={OptionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
       <Stack.Screen name={SETTINGS} component={SettingsScreen} />

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -6,22 +6,40 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  // Linking,
 } from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {AuthContext} from 'tools/context/auth';
+import {ThemeContext} from 'tools/context/theme';
 import PasswordInput from 'components/passwordInput';
 
 export default function Login({navigation}) {
+  const {colors} = useContext(ThemeContext);
+
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const {state, authContext} = useContext(AuthContext);
+
+  React.useEffect(() => {
+    if (state.isAuth) {
+      navigation.goBack();
+    }
+  }, [state, navigation]);
+
+  const handleSignup = () => {
+    authContext.signUp('phuocantd-register');
+  };
 
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <ScrollView>
         <View style={styles.center}>
           <Text style={styles.label}>Email</Text>
@@ -56,7 +74,7 @@ export default function Login({navigation}) {
             value={confirmPassword}
             onChange={setConfirmPassword}
           />
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={handleSignup}>
             <Text style={styles.btnText}>sign up</Text>
           </TouchableOpacity>
         </View>

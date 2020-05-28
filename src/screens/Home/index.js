@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Image, StyleSheet, ScrollView} from 'react-native';
 
 import {globalStyles} from 'global/styles';
@@ -10,8 +10,11 @@ import {
   dataProfessional,
   securityProfessional,
 } from 'data/home';
+import {ThemeContext} from 'tools/context/theme';
 
 export default function Home({navigation}) {
+  const {colors} = useContext(ThemeContext);
+
   const handleSeeAll = (title, items) =>
     navigation.navigate(LISTCOURSE, {items, title});
 
@@ -19,7 +22,10 @@ export default function Home({navigation}) {
 
   return (
     <ScrollView
-      style={globalStyles.container}
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}
       showsVerticalScrollIndicator={false}>
       <Image
         style={styles.image}
