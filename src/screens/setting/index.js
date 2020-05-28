@@ -10,7 +10,7 @@ import NoAuthSetting from './noAuth';
 
 export default function Setting({navigation}) {
   const {state, authContext} = useContext(AuthContext);
-  const {colors} = React.useContext(ThemeContext);
+  const {mode, colors, changeMode} = React.useContext(ThemeContext);
 
   const handleSignout = () => {
     authContext.signOut();
@@ -25,9 +25,19 @@ export default function Setting({navigation}) {
         colors.container,
       )}>
       {state.isAuth ? (
-        <AuthSetting handleSignout={handleSignout} />
+        <AuthSetting
+          handleSignout={handleSignout}
+          isDarkMode={mode === 'dark'}
+          changeMode={changeMode}
+          colors={colors}
+        />
       ) : (
-        <NoAuthSetting handleSignin={handleSignin} />
+        <NoAuthSetting
+          handleSignin={handleSignin}
+          isDarkMode={mode === 'dark'}
+          changeMode={changeMode}
+          colors={colors}
+        />
       )}
     </View>
   );

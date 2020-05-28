@@ -2,33 +2,38 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
+import {ThemeContext} from 'tools/context/theme';
+
 export default function Description({description}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const [isExpand, setIsExpand] = useState(false);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
+      <Text
+        style={StyleSheet.compose(
+          styles.text,
+          colors.text,
+        )}>
         {isExpand ? description : description.substring(0, 150)}
       </Text>
       <TouchableOpacity
-        style={styles.btn}
+        style={StyleSheet.compose(
+          styles.btn,
+          colors.bgInput,
+        )}
         onPress={() => setIsExpand(!isExpand)}>
-        <Icon name={isExpand ? 'up' : 'down'} size={20} color="#fff" />
+        <Icon name={isExpand ? 'up' : 'down'} size={20} style={colors.text} />
       </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 14,
-    flex: 1,
-  },
+  container: {flexDirection: 'row'},
+  text: {fontSize: 14, flex: 1},
   btn: {
-    backgroundColor: 'rgba(138,153,168, 0.40)',
     width: 30,
     alignItems: 'center',
     justifyContent: 'center',

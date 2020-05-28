@@ -2,12 +2,20 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {ThemeContext} from 'tools/context/theme';
+
 export default function MoreInfo({level, updated, duration, rating}) {
+  const {colors} = React.useContext(ThemeContext);
+
+  const compose = StyleSheet.compose(
+    styles.info,
+    colors.text,
+  );
   return (
     <View style={styles.container}>
-      <Text style={styles.info}>{level}</Text>
-      <Text style={styles.info}>{updated}</Text>
-      <Text style={styles.info}>{duration}</Text>
+      <Text style={compose}>{level}</Text>
+      <Text style={compose}>{updated}</Text>
+      <Text style={compose}>{duration}</Text>
       <View style={styles.rate}>
         <View style={styles.star}>
           <Icon name="star" color="#FAD000" size={13} />
@@ -16,7 +24,7 @@ export default function MoreInfo({level, updated, duration, rating}) {
           <Icon name="star" color="#FAD000" size={13} />
           <Icon name="star-half-full" color="#FAD000" size={13} />
         </View>
-        <Text style={styles.info}>({rating})</Text>
+        <Text style={compose}>({rating})</Text>
       </View>
     </View>
   );
@@ -27,7 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   info: {
-    color: '#fff',
     fontSize: 13,
     marginRight: 10,
   },

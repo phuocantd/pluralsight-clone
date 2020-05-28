@@ -10,7 +10,8 @@ import {
   CONTACT,
   FEEDBACK,
 } from 'global/constants';
-import {screenOptionHeader, OptionHeaderRight} from 'global/navigation';
+import {OptionHeaderRight} from 'global/navigation';
+import {ThemeContext} from 'tools/context/theme';
 import HomeScreen from 'screens/Home';
 import ListCourseScreen from 'screens/ListCourse';
 import CourseDetailScreen from 'screens/courseDetail';
@@ -22,8 +23,15 @@ import FeedbackScreen from 'screens/feedback';
 const Stack = createStackNavigator();
 
 export default function HomeStack() {
+  const {colors} = React.useContext(ThemeContext);
   return (
-    <Stack.Navigator initialRouteName={HOME} screenOptions={screenOptionHeader}>
+    <Stack.Navigator
+      initialRouteName={HOME}
+      screenOptions={{
+        headerTintColor: colors.text.color,
+        headerStyle: colors.background1,
+        headerTitleStyle: colors.text,
+      }}>
       <Stack.Screen
         name={HOME}
         component={HomeScreen}

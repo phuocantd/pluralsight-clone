@@ -19,7 +19,13 @@ export default function ListCourseScreen({route, navigation}) {
         globalStyles.container,
         colors.container,
       )}>
-      <Text style={styles.title}>{title}</Text>
+      <Text
+        style={StyleSheet.compose(
+          styles.title,
+          colors.text,
+        )}>
+        {title}
+      </Text>
       <ListCourse items={items} handleDetail={handleDetailCourse} />
     </View>
   );

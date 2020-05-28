@@ -10,15 +10,18 @@ import DownloadsStack from './downloadsStack';
 import BrowseStack from './browseStack';
 import SearchStack from './searchStack';
 import {HOME, DOWNLOADS, BROWSE, SEARCH} from 'global/constants';
+import {ThemeContext} from 'tools/context/theme';
 
 export default function BottomTabNavigator() {
+  const {colors} = React.useContext(ThemeContext);
+
   return (
     <Tab.Navigator
       initialRouteName={HOME}
       tabBarOptions={{
-        activeTintColor: '#0084bd',
-        activeBackgroundColor: '#0D0F12',
-        inactiveBackgroundColor: '#0D0F12',
+        activeTintColor: colors.btn.borderColor,
+        activeBackgroundColor: colors.background1.backgroundColor,
+        inactiveBackgroundColor: colors.background1.backgroundColor,
         keyboardHidesTabBar: true,
       }}>
       <Tab.Screen

@@ -13,7 +13,8 @@ import {
   AUTHORDETAIL,
   COURSEDETAIL,
 } from 'global/constants';
-import {screenOptionHeader, OptionHeaderRight} from 'global/navigation';
+import {OptionHeaderRight} from 'global/navigation';
+import {ThemeContext} from 'tools/context/theme';
 import BrowseScreen from 'screens/Browse';
 import ProfileScreen from 'screens/Profile';
 import PathsScreen from 'screens/paths';
@@ -28,10 +29,15 @@ import CourseDetailScreen from 'screens/courseDetail';
 const Stack = createStackNavigator();
 
 export default function BrowseStack() {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <Stack.Navigator
       initialRouteName={BROWSE}
-      screenOptions={screenOptionHeader}>
+      screenOptions={{
+        headerTintColor: colors.text.color,
+        headerStyle: colors.background1,
+        headerTitleStyle: colors.text,
+      }}>
       <Stack.Screen
         name={BROWSE}
         component={BrowseScreen}

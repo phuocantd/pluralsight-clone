@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 
+import {ThemeContext} from 'tools/context/theme';
 import AuthorInfo from './author';
 import MoreInfo from './moreInfo';
 import ButtonControl from './buttonControl';
@@ -34,15 +35,28 @@ const data = {
 };
 
 export default function CourseDetail() {
+  const {colors} = React.useContext(ThemeContext);
+
   const [isContent, setIsContent] = useState(true);
+
   return (
-    <View style={styles.container}>
+    <View
+      style={StyleSheet.compose(
+        styles.container,
+        colors.background2,
+      )}>
       <View>
         <Video image={data.image} />
       </View>
       <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
         <View style={{marginHorizontal: 20}}>
-          <Text style={styles.title}>{data.title}</Text>
+          <Text
+            style={StyleSheet.compose(
+              styles.title,
+              colors.text,
+            )}>
+            {data.title}
+          </Text>
           <View style={styles.authors}>
             {data.authors.map(author => (
               <AuthorInfo
@@ -72,17 +86,45 @@ export default function CourseDetail() {
         </View>
         <View>
           <View style={styles.tabs}>
-            <View style={isContent ? styles.tabActive : styles.tab}>
+            <View
+              style={StyleSheet.compose(
+                isContent ? styles.tabActive : styles.tab,
+                colors.background2,
+              )}>
               <Text
                 onPress={() => setIsContent(true)}
-                style={isContent ? styles.textTabActive : styles.textTab}>
+                style={
+                  isContent
+                    ? StyleSheet.compose(
+                        styles.textTabActive,
+                        colors.textBtn,
+                      )
+                    : StyleSheet.compose(
+                        styles.textTab,
+                        colors.text,
+                      )
+                }>
                 Contents
               </Text>
             </View>
-            <View style={!isContent ? styles.tabActive : styles.tab}>
+            <View
+              style={StyleSheet.compose(
+                isContent ? styles.tabActive : styles.tab,
+                colors.background2,
+              )}>
               <Text
                 onPress={() => setIsContent(false)}
-                style={!isContent ? styles.textTabActive : styles.textTab}>
+                style={
+                  !isContent
+                    ? StyleSheet.compose(
+                        styles.textTabActive,
+                        colors.textBtn,
+                      )
+                    : StyleSheet.compose(
+                        styles.textTab,
+                        colors.text,
+                      )
+                }>
                 Transcript
               </Text>
             </View>
@@ -95,9 +137,9 @@ export default function CourseDetail() {
 }
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#181C20'},
+  container: {flex: 1},
   info: {flex: 1},
-  title: {color: '#fff', fontSize: 25},
+  title: {fontSize: 25},
   authors: {flexDirection: 'row'},
   moreInfo: {marginTop: 5},
   btnControl: {marginTop: 10},
@@ -106,23 +148,15 @@ const styles = StyleSheet.create({
   tab: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#181C20',
     paddingBottom: 10,
     paddingTop: 20,
   },
   tabActive: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#181C20',
     paddingBottom: 10,
     paddingTop: 20,
-    borderBottomWidth: 3,
-    borderBottomColor: '#0084BD',
   },
-  textTab: {color: '#fff', textTransform: 'uppercase', fontSize: 20},
-  textTabActive: {
-    color: '#0084BD',
-    textTransform: 'uppercase',
-    fontSize: 20,
-  },
+  textTab: {textTransform: 'uppercase', fontSize: 20},
+  textTabActive: {textTransform: 'uppercase', fontSize: 20},
 });

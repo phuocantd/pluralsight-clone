@@ -34,52 +34,69 @@ export default function Login({navigation}) {
     authContext.signUp('phuocantd-register');
   };
 
+  const composeLabel = StyleSheet.compose(
+    styles.label,
+    colors.text,
+  );
+
+  const composeInput = StyleSheet.flatten([
+    styles.input,
+    colors.bgInput,
+    colors.text,
+  ]);
+
   return (
-    <View
+    <ScrollView
       style={StyleSheet.compose(
         globalStyles.container,
         colors.container,
       )}>
-      <ScrollView>
-        <View style={styles.center}>
-          <Text style={styles.label}>Email</Text>
-          <TextInput
-            style={styles.input}
-            value={userName}
-            onChangeText={text => setUserName(text)}
-          />
-          <Text style={styles.label}>First name</Text>
-          <TextInput
-            style={styles.input}
-            value={firstName}
-            onChangeText={text => setFirstName(text)}
-          />
-          <Text style={styles.label}>Last name</Text>
-          <TextInput
-            style={styles.input}
-            value={lastName}
-            onChangeText={text => setLastName(text)}
-          />
-          <Text style={styles.label}>Phone</Text>
-          <TextInput
-            keyboardType="numeric"
-            style={styles.input}
-            value={phone}
-            onChangeText={text => setUserName(setPhone)}
-          />
-          <Text style={styles.label}>Password</Text>
-          <PasswordInput value={password} onChange={setPassword} />
-          <Text style={styles.label}>Confirm password</Text>
-          <PasswordInput
-            value={confirmPassword}
-            onChange={setConfirmPassword}
-          />
-          <TouchableOpacity style={styles.btn} onPress={handleSignup}>
-            <Text style={styles.btnText}>sign up</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
+      <View style={styles.center}>
+        <Text style={composeLabel}>Email</Text>
+        <TextInput
+          style={composeInput}
+          value={userName}
+          onChangeText={text => setUserName(text)}
+        />
+        <Text style={composeLabel}>First name</Text>
+        <TextInput
+          style={composeInput}
+          value={firstName}
+          onChangeText={text => setFirstName(text)}
+        />
+        <Text style={composeLabel}>Last name</Text>
+        <TextInput
+          style={composeInput}
+          value={lastName}
+          onChangeText={text => setLastName(text)}
+        />
+        <Text style={composeLabel}>Phone</Text>
+        <TextInput
+          keyboardType="numeric"
+          style={composeInput}
+          value={phone}
+          onChangeText={text => setUserName(setPhone)}
+        />
+        <Text style={composeLabel}>Password</Text>
+        <PasswordInput value={password} onChange={setPassword} />
+        <Text style={composeLabel}>Confirm password</Text>
+        <PasswordInput value={confirmPassword} onChange={setConfirmPassword} />
+        <TouchableOpacity
+          style={StyleSheet.compose(
+            styles.btn,
+            colors.bgBtn,
+          )}
+          onPress={handleSignup}>
+          <Text
+            style={StyleSheet.compose(
+              styles.btnText,
+              colors.bgTextBtn,
+            )}>
+            sign up
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -91,14 +108,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   label: {
-    color: '#fff',
+    // color: '#fff',
     marginTop: 10,
     marginBottom: 5,
   },
   input: {
-    backgroundColor: '#0D0F12',
+    // backgroundColor: '#0D0F12',
     borderRadius: 6,
-    color: '#fff',
+    // color: '#fff',
     paddingTop: 10,
     paddingRight: 10,
     paddingBottom: 10,
@@ -108,18 +125,18 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 15,
     alignItems: 'center',
-    backgroundColor: '#2968B2',
+    // backgroundColor: '#2968B2',
     borderRadius: 6,
   },
   btnText: {
     textTransform: 'uppercase',
     marginVertical: 10,
-    color: '#fff',
+    // color: '#fff',
     fontSize: 15,
   },
   border: {
     borderRadius: 6,
-    borderColor: '#2968B2',
+    // borderColor: '#2968B2',
     borderWidth: 1,
     marginTop: 15,
   },
@@ -130,7 +147,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   labelText: {
-    color: '#2968B2',
+    // color: '#2968B2',
     textTransform: 'uppercase',
     marginVertical: 10,
     fontSize: 15,

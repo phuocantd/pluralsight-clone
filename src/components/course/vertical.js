@@ -2,12 +2,18 @@ import React from 'react';
 import {StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 import {COURSEDETAIL} from 'global/constants';
+import {ThemeContext} from 'tools/context/theme';
 import InfoCourse from './info';
 
 export default function Course({item, handleDetail}) {
+  const {colors} = React.useContext(ThemeContext);
+
   return (
     <TouchableOpacity
-      style={styles.item}
+      style={StyleSheet.compose(
+        styles.item,
+        colors.background3,
+      )}
       onPress={() => handleDetail(COURSEDETAIL)}>
       <Image
         style={styles.image}
@@ -31,11 +37,13 @@ const styles = StyleSheet.create({
   item: {
     width: 200,
     height: 200,
-    backgroundColor: '#1E2429',
     margin: 5,
+    borderWidth: 1,
+    borderColor: '#1E2429',
   },
   image: {
-    width: 200,
+    alignSelf: 'center',
+    width: 198,
     height: 100,
   },
 });

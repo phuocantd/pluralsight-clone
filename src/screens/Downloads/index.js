@@ -16,8 +16,18 @@ export default function Downloads() {
       )}>
       <View style={styles.center}>
         <Icon name="arrow-down-circle-outline" size={120} color="#1E2429" />
-        <Text style={styles.title}>No downloads</Text>
-        <Text style={styles.detail}>
+        <Text
+          style={StyleSheet.compose(
+            styles.title,
+            colors.text,
+          )}>
+          No downloads
+        </Text>
+        <Text
+          style={StyleSheet.compose(
+            styles.detail,
+            colors.text,
+          )}>
           Courses you download will appear here.
         </Text>
       </View>
@@ -32,11 +42,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: '#fff',
+    // color: '#fff',
     fontSize: 25,
   },
   detail: {
-    color: '#fff',
+    // color: '#fff',
     fontSize: 20,
   },
 });

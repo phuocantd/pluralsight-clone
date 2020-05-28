@@ -31,7 +31,7 @@ export default function Home({navigation}) {
         style={styles.image}
         source={{
           uri:
-            'https://www.stevejgordon.co.uk/wp-content/uploads/2020/04/Pluralsight-Free-April-2020-Wide.jpg',
+            'https://financesonline.com/uploads/2019/08/Pluralsight-logo1.png',
         }}
       />
       <CourseScroll

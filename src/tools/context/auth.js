@@ -46,6 +46,7 @@ export default function Provider({children}) {
 
     try {
       userToken = await AsyncStorage.getItem('token');
+      console.log('auth context:', userToken);
     } catch (e) {
       console.log('Restoring token failed');
     }
@@ -61,8 +62,9 @@ export default function Provider({children}) {
         await AsyncStorage.setItem('token', token);
         dispatch({type: 'SIGN_IN', token});
       },
-      signOut: () => {
+      signOut: async () => {
         console.log('sign out');
+        AsyncStorage.removeItem('token');
         dispatch({type: 'SIGN_OUT'});
       },
       signUp: async token => {

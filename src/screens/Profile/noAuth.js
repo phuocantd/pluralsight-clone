@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-export default function NoAuthProfile({handleSignIn}) {
+export default function NoAuthProfile({handleSignIn, colors}) {
   return (
     <View style={styles.center}>
-      <Text style={styles.title}>Please sign in to view your profile</Text>
+      <Text style={colors.text}>Please sign in to view your profile</Text>
       <TouchableOpacity style={styles.btn} onPress={handleSignIn}>
         <Text style={styles.textBtn}>Sign in</Text>
       </TouchableOpacity>
@@ -18,11 +18,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    color: '#fff',
-  },
   btn: {
-    backgroundColor: '#2968B2',
+    backgroundColor: '#0084BD',
     paddingVertical: 8,
     paddingHorizontal: 15,
     marginTop: 10,

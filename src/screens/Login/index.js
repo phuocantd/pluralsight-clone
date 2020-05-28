@@ -40,16 +40,43 @@ export default function Login({navigation}) {
       )}>
       <ScrollView>
         <View style={styles.center}>
-          <Text style={styles.label}>Email or username</Text>
+          <Text
+            style={StyleSheet.compose(
+              styles.label,
+              colors.text,
+            )}>
+            Email or username
+          </Text>
           <TextInput
-            style={styles.input}
+            style={StyleSheet.flatten([
+              styles.input,
+              colors.bgInput,
+              colors.text,
+            ])}
             value={userName}
             onChangeText={text => setUserName(text)}
           />
-          <Text style={styles.label}>Password</Text>
+          <Text
+            style={StyleSheet.compose(
+              styles.label,
+              colors.text,
+            )}>
+            Password
+          </Text>
           <PasswordInput value={password} onChange={setPassword} />
-          <TouchableOpacity style={styles.btn} onPress={handleLogin}>
-            <Text style={styles.btnText}>sign in</Text>
+          <TouchableOpacity
+            style={StyleSheet.compose(
+              styles.btn,
+              colors.bgBtn,
+            )}
+            onPress={handleLogin}>
+            <Text
+              style={StyleSheet.compose(
+                styles.btnText,
+                colors.bgTextBtn,
+              )}>
+              sign in
+            </Text>
           </TouchableOpacity>
           <View style={styles.mt}>
             <TouchableOpacity
@@ -58,12 +85,28 @@ export default function Login({navigation}) {
                 () => navigation.navigate(FORGOTPASSWORD)
                 // Linking.openURL('https://app.pluralsight.com/id/forgotpassword')
               }>
-              <Text style={styles.labelText}>forgot password</Text>
+              <Text
+                style={StyleSheet.compose(
+                  styles.labelText,
+                  colors.textBtn,
+                )}>
+                forgot password
+              </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.border}>
+          <View
+            style={StyleSheet.compose(
+              styles.border,
+              colors.btn,
+            )}>
             <TouchableOpacity style={styles.btnLabel}>
-              <Text style={styles.labelText}>use single sign-on (sso)</Text>
+              <Text
+                style={StyleSheet.compose(
+                  styles.labelText,
+                  colors.textBtn,
+                )}>
+                use single sign-on (sso)
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.mt}>
@@ -75,7 +118,13 @@ export default function Login({navigation}) {
                 // 'https://www.pluralsight.com/product/skills/free?acta=freemium_mobile_signup',
                 // )
               }>
-              <Text style={styles.labelText}>sign up free</Text>
+              <Text
+                style={StyleSheet.compose(
+                  styles.labelText,
+                  colors.textBtn,
+                )}>
+                sign up free
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -92,14 +141,13 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   label: {
-    color: '#fff',
     marginTop: 10,
     marginBottom: 5,
   },
   input: {
-    backgroundColor: '#0D0F12',
+    // backgroundColor: '#0D0F12',
     borderRadius: 6,
-    color: '#fff',
+    // color: '#fff',
     paddingTop: 10,
     paddingRight: 10,
     paddingBottom: 10,
@@ -109,18 +157,18 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 15,
     alignItems: 'center',
-    backgroundColor: '#2968B2',
+    // backgroundColor: '#2968B2',
     borderRadius: 6,
   },
   btnText: {
     textTransform: 'uppercase',
     marginVertical: 10,
-    color: '#fff',
+    // color: '#fff',
     fontSize: 15,
   },
   border: {
     borderRadius: 6,
-    borderColor: '#2968B2',
+    // borderColor: '#2968B2',
     borderWidth: 1,
     marginTop: 15,
   },
@@ -131,7 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   labelText: {
-    color: '#2968B2',
+    // color: '#2968B2',
     textTransform: 'uppercase',
     marginVertical: 10,
     fontSize: 15,

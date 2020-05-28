@@ -9,7 +9,7 @@ import AuthProfile from './auth';
 import NoAuthProfile from './noAuth';
 
 export default function Profile({navigation}) {
-  const {colors} = React.useContext(ThemeContext);
+  const {colors} = useContext(ThemeContext);
   const {state} = useContext(AuthContext);
 
   const handleSignin = () => navigation.navigate(LOGIN);
@@ -21,9 +21,9 @@ export default function Profile({navigation}) {
         colors.container,
       )}>
       {state.isAuth ? (
-        <AuthProfile />
+        <AuthProfile colors={colors} />
       ) : (
-        <NoAuthProfile handleSignIn={handleSignin} />
+        <NoAuthProfile handleSignIn={handleSignin} colors={colors} />
       )}
     </View>
   );

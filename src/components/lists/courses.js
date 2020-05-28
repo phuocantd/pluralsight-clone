@@ -22,7 +22,14 @@ export default function ListCourse({items, handleDetail, headerComponent}) {
           <Course item={item} handleDetail={handleDetail} />
         )}
         keyExtractor={(item, index) => index.toString()}
-        ItemSeparatorComponent={() => <View style={styles.seperator} />}
+        ItemSeparatorComponent={() => (
+          <View
+            style={StyleSheet.compose(
+              styles.seperator,
+              colors.seperator,
+            )}
+          />
+        )}
       />
     </View>
   );
@@ -34,7 +41,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   seperator: {
-    backgroundColor: '#fff',
     height: 0.5,
     margin: 5,
   },

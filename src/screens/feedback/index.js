@@ -23,6 +23,7 @@ import {AuthContext} from '../../tools/context/auth';
 export default function Feedback({navigation}) {
   const {colors} = useContext(ThemeContext);
   const {state} = useContext(AuthContext);
+
   const [email, setEmail] = useState('');
   const [feedback, setFeedback] = useState('');
   const [typeFeedback, setTypeFeedback] = useState('General feedback');
@@ -33,14 +34,22 @@ export default function Feedback({navigation}) {
       title: 'Send Feedback',
       headerRight: () => (
         <IconMaterialIcons
-          style={styles.send}
+          style={StyleSheet.compose(
+            styles.send,
+            colors.icon,
+          )}
           name="send"
-          color="#ccc"
           size={20}
         />
       ),
     });
-  }, [navigation]);
+  }, [navigation, colors]);
+
+  const composeText = style =>
+    StyleSheet.compose(
+      style,
+      colors.text,
+    );
 
   return (
     <View
@@ -51,29 +60,38 @@ export default function Feedback({navigation}) {
       <View style={styles.content}>
         {!state.isAuth && (
           <TextInput
-            style={styles.input}
+            style={StyleSheet.flatten([
+              styles.input,
+              colors.bgInput,
+              colors.text,
+            ])}
             value={email}
             onChangeText={value => setEmail(value)}
             placeholder="Your email address"
-            placeholderTextColor="#fff"
+            placeholderTextColor={colors.placeHolder.color}
           />
         )}
-        <Menu
-          style={styles.threeDot}
-          onSelect={value => setTypeFeedback(value)}>
+        <Menu onSelect={value => setTypeFeedback(value)}>
           <MenuTrigger>
             <View style={styles.feedback}>
-              <Text style={styles.txtFeedback}>{typeFeedback}</Text>
-              <IconAntDesign name="caretdown" color="#fff" size={20} />
+              <Text style={composeText(styles.txtFeedback)}>
+                {typeFeedback}
+              </Text>
+              <IconAntDesign name="caretdown" style={colors.text} size={20} />
             </View>
           </MenuTrigger>
           <MenuOptions
             customStyles={{
-              optionText: {color: '#fff', fontSize: 20, margin: 10},
-              optionsContainer: {
-                backgroundColor: '#0D0F12',
-                width: 220,
-              },
+              optionText: StyleSheet.compose(
+                {fontSize: 20, margin: 10},
+                colors.text,
+              ),
+              optionsContainer: StyleSheet.compose(
+                {
+                  width: 220,
+                },
+                colors.background1,
+              ),
             }}>
             <MenuOption value="General feedback" text="General feedback" />
             <MenuOption value="Feature request" text="Feature request" />
@@ -89,22 +107,30 @@ export default function Feedback({navigation}) {
           multiline
           value={feedback}
           onChangeText={value => setFeedback(value)}
-          style={styles.input}
+          style={StyleSheet.flatten([
+            styles.input,
+            colors.bgInput,
+            colors.text,
+          ])}
           placeholder="Your feedback"
-          placeholderTextColor="#fff"
+          placeholderTextColor={colors.placeHolder.color}
         />
-        <Text style={styles.count}>{feedback.length} / 2000</Text>
+        <Text style={composeText(styles.count)}>{feedback.length} / 2000</Text>
         <TouchableOpacity
           style={styles.checkbox}
           onPress={() =>
             toggleCheckBox ? setToggleCheckBox(false) : setToggleCheckBox(true)
           }>
           {toggleCheckBox ? (
-            <IconFontAwesome name="check-square-o" color="#fff" size={20} />
+            <IconFontAwesome
+              name="check-square-o"
+              style={colors.text}
+              size={20}
+            />
           ) : (
-            <IconFontAwesome name="square-o" color="#fff" size={20} />
+            <IconFontAwesome name="square-o" style={colors.text} size={20} />
           )}
-          <Text style={styles.txtCheckbox}>
+          <Text style={composeText(styles.txtCheckbox)}>
             Would you like to be contacted about this by a member of the team?{' '}
           </Text>
         </TouchableOpacity>
@@ -120,15 +146,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   input: {
-    backgroundColor: '#0D0F12',
     borderRadius: 6,
-    color: '#fff',
     padding: 10,
     fontSize: 18,
   },
   count: {
     fontSize: 14,
-    color: '#fff',
     alignSelf: 'flex-end',
     marginRight: 15,
   },
@@ -138,7 +161,7 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     marginHorizontal: 15,
   },
-  txtFeedback: {color: '#fff', fontSize: 18},
+  txtFeedback: {fontSize: 18},
   checkbox: {flexDirection: 'row', marginTop: 20, alignItems: 'center'},
-  txtCheckbox: {color: '#fff', marginLeft: 20, marginRight: 15, fontSize: 15},
+  txtCheckbox: {marginLeft: 20, marginRight: 15, fontSize: 15},
 });

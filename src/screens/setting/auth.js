@@ -1,9 +1,31 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Switch,
+  ScrollView,
+} from 'react-native';
 
-export default function AuthSetting({handleSignout}) {
+export default function AuthSetting({
+  handleSignout,
+  isDarkMode,
+  changeMode,
+  colors,
+}) {
+  const composeText = style =>
+    StyleSheet.compose(
+      style,
+      colors.text,
+    );
+  const composeSeperator = StyleSheet.compose(
+    styles.seperator,
+    colors.seperator,
+  );
   return (
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <View style={styles.info}>
         <Image
           source={{
@@ -13,33 +35,58 @@ export default function AuthSetting({handleSignout}) {
           style={styles.imgPostrait}
         />
         <View>
-          <Text style={styles.name}>Hà Công Tín</Text>
-          <Text style={styles.username}>congtinh</Text>
+          <Text style={composeText(styles.name)}>Hà Công Tín</Text>
+          <Text style={composeText(styles.username)}>CongTinHa</Text>
         </View>
       </View>
-      <Text style={styles.label}>Account</Text>
-      <Text style={styles.label}>Subscription</Text>
-      <Text style={styles.label}>Communication Preferences</Text>
-      <View style={styles.seperator} />
-      <Text style={styles.label}>Captions</Text>
-      <Text style={styles.label}>Notifications</Text>
-      <Text style={styles.label}>Advanced Options</Text>
-      <View style={styles.seperator} />
+      <Text style={composeText(styles.label)}>Account</Text>
+      <Text style={composeText(styles.label)}>Subscription</Text>
+      <Text style={composeText(styles.label)}>Communication Preferences</Text>
 
-      <Text style={styles.label}>App version</Text>
-      <Text style={styles.ver}>1.0.1</Text>
-      <View style={styles.seperator} />
+      <View style={composeSeperator} />
 
-      <TouchableOpacity style={styles.btn} onPress={handleSignout}>
-        <Text style={styles.textBtn}>Sign out</Text>
+      <Text style={composeText(styles.label)}>Captions</Text>
+      <Text style={composeText(styles.label)}>Notifications</Text>
+      <Text style={composeText(styles.label)}>Advanced Options</Text>
+      <View style={styles.mode}>
+        <Text style={composeText(styles.label)}>Dark mode</Text>
+        <Switch
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={changeMode}
+          value={isDarkMode}
+        />
+      </View>
+
+      <View style={composeSeperator} />
+
+      <Text style={composeText(styles.label)}>App version</Text>
+      <Text style={composeText(styles.ver)}>1.0.1</Text>
+
+      <View style={composeSeperator} />
+
+      <TouchableOpacity
+        style={StyleSheet.compose(
+          styles.btn,
+          colors.btn,
+        )}
+        onPress={handleSignout}>
+        <Text
+          style={StyleSheet.compose(
+            styles.textBtn,
+            colors.textBtn,
+          )}>
+          Sign out
+        </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    marginTop: 50,
+    marginTop: 20,
     marginHorizontal: 20,
   },
   info: {
@@ -52,40 +99,39 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   name: {
-    color: '#fff',
     fontSize: 20,
     marginLeft: 20,
   },
   username: {
-    color: '#fff',
     fontSize: 15,
     marginLeft: 20,
   },
   label: {
-    color: '#fff',
     fontSize: 18,
     marginTop: 10,
   },
   seperator: {
-    backgroundColor: '#aaa',
-    height: 0.5,
+    height: 1,
     marginTop: 20,
+    marginBottom: 10,
   },
   ver: {
-    color: '#fff',
     fontSize: 13,
   },
   btn: {
     marginTop: 20,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#2968B2',
     borderRadius: 5,
   },
   textBtn: {
-    color: '#2968B2',
     textTransform: 'uppercase',
     marginVertical: 8,
     fontSize: 15,
+  },
+  mode: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

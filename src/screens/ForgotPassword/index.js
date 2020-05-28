@@ -25,18 +25,42 @@ export default function Login({navigation}) {
       )}>
       <ScrollView>
         <View style={styles.center}>
-          <Text style={styles.title}>
+          <Text
+            style={StyleSheet.compose(
+              styles.title,
+              colors.text,
+            )}>
             Enter your email address and we'll send you a link to reset your
             password
           </Text>
-          <Text style={styles.label}>Email</Text>
+          <Text
+            style={StyleSheet.compose(
+              styles.label,
+              colors.text,
+            )}>
+            Email
+          </Text>
           <TextInput
-            style={styles.input}
+            style={StyleSheet.flatten([
+              styles.input,
+              colors.bgInput,
+              colors.text,
+            ])}
             value={email}
             onChangeText={text => setEmail(text)}
           />
-          <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnText}>Send email</Text>
+          <TouchableOpacity
+            style={StyleSheet.compose(
+              styles.btn,
+              colors.bgBtn,
+            )}>
+            <Text
+              style={StyleSheet.compose(
+                styles.btnText,
+                colors.bgTextBtn,
+              )}>
+              Send email
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -52,20 +76,20 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   title: {
-    color: '#fff',
+    // color: '#fff',
     marginTop: 10,
     marginBottom: 5,
     fontSize: 20,
   },
   label: {
-    color: '#fff',
+    // color: '#fff',
     marginTop: 10,
     marginBottom: 5,
   },
   input: {
-    backgroundColor: '#0D0F12',
+    // backgroundColor: '#0D0F12',
     borderRadius: 6,
-    color: '#fff',
+    // color: '#fff',
     paddingTop: 10,
     paddingRight: 10,
     paddingBottom: 10,
@@ -75,13 +99,13 @@ const styles = StyleSheet.create({
   btn: {
     marginTop: 15,
     alignItems: 'center',
-    backgroundColor: '#2968B2',
+    // backgroundColor: '#2968B2',
     borderRadius: 6,
   },
   btnText: {
     textTransform: 'uppercase',
     marginVertical: 10,
-    color: '#fff',
+    // color: '#fff',
     fontSize: 15,
   },
 });

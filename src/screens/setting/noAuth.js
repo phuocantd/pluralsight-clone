@@ -1,16 +1,59 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Switch} from 'react-native';
 
-export default function NoAuthSetting({handleSignin}) {
+export default function NoAuthSetting({
+  handleSignin,
+  isDarkMode,
+  changeMode,
+  colors,
+}) {
+  const composeText = StyleSheet.compose(
+    styles.text,
+    colors.text,
+  );
+
   return (
     <View style={styles.content}>
-      <Text style={styles.text}>Captions</Text>
-      <Text style={styles.text}>Notifications</Text>
-      <Text style={styles.text}>App version</Text>
-      <Text style={styles.version}>2.32.1</Text>
-      <View style={styles.seperator} />
-      <TouchableOpacity style={styles.btn} onPress={handleSignin}>
-        <Text style={styles.btnText}>Sign in</Text>
+      <Text style={composeText}>Captions</Text>
+      <Text style={composeText}>Notifications</Text>
+      <Text style={composeText}>App version</Text>
+      <Text
+        style={StyleSheet.compose(
+          styles.version,
+          colors.text,
+        )}>
+        2.32.1
+      </Text>
+      <View style={styles.mode}>
+        <Text style={composeText}>Dark mode</Text>
+        <Switch
+          trackColor={{false: '#767577', true: '#81b0ff'}}
+          thumbColor={isDarkMode ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={changeMode}
+          value={isDarkMode}
+        />
+      </View>
+      <View
+        style={StyleSheet.compose(
+          styles.seperator,
+          colors.seperator,
+        )}
+      />
+
+      <TouchableOpacity
+        style={StyleSheet.compose(
+          styles.btn,
+          colors.btn,
+        )}
+        onPress={handleSignin}>
+        <Text
+          style={StyleSheet.compose(
+            styles.btnText,
+            colors.textBtn,
+          )}>
+          Sign in
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -22,26 +65,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   text: {
-    color: '#fff',
     fontSize: 20,
     marginTop: 10,
   },
   version: {
-    color: '#Fff',
     fontSize: 15,
   },
-  seperator: {height: 0.5, backgroundColor: '#aaa', marginVertical: 15},
+  seperator: {height: 0.8, marginVertical: 15},
   btn: {
     marginTop: 20,
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: '#0084BD',
     alignItems: 'center',
   },
   btnText: {
-    color: '#0084BD',
     fontSize: 20,
     textTransform: 'uppercase',
     padding: 5,
+  },
+  mode: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 10,
   },
 });
