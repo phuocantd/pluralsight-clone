@@ -28,7 +28,7 @@ const recents = [
 ];
 
 export default function Search() {
-  const {colors} = React.useContext(ThemeContext);
+  const {colors, mode} = React.useContext(ThemeContext);
 
   const [searchValue, setSearchValue] = useState('');
   const [listRecent, setListRecent] = useState(recents);
@@ -52,11 +52,19 @@ export default function Search() {
         globalStyles.container,
         colors.container,
       )}>
-      <View style={styles.searchBar}>
+      <View
+        style={StyleSheet.compose(
+          styles.searchBar,
+          colors.background1,
+        )}>
         <TextInput
-          style={styles.searchInput}
+          style={StyleSheet.flatten([
+            styles.searchInput,
+            colors.borBt,
+            colors.text,
+          ])}
           placeholder="Search..."
-          placeholderTextColor="#fff"
+          placeholderTextColor={mode === 'dark' ? '#fff' : '#000'}
           autoFocus={true}
           value={searchValue}
           onChangeText={text => {
@@ -69,13 +77,16 @@ export default function Search() {
           blurOnSubmit={false}
         />
         <TouchableOpacity
-          style={styles.iconClear}
+          style={StyleSheet.compose(
+            styles.iconClear,
+            colors.borBt,
+          )}
           onPress={() => {
             setSearchValue('');
             setIsRecent(true);
           }}>
           {searchValue !== '' && (
-            <IconMaterialIcons name="clear" color="#fff" size={23} />
+            <IconMaterialIcons name="clear" style={colors.text} size={23} />
           )}
         </TouchableOpacity>
       </View>
@@ -96,7 +107,6 @@ export default function Search() {
 
 const styles = StyleSheet.create({
   searchBar: {
-    backgroundColor: '#0D0F12',
     paddingTop: 10,
     paddingBottom: 10,
     flexDirection: 'row',
@@ -105,40 +115,13 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 23,
     marginLeft: 15,
-    color: '#fff',
-    borderBottomWidth: 0.4,
-    borderBottomColor: '#fff',
+    borderBottomWidth: 0.7,
   },
   iconClear: {
     marginRight: 10,
     paddingRight: 10,
     borderBottomWidth: 0.4,
-    borderBottomColor: '#fff',
     marginTop: 15,
-  },
-  header: {
-    marginTop: 10,
-    marginHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  listRecent: {
-    marginTop: 10,
-  },
-  recentText: {color: '#fff', fontSize: 18},
-  clear: {color: 'blue', fontSize: 18},
-  itemRecent: {
-    flexDirection: 'row',
-    marginHorizontal: 10,
-    marginTop: 10,
-  },
-  iconTime: {
-    marginTop: 3,
-  },
-  textRecent: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: '#fff',
   },
   content: {flex: 1},
 });

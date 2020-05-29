@@ -18,12 +18,18 @@ export default function Paths({navigation}) {
         globalStyles.container,
         colors.container,
       )}>
-      <Text style={styles.text}>{listPath.list.length} Result</Text>
+      <Text
+        style={StyleSheet.compose(
+          styles.text,
+          colors.text,
+        )}>
+        {listPath.list.length} Result
+      </Text>
       <ListPath items={listPath.list} handleDetail={handleDetailPath} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {color: '#fff', fontSize: 13, marginLeft: 20, marginTop: 20},
+  text: {fontSize: 13, marginLeft: 20, marginTop: 20},
 });

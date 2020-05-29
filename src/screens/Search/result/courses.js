@@ -25,22 +25,41 @@ export default function Courses({navigation}) {
         globalStyles.container,
         colors.container,
       )}>
-      <Text style={styles.selectLevel}>Skill level</Text>
+      <Text
+        style={StyleSheet.compose(
+          styles.selectLevel,
+          colors.icon,
+        )}>
+        Skill level
+      </Text>
       <View style={styles.info}>
-        <Text style={styles.result}>
+        <Text
+          style={StyleSheet.compose(
+            styles.result,
+            colors.icon,
+          )}>
           {dataProfessional.listCourse.length} Results
         </Text>
-        <Menu style={styles.time} onSelect={value => setTimeFilter(value)}>
+        <Menu style={colors.text} onSelect={value => setTimeFilter(value)}>
           <MenuTrigger>
-            <Text style={styles.result}>{timeFilter}</Text>
+            <Text
+              style={StyleSheet.compose(
+                styles.result,
+                colors.icon,
+              )}>
+              {timeFilter}
+            </Text>
           </MenuTrigger>
           <MenuOptions
             customStyles={{
-              optionText: {color: '#fff', fontSize: 20, margin: 10},
-              optionsContainer: {
-                backgroundColor: '#0D0F12',
-                width: 220,
-              },
+              optionText: StyleSheet.compose(
+                {fontSize: 20, margin: 10},
+                colors.text,
+              ),
+              optionsContainer: StyleSheet.compose(
+                {width: 220},
+                colors.background1,
+              ),
             }}>
             <MenuOption value="Newest" text="Newest" />
             <MenuOption value="Relevance" text="Relevance" />
@@ -57,7 +76,6 @@ export default function Courses({navigation}) {
 
 const styles = StyleSheet.create({
   selectLevel: {
-    color: '#ccc',
     fontSize: 13,
     marginTop: 20,
     marginLeft: 20,
@@ -68,6 +86,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 20,
   },
-  result: {color: '#ccc', fontSize: 13},
-  time: {color: '#fff'},
+  result: {fontSize: 13},
 });

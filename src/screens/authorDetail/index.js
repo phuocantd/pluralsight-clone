@@ -32,40 +32,65 @@ export default function AuthorDetail({navigation}) {
                   'https://pluralsight.imgix.net/author/lg/deborah-kurata-v1.jpg?w=200',
               }}
             />
-            <Text style={styles.name}>Deborah Kurata</Text>
             <Text
-              style={{color: '#fff', alignSelf: 'center', marginBottom: 10}}>
+              style={StyleSheet.compose(
+                styles.name,
+                colors.text,
+              )}>
+              Deborah Kurata
+            </Text>
+            <Text
+              style={StyleSheet.compose(
+                {alignSelf: 'center', marginBottom: 10},
+                colors.text,
+              )}>
               Plurasight Author
             </Text>
             <Button title="Follow" onPress={() => console.log('Follow')} />
             <Text
-              style={{
-                color: '#fff',
-                fontSize: 13,
-                alignSelf: 'center',
-                marginTop: 10,
-                marginBottom: 20,
-              }}>
+              style={StyleSheet.compose(
+                {
+                  fontSize: 13,
+                  alignSelf: 'center',
+                  marginTop: 10,
+                  marginBottom: 20,
+                },
+                colors.text,
+              )}>
               Follow to be notified when new courses are published
             </Text>
             <Description description="Deborah Kurata is a software developer, consultant, conference speaker, and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with the Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)." />
             <View style={{flexDirection: 'row', marginTop: 20}}>
-              <IconFeather name="link-2" color="#fff" size={20} />
-              <Text style={{color: '#fff', marginLeft: 10}}>
+              <IconFeather name="link-2" style={colors.icon} size={20} />
+              <Text
+                style={StyleSheet.compose(
+                  {marginLeft: 10},
+                  colors.text,
+                )}>
                 http://msmvps.com/blogs/deborahk
               </Text>
             </View>
             <View style={{flexDirection: 'row', marginTop: 10}}>
-              <IconFontAwesome name="facebook-square" color="#fff" size={30} />
               <IconFontAwesome
-                style={{marginHorizontal: 10}}
-                name="linkedin-square"
-                color="#fff"
+                name="facebook-square"
+                style={colors.icon}
                 size={30}
               />
-              <IconFontAwesome name="twitter" color="#fff" size={30} />
+              <IconFontAwesome
+                style={StyleSheet.compose(
+                  {marginHorizontal: 10},
+                  colors.icon,
+                )}
+                name="linkedin-square"
+                size={30}
+              />
+              <IconFontAwesome name="twitter" style={colors.icon} size={30} />
             </View>
-            <Text style={{color: '#fff', fontSize: 20, marginVertical: 30}}>
+            <Text
+              style={StyleSheet.compose(
+                {fontSize: 20, marginVertical: 30},
+                colors.text,
+              )}>
               Course
             </Text>
           </View>
@@ -78,9 +103,7 @@ export default function AuthorDetail({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 20,
-  },
+  container: {marginHorizontal: 20},
   postrait: {
     marginTop: 30,
     height: 60,
@@ -88,14 +111,6 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignSelf: 'center',
   },
-  text: {
-    color: '#fff',
-    fontSize: 14,
-    flex: 1,
-  },
-  name: {
-    color: '#fff',
-    alignSelf: 'center',
-    fontSize: 25,
-  },
+  text: {fontSize: 14, flex: 1},
+  name: {alignSelf: 'center', fontSize: 25},
 });
