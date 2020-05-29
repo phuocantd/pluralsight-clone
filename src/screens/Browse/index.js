@@ -58,5 +58,3 @@ export default function Browse({navigation}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

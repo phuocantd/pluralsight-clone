@@ -7,7 +7,7 @@ import Description from 'components/description';
 import Course from 'components/course/horizontal';
 
 export default function PathDetail({navigation, route}) {
-  const {colors} = React.useContext(ThemeContext);
+  const {colors, mode} = React.useContext(ThemeContext);
 
   const {title} = route.params;
   return (
@@ -22,17 +22,37 @@ export default function PathDetail({navigation, route}) {
             style={styles.image}
             source={{
               uri:
-                'https://pluralsight2.imgix.net/paths/images/angular-denver-2019-639c79599c.png',
+                mode === 'dark'
+                  ? 'https://pluralsight2.imgix.net/paths/images/angular-denver-2019-639c79599c.png'
+                  : 'https://pluralsight.imgix.net/author/lg/7283fc45-f9e3-4298-9862-89653a627c8c.png',
             }}
           />
           <View>
-            <Text style={styles.name}>{title}</Text>
-            <Text style={styles.count}>44 courses 15 hours</Text>
+            <Text
+              style={StyleSheet.compose(
+                styles.name,
+                colors.text,
+              )}>
+              {title}
+            </Text>
+            <Text
+              style={StyleSheet.compose(
+                styles.count,
+                colors.text,
+              )}>
+              44 courses 15 hours
+            </Text>
           </View>
         </View>
         <Description description="Angular Denver is the coolest Angular conference east of the Continental Divide! Angular developers come from all over to spend two days learning, connecting, and having fun. With around 50 different topics, including authentication, facades, observables, accessibility, and inclusivity in development, there is something for everyone to level-up their developing skills." />
         <View>
-          <Text style={styles.titleCourse}>{title}</Text>
+          <Text
+            style={StyleSheet.compose(
+              styles.titleCourse,
+              colors.text,
+            )}>
+            {title}
+          </Text>
           {Array(44)
             .fill(null)
             .map((i, index) => ({

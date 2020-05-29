@@ -1,13 +1,22 @@
 import React from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
 
+import {ThemeContext} from 'tools/context/theme';
 import Skill from 'components/skill';
 
 export default function Section({title, items, handleDetail}) {
+  const {colors} = React.useContext(ThemeContext);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>{title}</Text>
+        <Text
+          style={StyleSheet.compose(
+            styles.title,
+            colors.text,
+          )}>
+          {title}
+        </Text>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {items.map(item => (
@@ -33,13 +42,6 @@ const styles = StyleSheet.create({
   title: {
     marginLeft: 5,
     marginTop: 10,
-    color: '#fff',
     fontSize: 17,
-  },
-  seeAll: {
-    marginTop: 14,
-    marginRight: 10,
-    color: '#fff',
-    fontSize: 13,
   },
 });

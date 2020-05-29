@@ -2,11 +2,16 @@ import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
 import {PATHDETAIL} from 'global/constants';
+import {ThemeContext} from 'tools/context/theme';
 
 export default function Path({item, handleDetail}) {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <TouchableOpacity
-      style={styles.item}
+      style={StyleSheet.compose(
+        styles.item,
+        colors.background3,
+      )}
       onPress={() => handleDetail(PATHDETAIL, 'Angular denver 2019')}>
       <View style={styles.center}>
         <Image
@@ -17,8 +22,20 @@ export default function Path({item, handleDetail}) {
         />
       </View>
       <View>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.info}>{item.count} courses</Text>
+        <Text
+          style={StyleSheet.compose(
+            styles.title,
+            colors.text,
+          )}>
+          {item.title}
+        </Text>
+        <Text
+          style={StyleSheet.compose(
+            styles.info,
+            colors.text,
+          )}>
+          {item.count} courses
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -28,7 +45,7 @@ const styles = StyleSheet.create({
   item: {
     width: 200,
     height: 200,
-    backgroundColor: '#1E2429',
+    // backgroundColor: '#1E2429',
     margin: 5,
   },
   center: {
@@ -41,12 +58,10 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 5,
     marginHorizontal: 5,
-    color: '#fff',
     fontSize: 15,
   },
   info: {
     marginHorizontal: 5,
-    color: '#fff',
     fontSize: 12,
   },
 });
