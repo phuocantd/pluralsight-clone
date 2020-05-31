@@ -1,0 +1,95 @@
+import React, {useContext} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+
+import {ThemeContext} from 'tools/context/theme';
+import Period from './period';
+
+export default function Topic({item, index}) {
+  const {colors} = useContext(ThemeContext);
+
+  return (
+    <View>
+      <View style={styles.item}>
+        <View style={styles.info}>
+          <View
+            style={StyleSheet.compose(
+              styles.index,
+              colors.background2,
+            )}>
+            <Text
+              style={StyleSheet.compose(
+                styles.textIndex,
+                colors.text,
+              )}>
+              {index}
+            </Text>
+          </View>
+          <View style={styles.nameDetail}>
+            <Text
+              style={StyleSheet.compose(
+                styles.name,
+                colors.text,
+              )}>
+              {item.name}
+            </Text>
+            <Text style={colors.text}>{item.total}</Text>
+          </View>
+        </View>
+        <Menu style={styles.threeDot} onSelect={value => console.log(value)}>
+          <MenuTrigger>
+            <IconEntypo
+              name="dots-three-vertical"
+              style={colors.icon}
+              size={20}
+            />
+          </MenuTrigger>
+          <MenuOptions
+            customStyles={{
+              optionText: StyleSheet.compose(
+                {fontSize: 20, margin: 10},
+                colors.text,
+              ),
+              optionsContainer: StyleSheet.compose(
+                {
+                  width: 220,
+                },
+                colors.background1,
+              ),
+            }}>
+            <MenuOption value="bookmark" text="Bookmark" />
+            <MenuOption value="download" text="Download Module" />
+          </MenuOptions>
+        </Menu>
+      </View>
+      {item.detail.map(period => (
+        <Period key={Math.random().toString()} item={period} />
+      ))}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  item: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  index: {
+    width: 70,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textIndex: {fontSize: 20},
+  info: {flexDirection: 'row', flex: 1},
+  nameDetail: {marginLeft: 10, flexDirection: 'column', flex: 1},
+  name: {fontSize: 18},
+});
