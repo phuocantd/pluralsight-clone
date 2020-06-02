@@ -20,9 +20,9 @@ export default function AuthSetting({
       style,
       colors.text,
     );
-  const composeSeperator = StyleSheet.compose(
-    styles.seperator,
-    colors.seperator,
+  const composeseparator = StyleSheet.compose(
+    styles.separator,
+    colors.separator,
   );
   return (
     <ScrollView style={styles.content}>
@@ -43,7 +43,7 @@ export default function AuthSetting({
       <Text style={composeText(styles.label)}>Subscription</Text>
       <Text style={composeText(styles.label)}>Communication Preferences</Text>
 
-      <View style={composeSeperator} />
+      <View style={composeseparator} />
 
       <Text style={composeText(styles.label)}>Captions</Text>
       <Text style={composeText(styles.label)}>Notifications</Text>
@@ -59,12 +59,12 @@ export default function AuthSetting({
         />
       </View>
 
-      <View style={composeSeperator} />
+      <View style={composeseparator} />
 
       <Text style={composeText(styles.label)}>App version</Text>
       <Text style={composeText(styles.ver)}>1.0.1</Text>
 
-      <View style={composeSeperator} />
+      <View style={composeseparator} />
 
       <TouchableOpacity
         style={StyleSheet.compose(
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 10,
   },
-  seperator: {
+  separator: {
     height: 1,
     marginTop: 20,
     marginBottom: 10,

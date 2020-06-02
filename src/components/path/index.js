@@ -42,26 +42,9 @@ export default function Path({item, handleDetail}) {
 }
 
 const styles = StyleSheet.create({
-  item: {
-    width: 200,
-    height: 200,
-    // backgroundColor: '#1E2429',
-    margin: 5,
-  },
-  center: {
-    alignItems: 'center',
-  },
-  image: {
-    width: 100,
-    height: 100,
-  },
-  title: {
-    marginTop: 5,
-    marginHorizontal: 5,
-    fontSize: 15,
-  },
-  info: {
-    marginHorizontal: 5,
-    fontSize: 12,
-  },
+  item: {width: 200, height: 200, margin: 5},
+  center: {alignItems: 'center'},
+  image: {width: 100, height: 100},
+  title: {marginTop: 5, marginHorizontal: 5, fontSize: 15},
+  info: {marginHorizontal: 5, fontSize: 12},
 });

@@ -57,21 +57,9 @@ export default function Info({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginLeft: 5,
-  },
-  title: {
-    // color: '#eee',
-    fontSize: 15,
-  },
-  info: {
-    fontSize: 12,
-  },
-  rate: {
-    flexDirection: 'row',
-  },
-  star: {
-    flexDirection: 'row',
-    marginTop: 3,
-  },
+  container: {marginLeft: 5},
+  title: {fontSize: 15},
+  info: {fontSize: 12},
+  rate: {flexDirection: 'row'},
+  star: {flexDirection: 'row', marginTop: 3},
 });

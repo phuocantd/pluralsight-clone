@@ -36,17 +36,7 @@ export default function Downloads() {
 }
 
 const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    // color: '#fff',
-    fontSize: 25,
-  },
-  detail: {
-    // color: '#fff',
-    fontSize: 20,
-  },
+  center: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  title: {fontSize: 25},
+  detail: {fontSize: 20},
 });

@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export const dark = StyleSheet.create({
   container: {backgroundColor: '#000'},
   bgBtn: {backgroundColor: '#0084BD'},
-  seperator: {backgroundColor: '#fff'},
+  separator: {backgroundColor: '#fff'},
   bgInput: {backgroundColor: 'rgba(138,153,168, 0.40)'},
   background1: {backgroundColor: '#0D0F12'},
   background2: {backgroundColor: '#181C20'},
@@ -20,7 +20,7 @@ export const dark = StyleSheet.create({
 export const light = StyleSheet.create({
   container: {backgroundColor: '#F2F2F2'},
   bgBtn: {backgroundColor: '#0084BD'},
-  seperator: {backgroundColor: '#000'},
+  separator: {backgroundColor: '#000'},
   bgInput: {backgroundColor: 'rgba(138,153,168, 0.30)'},
   background1: {backgroundColor: '#F0F3F5'},
   background2: {backgroundColor: '#F7F9FA'},

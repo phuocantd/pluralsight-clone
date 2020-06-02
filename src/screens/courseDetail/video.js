@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 50,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: 'white',
   },
   downIcon: {position: 'absolute', left: 20, top: 20},
 });

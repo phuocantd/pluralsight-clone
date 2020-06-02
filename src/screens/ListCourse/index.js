@@ -32,10 +32,5 @@ export default function ListCourseScreen({route, navigation}) {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    color: '#fff',
-    fontSize: 25,
-    marginLeft: 10,
-    marginTop: 20,
-  },
+  title: {fontSize: 25, marginLeft: 10, marginTop: 20},
 });

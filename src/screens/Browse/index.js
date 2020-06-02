@@ -1,9 +1,17 @@
-import React from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useContext} from 'react';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 
 import {globalStyles} from 'global/styles';
-import {PATHS, PATHDETAIL, AUTHORDETAIL} from 'global/constants';
+import {PATHS, PATHDETAIL, AUTHORDETAIL, LOGIN} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
+import {AuthContext} from 'tools/context/auth';
 import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';
 import ImageButton from 'components/imageButtonMedium';
 import ScrollImage from 'components/scrollImage';
@@ -12,7 +20,8 @@ import PathScroll from 'components/scrollHorizontal/paths';
 import AuthorScroll from 'components/scrollHorizontal/authors';
 
 export default function Browse({navigation}) {
-  const {colors} = React.useContext(ThemeContext);
+  const {colors} = useContext(ThemeContext);
+  const {state} = useContext(AuthContext);
 
   const seeAllPath = (title, items) =>
     navigation.navigate(PATHS, {items, title});
@@ -22,6 +31,8 @@ export default function Browse({navigation}) {
 
   const handleDetailAuthor = () => navigation.navigate(AUTHORDETAIL);
 
+  const handleSignin = () => navigation.navigate(LOGIN);
+
   return (
     <View
       style={StyleSheet.compose(
@@ -29,6 +40,42 @@ export default function Browse({navigation}) {
         colors.container,
       )}>
       <ScrollView>
+        {!state.isAuth && (
+          <View style={{margin: 25}}>
+            <Text
+              style={StyleSheet.compose(
+                {fontWeight: 'bold', fontSize: 23},
+                colors.text,
+              )}>
+              Sign in to skill up to day
+            </Text>
+            <Text
+              style={StyleSheet.compose(
+                {fontSize: 18, marginVertical: 5},
+                colors.text,
+              )}>
+              Keep your skills up-to-date with access to thousands if courses by
+              industry experts.
+            </Text>
+            <TouchableOpacity
+              onPress={handleSignin}
+              style={StyleSheet.compose(
+                {borderRadius: 6, marginTop: 5},
+                colors.bgBtn,
+              )}>
+              <Text
+                style={{
+                  color: 'white',
+                  textTransform: 'uppercase',
+                  alignSelf: 'center',
+                  fontSize: 18,
+                  paddingVertical: 8,
+                }}>
+                Sign in to start watching
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <ImageButton
           url="https://cdn.cjr.org/wp-content/uploads/2019/07/AdobeStock_165953143-686x371.jpeg"
           title="new releases"

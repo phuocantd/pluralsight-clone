@@ -36,8 +36,8 @@ export default function NoAuthSetting({
       </View>
       <View
         style={StyleSheet.compose(
-          styles.seperator,
-          colors.seperator,
+          styles.separator,
+          colors.separator,
         )}
       />
 
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   version: {
     fontSize: 15,
   },
-  seperator: {height: 0.8, marginVertical: 15},
+  separator: {height: 0.8, marginVertical: 15},
   btn: {
     marginTop: 20,
     borderWidth: 1,

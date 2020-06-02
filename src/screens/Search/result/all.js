@@ -58,8 +58,8 @@ export default function All({navigation}) {
           <View key={Math.random().toString()}>
             <View
               style={StyleSheet.compose(
-                styles.seperator,
-                colors.seperator,
+                styles.separator,
+                colors.separator,
               )}
             />
             <Course item={item} handleDetail={handleDetailCourse} />
@@ -69,8 +69,8 @@ export default function All({navigation}) {
 
       <View
         style={StyleSheet.compose(
-          styles.seperator,
-          colors.seperator,
+          styles.separator,
+          colors.separator,
         )}
       />
       <View style={styles.tab}>
@@ -89,8 +89,8 @@ export default function All({navigation}) {
           <View key={Math.random().toString()}>
             <View
               style={StyleSheet.compose(
-                styles.seperator,
-                colors.seperator,
+                styles.separator,
+                colors.separator,
               )}
             />
             <Path item={item} handleDetail={handleDetailPath} />
@@ -100,8 +100,8 @@ export default function All({navigation}) {
 
       <View
         style={StyleSheet.compose(
-          styles.seperator,
-          colors.seperator,
+          styles.separator,
+          colors.separator,
         )}
       />
       <View style={styles.tab}>
@@ -120,8 +120,8 @@ export default function All({navigation}) {
           <View key={Math.random().toString()}>
             <View
               style={StyleSheet.compose(
-                styles.seperator,
-                colors.seperator,
+                styles.separator,
+                colors.separator,
               )}
             />
             <Author item={item} handleDetail={handleDetailAuthor} />
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   title: {fontSize: 18},
   btn: {flexDirection: 'row', alignItems: 'center'},
   btnText: {fontSize: 13},
-  seperator: {
+  separator: {
     marginVertical: 15,
     height: 0.5,
     marginHorizontal: 10,

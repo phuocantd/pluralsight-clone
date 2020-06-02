@@ -17,8 +17,8 @@ export default function ListPath({items, handleDetail}) {
       ItemSeparatorComponent={() => (
         <View
           style={StyleSheet.compose(
-            styles.seperator,
-            colors.seperator,
+            styles.separator,
+            colors.separator,
           )}
         />
       )}
@@ -28,5 +28,5 @@ export default function ListPath({items, handleDetail}) {
 
 const styles = StyleSheet.create({
   list: {flex: 1, marginTop: 20},
-  seperator: {height: 0.5, margin: 5},
+  separator: {height: 0.5, margin: 5},
 });

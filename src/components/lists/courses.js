@@ -25,8 +25,8 @@ export default function ListCourse({items, handleDetail, headerComponent}) {
         ItemSeparatorComponent={() => (
           <View
             style={StyleSheet.compose(
-              styles.seperator,
-              colors.seperator,
+              styles.separator,
+              colors.separator,
             )}
           />
         )}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
   },
-  seperator: {
+  separator: {
     height: 0.5,
     margin: 5,
   },

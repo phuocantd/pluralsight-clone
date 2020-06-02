@@ -55,7 +55,4 @@ export default function AuthHome({navigation}) {
 
 const styles = StyleSheet.create({
   image: {height: 100},
-  txt: {
-    color: '#fff',
-  },
 });

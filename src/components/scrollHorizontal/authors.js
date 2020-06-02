@@ -31,17 +31,7 @@ export default function Authorscroll({title, items, handleDetail}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 15,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  title: {
-    marginLeft: 5,
-    marginTop: 10,
-    color: '#fff',
-    fontSize: 17,
-  },
+  container: {marginTop: 15},
+  header: {flexDirection: 'row', justifyContent: 'space-between'},
+  title: {marginLeft: 5, marginTop: 10, fontSize: 17},
 });

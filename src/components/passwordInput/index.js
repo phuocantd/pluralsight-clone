@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
+import {ThemeContext} from 'tools/context/theme';
+
 export default function PasswordInput({onChange, value}) {
+  const {colors} = React.useContext(ThemeContext);
+
   const [icon, setIcon] = useState('eye-with-line');
   const [hide, setHide] = useState(true);
 
@@ -12,18 +16,27 @@ export default function PasswordInput({onChange, value}) {
   };
 
   return (
-    <View style={styles.searchSection}>
+    <View
+      style={StyleSheet.compose(
+        styles.searchSection,
+        colors.bgInput,
+      )}>
       <TextInput
-        style={styles.input}
+        style={StyleSheet.compose(
+          styles.input,
+          colors.text,
+        )}
         secureTextEntry={hide}
         onChangeText={e => onChange(e)}
         value={value}
       />
       {value !== '' && (
         <Icon
-          style={styles.searchIcon}
+          style={StyleSheet.compose(
+            styles.searchIcon,
+            colors.text,
+          )}
           name={icon}
-          color="#fff"
           size={18}
           onPress={changeIcon}
         />
@@ -38,7 +51,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 6,
-    backgroundColor: '#0D0F12',
   },
   searchIcon: {
     padding: 10,
@@ -50,6 +62,5 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     marginLeft: 10,
     fontSize: 18,
-    color: '#fff',
   },
 });

@@ -66,7 +66,12 @@ export default function PathDetail({navigation, route}) {
             }))
             .map(item => (
               <View key={Math.random().toString()}>
-                <View style={styles.seperator} />
+                <View
+                  style={StyleSheet.compose(
+                    styles.separator,
+                    colors.separator,
+                  )}
+                />
                 <Course key={Math.random().toString()} item={item} />
               </View>
             ))}
@@ -77,32 +82,11 @@ export default function PathDetail({navigation, route}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 20,
-  },
-  image: {
-    width: 100,
-    height: 100,
-  },
-  title: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  name: {
-    fontSize: 25,
-    color: '#fff',
-  },
-  count: {color: '#Fff', fontSize: 15},
-  titleCourse: {
-    color: '#fff',
-    fontSize: 25,
-    marginLeft: 10,
-    marginTop: 20,
-  },
-  seperator: {
-    backgroundColor: '#fff',
-    height: 0.5,
-    margin: 5,
-  },
+  container: {marginHorizontal: 20},
+  image: {width: 100, height: 100},
+  title: {flexDirection: 'row', alignItems: 'center', marginVertical: 20},
+  name: {fontSize: 25},
+  count: {fontSize: 15},
+  titleCourse: {fontSize: 25, marginLeft: 10, marginTop: 20},
+  separator: {height: 0.5, margin: 5},
 });

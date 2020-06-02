@@ -26,15 +26,7 @@ export default function Info({title, count}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginLeft: 5,
-  },
-  title: {
-    color: '#eee',
-    fontSize: 15,
-  },
-  info: {
-    color: '#fff',
-    fontSize: 12,
-  },
+  container: {marginLeft: 5},
+  title: {fontSize: 15},
+  info: {fontSize: 12},
 });
