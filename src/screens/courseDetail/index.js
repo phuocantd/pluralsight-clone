@@ -10,34 +10,15 @@ import Video from './video';
 import Description from 'components/description';
 import ButtonItem from './buttonItem';
 import ListVideo from './listVideo';
+import {dataDetail} from 'data/courseDetail';
 
-const data = {
-  title: 'Architecting for Reliability on AWS',
-  image:
-    'https://pluralsight.imgix.net/course-images/aws-architecting-reliability-v1.png',
-  authors: [
-    {
-      name: 'Mike Pfeiffer',
-      image:
-        'https://pluralsight.imgix.net/author/lg/7171fd1a-7c0f-4c8a-bbc2-93da74eb4b32.png?w=200',
-    },
-    {
-      name: 'joe eames',
-      image: 'https://pluralsight.imgix.net/author/lg/joe-eames-v1.jpg?w=200',
-    },
-  ],
-  level: 'Intermediate',
-  rating: 83,
-  duration: '3h 34m',
-  updated: 'May 2018',
-  description:
-    'Learn how to implement a highly available and reliable application architecture using the patterns and best practices recommended by AWS. In this course, Architecting for Reliability on AWS, you will first explore the key concepts and core services of AWS. Next, you will follow along step-by-step to implement a real-world application that is built with the reliability principles defined within the AWS Well Architected Framework. Finally, you will learn how to further increase the reliability of an application architecture on AWS by implementing multi-region solutions. By the end of this course, you will have a variety of AWS architecture skills for the real world.',
-};
-
-export default function CourseDetail() {
+export default function CourseDetail({navigation}) {
   const {colors} = React.useContext(ThemeContext);
 
+  const [data, setData] = useState(dataDetail);
   const [isContent, setIsContent] = useState(true);
+
+  const handleBack = () => navigation.goBack();
 
   return (
     <View
@@ -46,7 +27,7 @@ export default function CourseDetail() {
         colors.background2,
       )}>
       <View>
-        <Video image={data.image} />
+        <Video image={data.image} handleBack={handleBack} />
       </View>
       <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
         <View style={{marginHorizontal: 20}}>

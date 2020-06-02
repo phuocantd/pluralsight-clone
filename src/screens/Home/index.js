@@ -1,70 +1,27 @@
 import React, {useContext} from 'react';
-import {Image, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
+import {AuthContext} from 'tools/context/auth';
 import {globalStyles} from 'global/styles';
-import {LISTCOURSE} from 'global/constants';
-import CourseScroll from 'components/scrollHorizontal/courses';
-import {
-  softwareDevelopment,
-  IToperations,
-  dataProfessional,
-  securityProfessional,
-} from 'data/home';
 import {ThemeContext} from 'tools/context/theme';
+import AuthHome from './auth';
+import NoAuthHome from './noAuth';
 
 export default function Home({navigation}) {
+  const {state} = useContext(AuthContext);
   const {colors} = useContext(ThemeContext);
 
-  const handleSeeAll = (title, items) =>
-    navigation.navigate(LISTCOURSE, {items, title});
-
-  const handleDetailCourse = screen => navigation.navigate(screen);
-
   return (
-    <ScrollView
+    <View
       style={StyleSheet.compose(
         globalStyles.container,
         colors.container,
+      )}>
+      {state.isAuth ? (
+        <AuthHome navigation={navigation} />
+      ) : (
+        <NoAuthHome navigation={navigation} />
       )}
-      showsVerticalScrollIndicator={false}>
-      <Image
-        style={styles.image}
-        source={{
-          uri:
-            'https://financesonline.com/uploads/2019/08/Pluralsight-logo1.png',
-        }}
-      />
-      <CourseScroll
-        title={softwareDevelopment.title}
-        items={softwareDevelopment.listCourse}
-        handleSeeAll={handleSeeAll}
-        handleDetail={handleDetailCourse}
-      />
-      <CourseScroll
-        title={IToperations.title}
-        items={IToperations.listCourse}
-        handleSeeAll={handleSeeAll}
-        handleDetail={handleDetailCourse}
-      />
-      <CourseScroll
-        title={dataProfessional.title}
-        items={dataProfessional.listCourse}
-        handleSeeAll={handleSeeAll}
-        handleDetail={handleDetailCourse}
-      />
-      <CourseScroll
-        title={securityProfessional.title}
-        items={securityProfessional.listCourse}
-        handleSeeAll={handleSeeAll}
-        handleDetail={handleDetailCourse}
-      />
-    </ScrollView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  image: {height: 100},
-  txt: {
-    color: '#fff',
-  },
-});

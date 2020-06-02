@@ -11,8 +11,12 @@ import {
 import {ThemeContext} from 'tools/context/theme';
 import Period from './period';
 
-export default function Topic({item, index}) {
+export default function Topic({item, index, handleMarkDown}) {
   const {colors} = useContext(ThemeContext);
+
+  const handleBookMark = () => {
+    handleMarkDown(index);
+  };
 
   return (
     <View>
@@ -30,6 +34,16 @@ export default function Topic({item, index}) {
               )}>
               {index}
             </Text>
+            {item.isMarkdown && (
+              <IconEntypo
+                name="bookmark"
+                size={20}
+                style={StyleSheet.compose(
+                  styles.markdown,
+                  colors.text,
+                )}
+              />
+            )}
           </View>
           <View style={styles.nameDetail}>
             <Text
@@ -63,7 +77,11 @@ export default function Topic({item, index}) {
                 colors.background1,
               ),
             }}>
-            <MenuOption value="bookmark" text="Bookmark" />
+            <MenuOption
+              value="bookmark"
+              text="Bookmark"
+              onSelect={handleBookMark}
+            />
             <MenuOption value="download" text="Download Module" />
           </MenuOptions>
         </Menu>
@@ -92,4 +110,5 @@ const styles = StyleSheet.create({
   info: {flexDirection: 'row', flex: 1},
   nameDetail: {marginLeft: 10, flexDirection: 'column', flex: 1},
   name: {fontSize: 18},
+  markdown: {position: 'absolute', left: 0, bottom: 0},
 });
