@@ -4,7 +4,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import {ThemeContext} from 'tools/context/theme';
 
-export default function Recent({list, setList}) {
+export default function Recent({list, setList, handleSelectRecent}) {
   const {colors} = React.useContext(ThemeContext);
 
   const composeText = style =>
@@ -31,7 +31,9 @@ export default function Recent({list, setList}) {
         keyExtractor={item => item.id}
         data={list}
         renderItem={({item}) => (
-          <View style={styles.itemRecent}>
+          <TouchableOpacity
+            style={styles.itemRecent}
+            onPress={() => handleSelectRecent(item.text)}>
             <IconEntypo
               style={StyleSheet.compose(
                 styles.iconTime,
@@ -42,7 +44,7 @@ export default function Recent({list, setList}) {
               size={16}
             />
             <Text style={composeText(styles.textRecent)}>{item.text}</Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

@@ -16,6 +16,7 @@ export default function Topic({item, index, handleMarkDown}) {
 
   const handleBookMark = () => {
     handleMarkDown(index);
+    console.log(item);
   };
 
   return (
@@ -79,7 +80,7 @@ export default function Topic({item, index, handleMarkDown}) {
             }}>
             <MenuOption
               value="bookmark"
-              text="Bookmark"
+              text={item.isMarkdown ? 'Unbookmark' : 'Bookmark'}
               onSelect={handleBookMark}
             />
             <MenuOption value="download" text="Download Module" />

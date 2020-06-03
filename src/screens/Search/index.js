@@ -43,7 +43,14 @@ export default function Search() {
       ]);
       Keyboard.dismiss();
       setIsRecent(false);
+      setIsSuccess(true);
     }
+  };
+
+  const handleSelectRecent = recent => {
+    setSearchValue(recent);
+    setIsSuccess(false);
+    setIsRecent(false);
   };
 
   return (
@@ -69,7 +76,10 @@ export default function Search() {
           value={searchValue}
           onChangeText={text => {
             setSearchValue(text);
+            console.log({isRecent, isSuccess});
             if (text === '') {
+              setIsRecent(true);
+            } else {
               setIsRecent(true);
             }
           }}
@@ -92,8 +102,14 @@ export default function Search() {
       </View>
       <View style={styles.content}>
         {isRecent ? (
-          searchValue === '' && (
-            <Recent list={listRecent} setList={setListRecent} />
+          searchValue === '' ? (
+            <Recent
+              list={listRecent}
+              setList={setListRecent}
+              handleSelectRecent={handleSelectRecent}
+            />
+          ) : (
+            <View />
           )
         ) : isSuccess ? (
           <ResultSearch />
