@@ -76,7 +76,6 @@ export default function Search() {
           value={searchValue}
           onChangeText={text => {
             setSearchValue(text);
-            console.log({isRecent, isSuccess});
             if (text === '') {
               setIsRecent(true);
             } else {
