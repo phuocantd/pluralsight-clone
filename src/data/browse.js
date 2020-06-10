@@ -82,6 +82,12 @@ export const listPath = {
   list: [
     {
       image:
+        'https://pluralsight.imgix.net/author/lg/7283fc45-f9e3-4298-9862-89653a627c8c.png',
+      title: 'Angular Denver 2019',
+      count: 44,
+    },
+    {
+      image:
         'https://pluralsight2.imgix.net/paths/images/business-analysis-3c8e439908.png',
       title: 'Managing Projects',
       count: 15,
@@ -103,6 +109,180 @@ export const listPath = {
         'https://pluralsight2.imgix.net/paths/images/ng-conf-2019-2c14f96341.png',
       title: 'ng-conf 2019',
       count: 68,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/salesforce-e8b45b03c6.png',
+      title: 'Beginning Salesforce Administration',
+      count: 10,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/code-mash-187b6cec80.png',
+      title: 'CodeMash Conference 2020',
+      count: 94,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/droidcon-sf-a96cc1e0f1.png',
+      title: 'droidcon SF 2019',
+      count: 70,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/that-conference-2019-f0b90afecc.png',
+      title: 'THAT Conference 2019',
+      count: 67,
+    },
+  ],
+};
+
+export const listPathConferences = {
+  title: 'Conferences',
+  list: [
+    {
+      image:
+        'https://pluralsight.imgix.net/author/lg/7283fc45-f9e3-4298-9862-89653a627c8c.png',
+      title: 'Angular Denver 2019',
+      count: 44,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/code-mash-187b6cec80.png',
+      title: 'CodeMash Conference 2020',
+      count: 94,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/csharp-e7b8fcd4ce.png',
+      title: '.NET Base Class Library',
+      count: 6,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/dot-net-e535ca86d0.png',
+      title: 'API Development in ASP.NET Core',
+      count: 7,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/ng-conf-2019-2c14f96341.png',
+      title: 'ng-conf 2019',
+      count: 68,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/salesforce-e8b45b03c6.png',
+      title: 'Beginning Salesforce Administration',
+      count: 10,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/code-mash-187b6cec80.png',
+      title: 'CodeMash Conference 2020',
+      count: 94,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/droidcon-sf-a96cc1e0f1.png',
+      title: 'droidcon SF 2019',
+      count: 70,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/that-conference-2019-f0b90afecc.png',
+      title: 'THAT Conference 2019',
+      count: 67,
+    },
+  ],
+};
+
+export const listPathSoftwareDevelopment = {
+  title: 'Software Development',
+  list: [
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/business-analysis-3c8e439908.png',
+      title: 'Managing Projects',
+      count: 15,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/csharp-e7b8fcd4ce.png',
+      title: '.NET Base Class Library',
+      count: 6,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/dot-net-e535ca86d0.png',
+      title: 'API Development in ASP.NET Core',
+      count: 7,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/ng-conf-2019-2c14f96341.png',
+      title: 'ng-conf 2019',
+      count: 68,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/salesforce-e8b45b03c6.png',
+      title: 'Beginning Salesforce Administration',
+      count: 10,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/code-mash-187b6cec80.png',
+      title: 'CodeMash Conference 2020',
+      count: 94,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/droidcon-sf-a96cc1e0f1.png',
+      title: 'droidcon SF 2019',
+      count: 70,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/that-conference-2019-f0b90afecc.png',
+      title: 'THAT Conference 2019',
+      count: 67,
+    },
+  ],
+};
+
+export const listPathITOps = {
+  title: 'IT Ops',
+  list: [
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/dot-net-e535ca86d0.png',
+      title: 'API Development in ASP.NET Core',
+      count: 7,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/ng-conf-2019-2c14f96341.png',
+      title: 'ng-conf 2019',
+      count: 68,
+    },
+    {
+      image:
+        'https://pluralsight.imgix.net/author/lg/7283fc45-f9e3-4298-9862-89653a627c8c.png',
+      title: 'Angular Denver 2019',
+      count: 44,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/business-analysis-3c8e439908.png',
+      title: 'Managing Projects',
+      count: 15,
+    },
+    {
+      image:
+        'https://pluralsight2.imgix.net/paths/images/csharp-e7b8fcd4ce.png',
+      title: '.NET Base Class Library',
+      count: 6,
     },
     {
       image:

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import {globalStyles} from 'global/styles';
-import {PATHS, PATHDETAIL, AUTHORDETAIL, LOGIN} from 'global/constants';
+import {PATHS, PATHDETAIL, AUTHORDETAIL, LOGIN, SKILL} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 import {AuthContext} from 'tools/context/auth';
 import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';
@@ -32,6 +32,8 @@ export default function Browse({navigation}) {
   const handleDetailAuthor = () => navigation.navigate(AUTHORDETAIL);
 
   const handleSignin = () => navigation.navigate(LOGIN);
+
+  const handleDetailSkill = title => navigation.navigate(SKILL, {title});
 
   return (
     <View
@@ -88,7 +90,7 @@ export default function Browse({navigation}) {
         <SkillScroll
           title={listSkill.title}
           items={listSkill.list}
-          handleDetail={() => console.log('skill clicked')}
+          handleDetail={handleDetailSkill}
         />
         <PathScroll
           handleSeeAll={seeAllPath}

@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 import {ThemeContext} from 'tools/context/theme';
 
-export default function Skill({item}) {
+export default function Skill({item, handleDetail}) {
   const {colors} = React.useContext(ThemeContext);
   return (
     <TouchableOpacity
@@ -11,7 +11,7 @@ export default function Skill({item}) {
         styles.item,
         colors.background3,
       )}
-      onPress={() => console.log(`${item.name} clicked!!!`)}>
+      onPress={() => handleDetail(item.name)}>
       <Text
         style={StyleSheet.compose(
           styles.name,
