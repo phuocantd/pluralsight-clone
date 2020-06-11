@@ -13,6 +13,7 @@ import {
   AUTHORDETAIL,
   COURSEDETAIL,
   SKILL,
+  FEATURE,
 } from 'global/constants';
 import {OptionHeaderRight} from 'global/navigation';
 import {ThemeContext} from 'tools/context/theme';
@@ -27,6 +28,7 @@ import FeedbackScreen from 'screens/feedback';
 import AuthorDetailScreen from 'screens/authorDetail';
 import CourseDetailScreen from 'screens/courseDetail';
 import SkillScreen from 'screens/skill';
+import FeatureScreen from 'screens/features';
 
 const Stack = createStackNavigator();
 
@@ -75,6 +77,13 @@ export default function BrowseStack() {
         component={SkillScreen}
         options={({navigation, route}) => ({
           title: route.params.title,
+        })}
+      />
+      <Stack.Screen
+        name={FEATURE}
+        component={FeatureScreen}
+        options={({navigation, route}) => ({
+          headerShown: false,
         })}
       />
     </Stack.Navigator>

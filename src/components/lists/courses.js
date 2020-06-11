@@ -36,12 +36,6 @@ export default function ListCourse({items, handleDetail, headerComponent}) {
 }
 
 const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-    marginTop: 20,
-  },
-  separator: {
-    height: 0.5,
-    margin: 5,
-  },
+  list: {flex: 1},
+  separator: {height: 0.5, margin: 5},
 });

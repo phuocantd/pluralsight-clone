@@ -10,6 +10,7 @@ export const PATHS = 'Paths';
 export const LISTPATH = 'ListPath';
 export const PATHDETAIL = 'PathDetail';
 export const SKILL = 'Skill';
+export const FEATURE = 'Feature';
 
 export const AUTHORDETAIL = 'AuthorDetail';
 

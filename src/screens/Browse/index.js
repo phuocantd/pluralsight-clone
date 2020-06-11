@@ -9,7 +9,14 @@ import {
 } from 'react-native';
 
 import {globalStyles} from 'global/styles';
-import {PATHS, PATHDETAIL, AUTHORDETAIL, LOGIN, SKILL} from 'global/constants';
+import {
+  PATHS,
+  PATHDETAIL,
+  AUTHORDETAIL,
+  LOGIN,
+  SKILL,
+  FEATURE,
+} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 import {AuthContext} from 'tools/context/auth';
 import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';
@@ -22,6 +29,8 @@ import AuthorScroll from 'components/scrollHorizontal/authors';
 export default function Browse({navigation}) {
   const {colors} = useContext(ThemeContext);
   const {state} = useContext(AuthContext);
+
+  const handleFeature = () => navigation.navigate(FEATURE);
 
   const seeAllPath = (title, items) =>
     navigation.navigate(PATHS, {items, title});
@@ -79,10 +88,14 @@ export default function Browse({navigation}) {
           </View>
         )}
         <ImageButton
+          style={{marginHorizontal: 10, marginTop: 10}}
+          handleDetail={handleFeature}
           url="https://cdn.cjr.org/wp-content/uploads/2019/07/AdobeStock_165953143-686x371.jpeg"
           title="new releases"
         />
         <ImageButton
+          style={{marginHorizontal: 10, marginTop: 10}}
+          handleDetail={handleFeature}
           url="https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg"
           title="recommended for you"
         />

@@ -6,11 +6,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function ImageButton({url, title}) {
+export default function ImageButton({url, title, handleDetail, style}) {
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => console.log(`${title} clicked!!!`)}>
+    <TouchableOpacity style={style} onPress={handleDetail}>
       <ImageBackground source={{uri: url}} style={styles.imgBackground}>
         <Text style={styles.title}>{title}</Text>
       </ImageBackground>
@@ -19,10 +17,6 @@ export default function ImageButton({url, title}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 10,
-    marginTop: 10,
-  },
   imgBackground: {
     justifyContent: 'center',
     alignItems: 'center',
