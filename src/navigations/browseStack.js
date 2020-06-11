@@ -12,8 +12,12 @@ import {
   FEEDBACK,
   AUTHORDETAIL,
   COURSEDETAIL,
+  SKILL,
+  FEATURE,
+  LISTCOURSE,
 } from 'global/constants';
-import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
+import {OptionHeaderRight} from 'global/navigation';
+import {ThemeContext} from 'tools/context/theme';
 import BrowseScreen from 'screens/Browse';
 import ProfileScreen from 'screens/Profile';
 import PathsScreen from 'screens/paths';
@@ -24,18 +28,26 @@ import ContactScreen from 'screens/contact';
 import FeedbackScreen from 'screens/feedback';
 import AuthorDetailScreen from 'screens/authorDetail';
 import CourseDetailScreen from 'screens/courseDetail';
+import SkillScreen from 'screens/skill';
+import FeatureScreen from 'screens/features';
+import ListCourseScreen from 'screens/ListCourse';
 
 const Stack = createStackNavigator();
 
 export default function BrowseStack() {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <Stack.Navigator
       initialRouteName={BROWSE}
-      screenOptions={screenOptionHeader}>
+      screenOptions={{
+        headerTintColor: colors.text.color,
+        headerStyle: colors.background1,
+        headerTitleStyle: colors.text,
+      }}>
       <Stack.Screen
         name={BROWSE}
         component={BrowseScreen}
-        options={optionHeaderRight}
+        options={OptionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
       <Stack.Screen name={SETTINGS} component={SettingsScreen} />
@@ -61,6 +73,25 @@ export default function BrowseStack() {
         name={COURSEDETAIL}
         component={CourseDetailScreen}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={SKILL}
+        component={SkillScreen}
+        options={({navigation, route}) => ({
+          title: route.params.title,
+        })}
+      />
+      <Stack.Screen
+        name={FEATURE}
+        component={FeatureScreen}
+        options={({navigation, route}) => ({
+          headerShown: false,
+        })}
+      />
+      <Stack.Screen
+        name={LISTCOURSE}
+        component={ListCourseScreen}
+        options={{title: ''}}
       />
     </Stack.Navigator>
   );

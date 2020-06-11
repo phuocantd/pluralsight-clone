@@ -1,7 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
 
+import {ThemeContext} from 'tools/context/theme';
+
 export default function Path({item, handleDetail}) {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <TouchableOpacity style={styles.item} onPress={handleDetail}>
       <Image
@@ -10,7 +13,13 @@ export default function Path({item, handleDetail}) {
           uri: item.image,
         }}
       />
-      <Text style={styles.title}>{item.name}</Text>
+      <Text
+        style={StyleSheet.compose(
+          styles.title,
+          colors.text,
+        )}>
+        {item.name}
+      </Text>
     </TouchableOpacity>
   );
 }
@@ -27,7 +36,6 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 5,
-    color: '#fff',
     fontSize: 15,
   },
 });

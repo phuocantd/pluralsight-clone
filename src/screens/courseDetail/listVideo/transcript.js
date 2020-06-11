@@ -1,17 +1,27 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+
+import {ThemeContext} from 'tools/context/theme';
 
 export default function Transcript() {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <View>
-      <Text style={{color: '#fff', fontSize: 23}}>
+      <Text
+        style={StyleSheet.compose(
+          {fontSize: 23},
+          colors.text,
+        )}>
         Architecting for Reliability on AWS
       </Text>
-      <Text style={{color: '#fff', fontSize: 20, marginVertical: 10}}>
+      <Text
+        style={StyleSheet.compose(
+          {fontSize: 20, marginVertical: 10},
+          colors.text,
+        )}>
         Course Overview
       </Text>
-      <Text style={{color: '#fff'}}>
+      <Text style={colors.text}>
         Hey everyone. This is Mike Pfeiffer, and welcome to Architecting for
         Reliability on AWS. In this course, we'll work together to implement a
         highly available and reliable application architecture using the

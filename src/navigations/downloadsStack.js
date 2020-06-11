@@ -8,7 +8,8 @@ import {
   CONTACT,
   FEEDBACK,
 } from 'global/constants';
-import {screenOptionHeader, optionHeaderRight} from 'global/navigation';
+import {OptionHeaderRight} from 'global/navigation';
+import {ThemeContext} from 'tools/context/theme';
 import DownloadsScreen from 'screens/Downloads';
 import ProfileScreen from 'screens/Profile';
 import SettingsScreen from 'screens/setting';
@@ -18,14 +19,19 @@ import FeedbackScreen from 'screens/feedback';
 const Stack = createStackNavigator();
 
 export default function DownloadsStack() {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <Stack.Navigator
       initialRouteName={DOWNLOADS}
-      screenOptions={screenOptionHeader}>
+      screenOptions={{
+        headerTintColor: colors.text.color,
+        headerStyle: colors.background1,
+        headerTitleStyle: colors.text,
+      }}>
       <Stack.Screen
         name={DOWNLOADS}
         component={DownloadsScreen}
-        options={optionHeaderRight}
+        options={OptionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
       <Stack.Screen name={SETTINGS} component={SettingsScreen} />

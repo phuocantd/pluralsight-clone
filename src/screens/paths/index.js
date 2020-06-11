@@ -1,12 +1,19 @@
 import React from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
 import {LISTPATH} from 'global/constants';
+import {
+  listPath,
+  listPathConferences,
+  listPathSoftwareDevelopment,
+  listPathITOps,
+} from 'data/browse';
 import PathScroll from 'components/scrollHorizontal/paths';
 
 export default function Paths({route, navigation}) {
-  const {items} = route.params;
+  const {colors} = React.useContext(ThemeContext);
 
   const handleSeeAll = (title, itemsPath) =>
     navigation.navigate(LISTPATH, {items: itemsPath, title});
@@ -15,66 +22,70 @@ export default function Paths({route, navigation}) {
     navigation.navigate(screen, {title});
 
   return (
-    <View style={globalStyles.container}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
       <ScrollView>
         <PathScroll
           handleSeeAll={handleSeeAll}
-          title="Conference"
-          items={items}
+          title={listPathConferences.title}
+          items={listPathConferences.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
-          title="Software Development"
-          items={items}
+          title={listPathSoftwareDevelopment.title}
+          items={listPathSoftwareDevelopment.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
-          title="IT Ops"
-          items={items}
+          title={listPathITOps.title}
+          items={listPathITOps.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
           title="Information Security"
-          items={items}
+          items={listPath.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
           title="Data Professional"
-          items={items}
+          items={listPath.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
           title="Bussiness Professional"
-          items={items}
+          items={listPath.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
           title="Creative Professional"
-          items={items}
+          items={listPath.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
           title="Manufacturing abd Design"
-          items={items}
+          items={listPath.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
           title="Architecture $ Construction"
-          items={items}
+          items={listPath.list}
           handleDetail={handleDetailPath}
         />
         <PathScroll
           handleSeeAll={handleSeeAll}
           title="Certifications"
-          items={items}
+          items={listPath.list}
           handleDetail={handleDetailPath}
         />
       </ScrollView>

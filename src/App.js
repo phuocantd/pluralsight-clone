@@ -4,13 +4,19 @@ import {MenuProvider} from 'react-native-popup-menu';
 
 // import BottomTabNavigator from './navigations/BottomTabNavigator';
 import AppNavigator from './navigations/AppNavigator';
+import AuthProvider from './tools/context/auth';
+import ThemeProvider from './tools/context/theme';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MenuProvider>
-        <AppNavigator />
-      </MenuProvider>
-    </NavigationContainer>
+    <AuthProvider>
+      <ThemeProvider>
+        <NavigationContainer>
+          <MenuProvider>
+            <AppNavigator />
+          </MenuProvider>
+        </NavigationContainer>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }

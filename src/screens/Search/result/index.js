@@ -1,5 +1,6 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {StyleSheet} from 'react-native';
 
 import {
   ALLSEARCHRESULT,
@@ -14,14 +15,20 @@ import AuthorsResult from './authors';
 
 const Tab = createMaterialTopTabNavigator();
 
+import {ThemeContext} from 'tools/context/theme';
+
 export default function TabResult() {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <Tab.Navigator
       tabBarOptions={{
-        tabStyle: {backgroundColor: '#181C20', marginBottom: 1},
-        headerStyle: {backgroundColor: 'white'},
+        tabStyle: StyleSheet.compose(
+          {marginBottom: 1},
+          colors.background2,
+        ),
+        headerStyle: colors.separator,
         activeTintColor: '#0084BD',
-        inactiveTintColor: '#fff',
+        inactiveTintColor: colors.text.color,
       }}>
       <Tab.Screen
         name={ALLSEARCHRESULT}

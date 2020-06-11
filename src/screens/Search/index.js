@@ -9,6 +9,7 @@ import {
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {globalStyles} from 'global/styles';
+import {ThemeContext} from 'tools/context/theme';
 import Recent from 'components/recent';
 import NotFound from './notFound';
 import ResultSearch from './result';
@@ -27,6 +28,8 @@ const recents = [
 ];
 
 export default function Search() {
+  const {colors, mode} = React.useContext(ThemeContext);
+
   const [searchValue, setSearchValue] = useState('');
   const [listRecent, setListRecent] = useState(recents);
   const [isRecent, setIsRecent] = useState(true);
@@ -40,21 +43,42 @@ export default function Search() {
       ]);
       Keyboard.dismiss();
       setIsRecent(false);
+      setIsSuccess(true);
     }
   };
 
+  const handleSelectRecent = recent => {
+    setSearchValue(recent);
+    setIsSuccess(false);
+    setIsRecent(false);
+  };
+
   return (
-    <View style={globalStyles.container}>
-      <View style={styles.searchBar}>
+    <View
+      style={StyleSheet.compose(
+        globalStyles.container,
+        colors.container,
+      )}>
+      <View
+        style={StyleSheet.compose(
+          styles.searchBar,
+          colors.background1,
+        )}>
         <TextInput
-          style={styles.searchInput}
+          style={StyleSheet.flatten([
+            styles.searchInput,
+            colors.borBt,
+            colors.text,
+          ])}
           placeholder="Search..."
-          placeholderTextColor="#fff"
+          placeholderTextColor={mode === 'dark' ? '#fff' : '#000'}
           autoFocus={true}
           value={searchValue}
           onChangeText={text => {
             setSearchValue(text);
             if (text === '') {
+              setIsRecent(true);
+            } else {
               setIsRecent(true);
             }
           }}
@@ -62,20 +86,29 @@ export default function Search() {
           blurOnSubmit={false}
         />
         <TouchableOpacity
-          style={styles.iconClear}
+          style={StyleSheet.compose(
+            styles.iconClear,
+            colors.borBt,
+          )}
           onPress={() => {
             setSearchValue('');
             setIsRecent(true);
           }}>
           {searchValue !== '' && (
-            <IconMaterialIcons name="clear" color="#fff" size={23} />
+            <IconMaterialIcons name="clear" style={colors.text} size={23} />
           )}
         </TouchableOpacity>
       </View>
       <View style={styles.content}>
         {isRecent ? (
-          searchValue === '' && (
-            <Recent list={listRecent} setList={setListRecent} />
+          searchValue === '' ? (
+            <Recent
+              list={listRecent}
+              setList={setListRecent}
+              handleSelectRecent={handleSelectRecent}
+            />
+          ) : (
+            <View />
           )
         ) : isSuccess ? (
           <ResultSearch />
@@ -89,7 +122,6 @@ export default function Search() {
 
 const styles = StyleSheet.create({
   searchBar: {
-    backgroundColor: '#0D0F12',
     paddingTop: 10,
     paddingBottom: 10,
     flexDirection: 'row',
@@ -98,40 +130,13 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 23,
     marginLeft: 15,
-    color: '#fff',
-    borderBottomWidth: 0.4,
-    borderBottomColor: '#fff',
+    borderBottomWidth: 0.7,
   },
   iconClear: {
     marginRight: 10,
     paddingRight: 10,
     borderBottomWidth: 0.4,
-    borderBottomColor: '#fff',
     marginTop: 15,
-  },
-  header: {
-    marginTop: 10,
-    marginHorizontal: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  listRecent: {
-    marginTop: 10,
-  },
-  recentText: {color: '#fff', fontSize: 18},
-  clear: {color: 'blue', fontSize: 18},
-  itemRecent: {
-    flexDirection: 'row',
-    marginHorizontal: 10,
-    marginTop: 10,
-  },
-  iconTime: {
-    marginTop: 3,
-  },
-  textRecent: {
-    marginLeft: 10,
-    fontSize: 16,
-    color: '#fff',
   },
   content: {flex: 1},
 });

@@ -13,6 +13,7 @@ module.exports = {
           screens: './src/screens',
           data: './src/data',
           global: './src/global',
+          tools: './src/tools',
         },
       },
     ],

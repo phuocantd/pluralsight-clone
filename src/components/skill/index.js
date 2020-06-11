@@ -1,26 +1,36 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-export default function Path({item}) {
+import {ThemeContext} from 'tools/context/theme';
+
+export default function Skill({item, handleDetail}) {
+  const {colors} = React.useContext(ThemeContext);
   return (
     <TouchableOpacity
-      style={styles.item}
-      onPress={() => console.log(`${item.name} clicked!!!`)}>
-      <Text style={styles.name}>{item.name}</Text>
+      style={StyleSheet.compose(
+        styles.item,
+        colors.background3,
+      )}
+      onPress={() => handleDetail(item.name)}>
+      <Text
+        style={StyleSheet.compose(
+          styles.name,
+          colors.text,
+        )}>
+        {item.name}
+      </Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: '#1E2429',
     margin: 5,
     padding: 5,
     borderRadius: 10,
   },
   name: {
     marginHorizontal: 5,
-    color: '#fff',
     fontSize: 15,
   },
 });

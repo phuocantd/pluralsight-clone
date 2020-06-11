@@ -1,13 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 
+import {ThemeContext} from 'tools/context/theme';
 import AuthorInfo from './author';
 import MoreInfo from './moreInfo';
 import ButtonControl from './buttonControl';
@@ -15,40 +10,34 @@ import Video from './video';
 import Description from 'components/description';
 import ButtonItem from './buttonItem';
 import ListVideo from './listVideo';
+import {dataDetail} from 'data/courseDetail';
 
-const data = {
-  title: 'Architecting for Reliability on AWS',
-  image:
-    'https://pluralsight.imgix.net/course-images/aws-architecting-reliability-v1.png',
-  authors: [
-    {
-      name: 'Mike Pfeiffer',
-      image:
-        'https://pluralsight.imgix.net/author/lg/7171fd1a-7c0f-4c8a-bbc2-93da74eb4b32.png?w=200',
-    },
-    {
-      name: 'joe eames',
-      image: 'https://pluralsight.imgix.net/author/lg/joe-eames-v1.jpg?w=200',
-    },
-  ],
-  level: 'Intermediate',
-  rating: 83,
-  duration: '3h 34m',
-  updated: 'May 2018',
-  description:
-    'Learn how to implement a highly available and reliable application architecture using the patterns and best practices recommended by AWS. In this course, Architecting for Reliability on AWS, you will first explore the key concepts and core services of AWS. Next, you will follow along step-by-step to implement a real-world application that is built with the reliability principles defined within the AWS Well Architected Framework. Finally, you will learn how to further increase the reliability of an application architecture on AWS by implementing multi-region solutions. By the end of this course, you will have a variety of AWS architecture skills for the real world.',
-};
+export default function CourseDetail({navigation}) {
+  const {colors} = React.useContext(ThemeContext);
 
-export default function CourseDetail() {
+  const [data, setData] = useState(dataDetail);
   const [isContent, setIsContent] = useState(true);
+
+  const handleBack = () => navigation.goBack();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={StyleSheet.compose(
+        styles.container,
+        colors.background2,
+      )}>
       <View>
-        <Video image={data.image} />
+        <Video image={data.image} handleBack={handleBack} />
       </View>
       <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
         <View style={{marginHorizontal: 20}}>
-          <Text style={styles.title}>{data.title}</Text>
+          <Text
+            style={StyleSheet.compose(
+              styles.title,
+              colors.text,
+            )}>
+            {data.title}
+          </Text>
           <View style={styles.authors}>
             {data.authors.map(author => (
               <AuthorInfo
@@ -78,20 +67,48 @@ export default function CourseDetail() {
         </View>
         <View>
           <View style={styles.tabs}>
-            <TouchableOpacity
-              style={styles.tab}
-              onPress={() => setIsContent(true)}>
-              <Text style={isContent ? styles.textTabActive : styles.textTab}>
+            <View
+              style={StyleSheet.compose(
+                isContent ? styles.tabActive : styles.tab,
+                colors.background2,
+              )}>
+              <Text
+                onPress={() => setIsContent(true)}
+                style={
+                  isContent
+                    ? StyleSheet.compose(
+                        styles.textTabActive,
+                        colors.textBtn,
+                      )
+                    : StyleSheet.compose(
+                        styles.textTab,
+                        colors.text,
+                      )
+                }>
                 Contents
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.tab}
-              onPress={() => setIsContent(false)}>
-              <Text style={!isContent ? styles.textTabActive : styles.textTab}>
+            </View>
+            <View
+              style={StyleSheet.compose(
+                isContent ? styles.tabActive : styles.tab,
+                colors.background2,
+              )}>
+              <Text
+                onPress={() => setIsContent(false)}
+                style={
+                  !isContent
+                    ? StyleSheet.compose(
+                        styles.textTabActive,
+                        colors.textBtn,
+                      )
+                    : StyleSheet.compose(
+                        styles.textTab,
+                        colors.text,
+                      )
+                }>
                 Transcript
               </Text>
-            </TouchableOpacity>
+            </View>
           </View>
         </View>
         <ListVideo isContent={isContent} />
@@ -101,9 +118,9 @@ export default function CourseDetail() {
 }
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#181C20'},
+  container: {flex: 1},
   info: {flex: 1},
-  title: {color: '#fff', fontSize: 25},
+  title: {fontSize: 25},
   authors: {flexDirection: 'row'},
   moreInfo: {marginTop: 5},
   btnControl: {marginTop: 10},
@@ -112,14 +129,15 @@ const styles = StyleSheet.create({
   tab: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#181C20',
     paddingBottom: 10,
     paddingTop: 20,
   },
-  textTab: {color: '#fff', textTransform: 'uppercase', fontSize: 20},
-  textTabActive: {
-    color: '#0084BD',
-    textTransform: 'uppercase',
-    fontSize: 20,
+  tabActive: {
+    flex: 1,
+    alignItems: 'center',
+    paddingBottom: 10,
+    paddingTop: 20,
   },
+  textTab: {textTransform: 'uppercase', fontSize: 20},
+  textTabActive: {textTransform: 'uppercase', fontSize: 20},
 });
