@@ -3,7 +3,7 @@ import {StyleSheet, ScrollView} from 'react-native';
 
 import {listPathConferences, listTopAuthor} from 'data/browse';
 import {IToperations, softwareDevelopment} from 'data/home';
-import {LISTCOURSE, AUTHORDETAIL} from 'global/constants';
+import {LISTCOURSE, AUTHORDETAIL, PATHDETAIL} from 'global/constants';
 import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
 import PathHorizontal from 'components/scrollHorizontal/paths';
@@ -19,6 +19,9 @@ export default function Skill({navigation}) {
 
   const handleDetailAuthor = () => navigation.navigate(AUTHORDETAIL);
 
+  const handleDetailPath = () =>
+    navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
+
   return (
     <ScrollView
       style={StyleSheet.compose(
@@ -28,6 +31,7 @@ export default function Skill({navigation}) {
       <PathHorizontal
         title="Paths in Angular"
         items={listPathConferences.list}
+        handleDetail={handleDetailPath}
       />
       <CourseHorizontal
         title="New Angular"
