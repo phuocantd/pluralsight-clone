@@ -23,13 +23,15 @@ export default function PathScroll({title, items, handleSeeAll, handleDetail}) {
           {title}
         </Text>
         <TouchableOpacity onPress={() => handleSeeAll(title, items)}>
-          <Text
-            style={StyleSheet.compose(
-              styles.seeAll,
-              colors.text,
-            )}>
-            See all >
-          </Text>
+          {handleSeeAll && (
+            <Text
+              style={StyleSheet.compose(
+                styles.seeAll,
+                colors.text,
+              )}>
+              See all {'>'}
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

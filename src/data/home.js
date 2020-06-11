@@ -134,6 +134,16 @@ export const dataProfessional = {
   listCourse: [
     {
       image:
+        'https://pluralsight.imgix.net/course-images/aws-architecting-reliability-v1.png',
+      courseTitle: 'Architecting for Reliability on AWS',
+      level: 'Intermediate',
+      rating: 83,
+      duration: '3h 34m',
+      updated: 'May 2018',
+      author: 'Mike Pfeiffer',
+    },
+    {
+      image:
         'https://pluralsight.imgix.net/course-images/power-bi-building-first-report-v1.png',
       courseTitle: 'Building Your First Power BI Report',
       level: 'Beginner',

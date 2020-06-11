@@ -14,6 +14,7 @@ import {
   COURSEDETAIL,
   SKILL,
   FEATURE,
+  LISTCOURSE,
 } from 'global/constants';
 import {OptionHeaderRight} from 'global/navigation';
 import {ThemeContext} from 'tools/context/theme';
@@ -29,6 +30,7 @@ import AuthorDetailScreen from 'screens/authorDetail';
 import CourseDetailScreen from 'screens/courseDetail';
 import SkillScreen from 'screens/skill';
 import FeatureScreen from 'screens/features';
+import ListCourseScreen from 'screens/ListCourse';
 
 const Stack = createStackNavigator();
 
@@ -85,6 +87,11 @@ export default function BrowseStack() {
         options={({navigation, route}) => ({
           headerShown: false,
         })}
+      />
+      <Stack.Screen
+        name={LISTCOURSE}
+        component={ListCourseScreen}
+        options={{title: ''}}
       />
     </Stack.Navigator>
   );
