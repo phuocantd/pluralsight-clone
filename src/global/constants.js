@@ -1,3 +1,5 @@
+export const SPLASH = 'Splash';
+
 //Home stack
 export const HOME = 'Home';
 export const LISTCOURSE = 'ListCourse';
@@ -25,6 +27,7 @@ export const REGISTER = 'Register';
 export const FORGOTPASSWORD = 'ForgotPassword';
 
 export const PROFILE = 'Profile';
+export const UPDATEPROFILE = 'UpdateProfile';
 
 export const SETTINGS = 'Settings';
 export const FEEDBACK = 'Feedback';

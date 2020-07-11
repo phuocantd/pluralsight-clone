@@ -15,6 +15,7 @@ import {
   SKILL,
   FEATURE,
   LISTCOURSE,
+  UPDATEPROFILE,
 } from 'global/constants';
 import {OptionHeaderRight} from 'global/navigation';
 import {ThemeContext} from 'tools/context/theme';
@@ -31,6 +32,7 @@ import CourseDetailScreen from 'screens/courseDetail';
 import SkillScreen from 'screens/skill';
 import FeatureScreen from 'screens/features';
 import ListCourseScreen from 'screens/ListCourse';
+import UpdateProfileScreen from 'screens/updateProfile';
 
 const Stack = createStackNavigator();
 
@@ -50,6 +52,7 @@ export default function BrowseStack() {
         options={OptionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
+      <Stack.Screen name={UPDATEPROFILE} component={UpdateProfileScreen} />
       <Stack.Screen name={SETTINGS} component={SettingsScreen} />
       <Stack.Screen name={FEEDBACK} component={FeedbackScreen} />
       <Stack.Screen name={CONTACT} component={ContactScreen} />

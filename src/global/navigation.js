@@ -13,6 +13,7 @@ import {
 import {PROFILE, SETTINGS, CONTACT, FEEDBACK} from './constants';
 import {AuthContext} from 'tools/context/auth';
 import {ThemeContext} from 'tools/context/theme';
+import {Stores} from 'tools/context/stores';
 
 const styles = StyleSheet.create({
   headerRight: {
@@ -38,6 +39,7 @@ export const ScreenOptionHeader = () => {
 export const OptionHeaderRight = ({navigation}) => {
   const {state} = useContext(AuthContext);
   const {changeMode, colors} = useContext(ThemeContext);
+  const {profile} = useContext(Stores);
 
   return {
     headerRight: () => (
@@ -55,10 +57,7 @@ export const OptionHeaderRight = ({navigation}) => {
         <TouchableOpacity onPress={() => navigation.navigate(PROFILE)}>
           {state.isAuth ? (
             <Image
-              source={{
-                uri:
-                  'https://pluralsight.imgix.net/author/lg/2262d7bd-d718-41c7-833c-03e8cd4566b9.jpg',
-              }}
+              source={{uri: profile.avatar}}
               style={{width: 25, height: 25, borderRadius: 12.5}}
             />
           ) : (

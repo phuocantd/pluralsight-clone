@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from 'react';
+import React, {useMemo, useReducer} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const AuthContext = React.createContext();
@@ -35,27 +35,33 @@ export default function Provider({children}) {
     },
   );
 
-  useEffect(() => {
-    if (state.isLoading) {
-      _bootstrapAsync();
-    }
-  }, [state]);
+  // useEffect(() => {
+  //   if (state.isLoading) {
+  //     _bootstrapAsync();
+  //   }
+  // }, [state]);
 
-  const _bootstrapAsync = async () => {
-    let userToken = null;
+  // const _bootstrapAsync = async () => {
+  //   let userToken = null;
 
-    try {
-      userToken = await AsyncStorage.getItem('token');
-      console.log('auth context:', userToken);
-    } catch (e) {
-      console.log('Restoring token failed');
-    }
-    const isAuth = userToken !== null;
-    dispatch({type: 'RESTORE_TOKEN', token: userToken, isAuth});
-  };
+  //   try {
+  //     userToken = await AsyncStorage.getItem('token');
+  //     const res = await me(userToken);
+  //     console.log(res);
+  //     authContext.restoreToken()
+  //   } catch (e) {
+  //     authContext.restoreToken(null, false);
+  //     console.log('Restoring token failed');
+  //   }
+  //   const isAuth = userToken !== null;
+  //   dispatch({type: 'RESTORE_TOKEN', token: userToken, isAuth});
+  // };
 
-  const authContext = React.useMemo(
+  const authContext = useMemo(
     () => ({
+      restoreToken: async (token, isAuth) => {
+        dispatch({type: 'RESTORE_TOKEN', token, isAuth});
+      },
       signIn: async token => {
         console.log('sign-in:', token);
         // const token = 'phuocantd';
@@ -67,11 +73,11 @@ export default function Provider({children}) {
         AsyncStorage.removeItem('token');
         dispatch({type: 'SIGN_OUT'});
       },
-      signUp: async token => {
-        console.log('sign-up:', token);
+      signUp: async () => {
+        // console.log('sign-up:', token);
         // const token = 'phuocantd';
-        await AsyncStorage.setItem('token', token);
-        dispatch({type: 'SIGN_IN', token});
+        // await AsyncStorage.setItem('token', token);
+        // dispatch({type: 'SIGN_IN', token});
       },
     }),
     [],

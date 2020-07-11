@@ -14,6 +14,8 @@ module.exports = {
           data: './src/data',
           global: './src/global',
           tools: './src/tools',
+          api: './src/api',
+          containers: './src/containers',
         },
       },
     ],

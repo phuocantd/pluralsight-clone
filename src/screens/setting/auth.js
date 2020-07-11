@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   Switch,
   ScrollView,
 } from 'react-native';
+import {Stores} from 'src/tools/context/stores';
 
 export default function AuthSetting({
   handleSignout,
@@ -15,6 +16,8 @@ export default function AuthSetting({
   changeMode,
   colors,
 }) {
+  const {profile} = useContext(Stores);
+
   const composeText = style =>
     StyleSheet.compose(
       style,
@@ -27,16 +30,10 @@ export default function AuthSetting({
   return (
     <ScrollView style={styles.content}>
       <View style={styles.info}>
-        <Image
-          source={{
-            uri:
-              'https://pluralsight.imgix.net/author/lg/2262d7bd-d718-41c7-833c-03e8cd4566b9.jpg',
-          }}
-          style={styles.imgPostrait}
-        />
+        <Image source={{uri: profile.avatar}} style={styles.imgPostrait} />
         <View>
-          <Text style={composeText(styles.name)}>Hà Công Tín</Text>
-          <Text style={composeText(styles.username)}>CongTinHa</Text>
+          <Text style={composeText(styles.name)}>{profile.name}</Text>
+          <Text style={composeText(styles.username)}>{profile.email}</Text>
         </View>
       </View>
       <Text style={composeText(styles.label)}>Account</Text>

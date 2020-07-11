@@ -14,13 +14,16 @@ import {REGISTER, FORGOTPASSWORD} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 import PasswordInput from 'components/passwordInput';
 import {AuthContext} from 'tools/context/auth';
+import {Stores} from 'tools/context/stores';
+import {login} from 'api/user';
 
 export default function Login({navigation}) {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('phuocanmi@gmail.com');
+  const [password, setPassword] = useState('1612009');
 
   const {state, authContext} = useContext(AuthContext);
-  const {colors} = React.useContext(ThemeContext);
+  const {colors} = useContext(ThemeContext);
+  const {restoreProfile} = useContext(Stores);
 
   React.useEffect(() => {
     if (state.isAuth) {
@@ -28,8 +31,14 @@ export default function Login({navigation}) {
     }
   }, [state, navigation]);
 
-  const handleLogin = () => {
-    authContext.signIn('phuocantd');
+  const handleLogin = async () => {
+    try {
+      const res = await login(userName, password);
+      restoreProfile(res.data.userInfo);
+      authContext.signIn(res.data.token);
+    } catch (err) {
+      console.log('Login fail:', err);
+    }
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import {LOGIN} from 'global/constants';
+import {LOGIN, UPDATEPROFILE} from 'global/constants';
 import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
 import {AuthContext} from 'tools/context/auth';
@@ -14,6 +14,14 @@ export default function Profile({navigation}) {
 
   const handleSignin = () => navigation.navigate(LOGIN);
 
+  const handleUpdateProfile = () => navigation.navigate(UPDATEPROFILE);
+
+  const handleViewAvatar = (name, url) => {
+    navigation.navigate('ImageView', {
+      file: {fileName: name, uri: url},
+    });
+  };
+
   return (
     <View
       style={StyleSheet.compose(
@@ -21,7 +29,11 @@ export default function Profile({navigation}) {
         colors.container,
       )}>
       {state.isAuth ? (
-        <AuthProfile colors={colors} />
+        <AuthProfile
+          colors={colors}
+          handleUpdateProfile={handleUpdateProfile}
+          handleViewAvatar={handleViewAvatar}
+        />
       ) : (
         <NoAuthProfile handleSignIn={handleSignin} colors={colors} />
       )}

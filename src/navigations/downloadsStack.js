@@ -7,6 +7,7 @@ import {
   SETTINGS,
   CONTACT,
   FEEDBACK,
+  UPDATEPROFILE,
 } from 'global/constants';
 import {OptionHeaderRight} from 'global/navigation';
 import {ThemeContext} from 'tools/context/theme';
@@ -15,6 +16,7 @@ import ProfileScreen from 'screens/Profile';
 import SettingsScreen from 'screens/setting';
 import ContactScreen from 'screens/contact';
 import FeedbackScreen from 'screens/feedback';
+import UpdateProfileScreen from 'screens/updateProfile';
 
 const Stack = createStackNavigator();
 
@@ -34,6 +36,7 @@ export default function DownloadsStack() {
         options={OptionHeaderRight}
       />
       <Stack.Screen name={PROFILE} component={ProfileScreen} />
+      <Stack.Screen name={UPDATEPROFILE} component={UpdateProfileScreen} />
       <Stack.Screen name={SETTINGS} component={SettingsScreen} />
       <Stack.Screen name={FEEDBACK} component={FeedbackScreen} />
       <Stack.Screen name={CONTACT} component={ContactScreen} />

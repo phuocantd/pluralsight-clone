@@ -1,8 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import React, {useContext} from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {Stores} from 'tools/context/stores';
 
-export default function AuthProfile({colors}) {
+export default function AuthProfile({
+  colors,
+  handleUpdateProfile,
+  handleViewAvatar,
+}) {
+  const {profile} = useContext(Stores);
+
   const composeText = style =>
     StyleSheet.compose(
       style,
@@ -12,34 +19,55 @@ export default function AuthProfile({colors}) {
   return (
     <View style={styles.content}>
       <View style={styles.info}>
-        <Image
-          source={{
-            uri:
-              'https://pluralsight.imgix.net/author/lg/2262d7bd-d718-41c7-833c-03e8cd4566b9.jpg',
-          }}
-          style={styles.imgPostrait}
-        />
-        <Text style={composeText(styles.name)}>Hà Công Tín</Text>
+        <TouchableOpacity
+          onPress={() => handleViewAvatar(profile.name, profile.avatar)}>
+          <Image source={{uri: profile.avatar}} style={styles.imgPostrait} />
+        </TouchableOpacity>
+        <Text style={composeText(styles.name)}>{profile.name}</Text>
       </View>
-      <Text
+      {/* <Text
         style={composeText({
           marginTop: 40,
           fontSize: 17,
           fontWeight: 'bold',
         })}>
         Activity insights (last 30 day)
-      </Text>
-      <View style={{flexDirection: 'row', marginTop: 30}}>
+      </Text> */}
+      <View style={[colors.separator, {height: 0.5, marginTop: 20}]} />
+      <View style={{flexDirection: 'row', marginTop: 20}}>
         <View style={{justifyContent: 'space-between'}}>
-          <Text style={composeText({fontSize: 13})}>TOTAL</Text>
-          <Text style={composeText({fontSize: 17, fontWeight: 'bold'})}>5</Text>
+          <Text style={composeText({fontSize: 15})}>Type:</Text>
+          <Text style={composeText({fontSize: 15, marginTop: 5})}>Point:</Text>
         </View>
         <View style={{marginLeft: 10, justifyContent: 'space-between'}}>
-          <Text style={composeText({fontSize: 13})}>ACTIVE DAYS</Text>
-          <Text style={composeText({fontSize: 13})}>2 day streak</Text>
+          <Text style={composeText({fontSize: 15})}>{profile.type}</Text>
+          <Text style={composeText({fontSize: 15, marginTop: 5})}>
+            {profile.point}
+          </Text>
         </View>
       </View>
-      <View style={{marginTop: 30}}>
+      <View style={[colors.separator, {height: 0.5, marginTop: 10}]} />
+      <View style={{marginTop: 10}}>
+        <Text style={composeText({fontSize: 18})}>Email: {profile.email}</Text>
+        <Text style={composeText({fontSize: 18, marginTop: 10})}>
+          Phone: {profile.phone}
+        </Text>
+      </View>
+      <TouchableOpacity
+        style={StyleSheet.compose(
+          styles.btn,
+          colors.btn,
+        )}
+        onPress={handleUpdateProfile}>
+        <Text
+          style={StyleSheet.compose(
+            styles.textBtn,
+            colors.textBtn,
+          )}>
+          Update profile
+        </Text>
+      </TouchableOpacity>
+      {/* <View style={{marginTop: 30}}>
         <Text style={composeText({fontSize: 13})}>MOST ACTIVE TIME OF DAY</Text>
         <Text style={composeText({fontWeight: 'bold', fontSize: 20})}>
           11:00 AM
@@ -50,7 +78,7 @@ export default function AuthProfile({colors}) {
         <Text style={composeText({fontWeight: 'bold', fontSize: 20})}>
           It Ops
         </Text>
-      </View>
+      </View> */}
     </View>
   );
 }
@@ -69,8 +97,12 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
   },
-  name: {
-    fontSize: 20,
-    marginLeft: 20,
+  name: {fontSize: 20, marginLeft: 20},
+  btn: {
+    marginTop: 20,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
   },
+  textBtn: {textTransform: 'uppercase', marginVertical: 8, fontSize: 15},
 });

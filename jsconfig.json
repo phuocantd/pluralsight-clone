@@ -9,7 +9,9 @@
       "global/*": ["./src/global/*"],
       "navigations/*": ["./src/navigations/*"],
       "screens/*": ["./src/screens/*"],
-      "tools/*": ["./src/tools/*"]
+      "tools/*": ["./src/tools/*"],
+      "api/*": ["./src/api/*"],
+      "containers/*": ["./src/containers/*"]
     }
   }
 }
