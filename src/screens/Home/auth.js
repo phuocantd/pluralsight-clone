@@ -6,7 +6,7 @@ import _ from 'lodash';
 import {LISTCOURSE} from 'global/constants';
 import CourseScroll from 'components/scrollHorizontal/courses';
 import {getTopSell, getTopNew, getTopRate} from 'api/course';
-import Loading from 'components/loading';
+import Loading from 'src/components/Loading';
 
 export default function AuthHome({navigation}) {
   const [loading, setLoading] = useState(true);

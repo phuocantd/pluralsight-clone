@@ -12,7 +12,7 @@ import Description from 'components/description';
 import ButtonItem from './buttonItem';
 import ListVideo from './listVideo';
 import {getCourseInfo} from 'api/course';
-import Loading from 'components/loading';
+import Loading from 'components/Loading';
 
 export default function CourseDetail({navigation, route}) {
   const {colors} = React.useContext(ThemeContext);
@@ -41,15 +41,7 @@ export default function CourseDetail({navigation, route}) {
   const handleBack = () => navigation.goBack();
 
   if (loading) {
-    return (
-      <Loading
-        backgroundColor={_.get(
-          colors,
-          'container.backgroundColor',
-          'transparent',
-        )}
-      />
-    );
+    return <Loading />;
   }
   return (
     <View
