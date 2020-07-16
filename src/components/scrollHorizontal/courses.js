@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {ThemeContext} from 'tools/context/theme';
 import Course from 'components/course/vertical';
 
 export default function Section({title, items, handleSeeAll, handleDetail}) {
-  const {colors} = React.useContext(ThemeContext);
+  const {colors} = useContext(ThemeContext);
 
   return (
     <View style={styles.container}>
@@ -29,17 +29,13 @@ export default function Section({title, items, handleSeeAll, handleDetail}) {
               styles.seeAll,
               colors.text,
             )}>
-            See all >
+            {'See all >'}
           </Text>
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {items.map(item => (
-          <Course
-            key={Math.random().toString()}
-            item={item}
-            handleDetail={handleDetail}
-          />
+          <Course key={item.id} item={item} handleDetail={handleDetail} />
         ))}
       </ScrollView>
     </View>

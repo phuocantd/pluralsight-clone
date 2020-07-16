@@ -1,8 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {format} from 'date-fns';
 
 import {ThemeContext} from 'tools/context/theme';
+import Rate from '../rate';
 
 export default function Info({
   title,
@@ -16,6 +17,7 @@ export default function Info({
   return (
     <View style={styles.container}>
       <Text
+        numberOfLines={2}
         style={StyleSheet.compose(
           styles.title,
           colors.placeHolder,
@@ -33,25 +35,11 @@ export default function Info({
         style={StyleSheet.compose(
           styles.info,
           colors.text,
-        )}>{`${level} ${updated} ${duration}`}</Text>
-      {rating > 0 && (
-        <View style={styles.rate}>
-          <View style={styles.star}>
-            <Icon name="star" color="#FAD000" size={13} />
-            <Icon name="star" color="#FAD000" size={13} />
-            <Icon name="star" color="#FAD000" size={13} />
-            <Icon name="star" color="#FAD000" size={13} />
-            <Icon name="star-half-full" color="#FAD000" size={13} />
-          </View>
-          <Text
-            style={StyleSheet.compose(
-              styles.info,
-              colors.text,
-            )}>
-            ({rating})
-          </Text>
-        </View>
-      )}
+        )}>{`${duration}h ${format(
+        new Date(updated),
+        'dd/MM/yyyy',
+      )} ${level}`}</Text>
+      <Rate rate={rating} />
     </View>
   );
 }
@@ -60,6 +48,4 @@ const styles = StyleSheet.create({
   container: {marginLeft: 5},
   title: {fontSize: 15},
   info: {fontSize: 12},
-  rate: {flexDirection: 'row'},
-  star: {flexDirection: 'row', marginTop: 3},
 });

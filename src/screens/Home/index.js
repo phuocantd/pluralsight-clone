@@ -19,7 +19,7 @@ export default function Home({navigation}) {
         globalStyles.container,
         colors.container,
       )}>
-      {state.isAuth ? (
+      {!state.isAuth ? (
         <AuthHome navigation={navigation} />
       ) : (
         <NoAuthHome navigation={navigation} />

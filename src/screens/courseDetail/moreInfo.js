@@ -1,8 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {format} from 'date-fns';
 
 import {ThemeContext} from 'tools/context/theme';
+import Rate from 'src/components/rate';
 
 export default function MoreInfo({level, updated, duration, rating}) {
   const {colors} = React.useContext(ThemeContext);
@@ -14,18 +15,9 @@ export default function MoreInfo({level, updated, duration, rating}) {
   return (
     <View style={styles.container}>
       <Text style={compose}>{level}</Text>
-      <Text style={compose}>{updated}</Text>
+      <Text style={compose}>{format(new Date(updated), 'dd/MM/yyyy')}</Text>
       <Text style={compose}>{duration}</Text>
-      <View style={styles.rate}>
-        <View style={styles.star}>
-          <Icon name="star" color="#FAD000" size={13} />
-          <Icon name="star" color="#FAD000" size={13} />
-          <Icon name="star" color="#FAD000" size={13} />
-          <Icon name="star" color="#FAD000" size={13} />
-          <Icon name="star-half-full" color="#FAD000" size={13} />
-        </View>
-        <Text style={compose}>({rating})</Text>
-      </View>
+      <Rate rate={rating} />
     </View>
   );
 }

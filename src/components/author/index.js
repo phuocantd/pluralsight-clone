@@ -6,11 +6,11 @@ import {ThemeContext} from 'tools/context/theme';
 export default function Path({item, handleDetail}) {
   const {colors} = React.useContext(ThemeContext);
   return (
-    <TouchableOpacity style={styles.item} onPress={handleDetail}>
+    <TouchableOpacity style={styles.item} onPress={() => handleDetail(item.id)}>
       <Image
         style={styles.image}
         source={{
-          uri: item.image,
+          uri: item['user.avatar'],
         }}
       />
       <Text
@@ -18,7 +18,7 @@ export default function Path({item, handleDetail}) {
           styles.title,
           colors.text,
         )}>
-        {item.name}
+        {item['user.name']}
       </Text>
     </TouchableOpacity>
   );

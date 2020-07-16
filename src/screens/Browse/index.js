@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import _ from 'lodash';
 
 import {globalStyles} from 'global/styles';
 import {
@@ -25,10 +26,40 @@ import ScrollImage from 'components/scrollImage';
 import SkillScroll from 'components/scrollHorizontal/skills';
 import PathScroll from 'components/scrollHorizontal/paths';
 import AuthorScroll from 'components/scrollHorizontal/authors';
+import {getInstructors} from 'api/instructor';
+import {getCategories} from 'api/category';
+import Axios from 'axios';
 
 export default function Browse({navigation}) {
+  // const [data, setData] = useState({authors: []});
+  const [dataAuthors, setDataAuthors] = useState([]);
+  const [dataCategories, setDataCategories] = useState([]);
+
   const {colors} = useContext(ThemeContext);
   const {state} = useContext(AuthContext);
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    // const resAuthor = await getInstructors();
+    // const resCategories = await getCategories();
+    const arrApi = [];
+    arrApi.push(getInstructors(), getCategories());
+    Axios.all(arrApi)
+      .then(([resAuthor, resCategories]) => {
+        // console.log(
+        //   'teacher:',
+        //   _.get(resAuthor, 'data.payload', []),
+        //   '\n\n\n\n\n',
+        //   _.get(resCategories, 'data.payload', []),
+        // );
+        setDataAuthors(_.get(resAuthor, 'data.payload', []));
+        setDataCategories(_.get(resCategories, 'data.payload', []));
+      })
+      .catch(err => console.log('ERR:', err));
+  };
 
   const handleFeature = () => navigation.navigate(FEATURE);
 
@@ -38,7 +69,7 @@ export default function Browse({navigation}) {
   const handleDetailPath = () =>
     navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
 
-  const handleDetailAuthor = () => navigation.navigate(AUTHORDETAIL);
+  const handleDetailAuthor = id => navigation.navigate(AUTHORDETAIL, {id});
 
   const handleSignin = () => navigation.navigate(LOGIN);
 
@@ -113,8 +144,8 @@ export default function Browse({navigation}) {
         />
         <AuthorScroll
           handleDetail={handleDetailAuthor}
-          title={listTopAuthor.title}
-          items={listTopAuthor.list}
+          title="Tác giả"
+          items={dataAuthors}
         />
       </ScrollView>
     </View>

@@ -19,11 +19,7 @@ export default function Authorscroll({title, items, handleDetail}) {
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {items.map(item => (
-          <Author
-            key={Math.random().toString()}
-            item={item}
-            handleDetail={handleDetail}
-          />
+          <Author key={item.id} item={item} handleDetail={handleDetail} />
         ))}
       </ScrollView>
     </View>

@@ -1,25 +1,56 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import _ from 'lodash';
 
 import {ThemeContext} from 'tools/context/theme';
-import AuthorInfo from './author';
+// import AuthorInfo from './author';
 import MoreInfo from './moreInfo';
 import ButtonControl from './buttonControl';
 import Video from './video';
 import Description from 'components/description';
 import ButtonItem from './buttonItem';
 import ListVideo from './listVideo';
-import {dataDetail} from 'data/courseDetail';
+import {getCourseInfo} from 'api/course';
+import Loading from 'components/loading';
 
-export default function CourseDetail({navigation}) {
+export default function CourseDetail({navigation, route}) {
   const {colors} = React.useContext(ThemeContext);
+  const {id} = route.params;
 
-  const [data, setData] = useState(dataDetail);
+  const [loading, setLoading] = useState(true);
+
+  const [data, setData] = useState({});
   const [isContent, setIsContent] = useState(true);
+
+  useEffect(() => {
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const loadData = async () => {
+    try {
+      const res = await getCourseInfo(id);
+      setData(_.get(res, 'data.payload', {}));
+      setLoading(false);
+    } catch (error) {
+      console.log('ERR:', error);
+    }
+  };
 
   const handleBack = () => navigation.goBack();
 
+  if (loading) {
+    return (
+      <Loading
+        backgroundColor={_.get(
+          colors,
+          'container.backgroundColor',
+          'transparent',
+        )}
+      />
+    );
+  }
   return (
     <View
       style={StyleSheet.compose(
@@ -27,7 +58,7 @@ export default function CourseDetail({navigation}) {
         colors.background2,
       )}>
       <View>
-        <Video image={data.image} handleBack={handleBack} />
+        <Video image={data.imageUrl} handleBack={handleBack} />
       </View>
       <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
         <View style={{marginHorizontal: 20}}>
@@ -38,7 +69,7 @@ export default function CourseDetail({navigation}) {
             )}>
             {data.title}
           </Text>
-          <View style={styles.authors}>
+          {/* <View style={styles.authors}>
             {data.authors.map(author => (
               <AuthorInfo
                 key={Math.random().toString()}
@@ -46,13 +77,13 @@ export default function CourseDetail({navigation}) {
                 image={author.image}
               />
             ))}
-          </View>
+          </View> */}
           <View style={styles.moreInfo}>
             <MoreInfo
-              level={data.level}
-              updated={data.updated}
-              duration={data.duration}
-              rating={data.rating}
+              level={data.status}
+              updated={data.updatedAt}
+              duration={data.totalHours}
+              rating={data.ratedNumber}
             />
           </View>
           <View style={styles.btnControl}>

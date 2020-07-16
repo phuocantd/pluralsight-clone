@@ -21,13 +21,8 @@ export default function Course({item, handleDetail}) {
         styles.item,
         colors.background3,
       )}
-      onPress={() => handleDetail(COURSEDETAIL)}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: item.image,
-        }}
-      />
+      onPress={() => handleDetail(COURSEDETAIL, item.id)}>
+      <Image style={styles.image} source={{uri: item.imageUrl}} />
       <Menu style={styles.threeDot} onSelect={value => console.log(value)}>
         <MenuTrigger>
           <IconEntypo
@@ -57,12 +52,12 @@ export default function Course({item, handleDetail}) {
       </Menu>
 
       <InfoCourse
-        title={item.courseTitle}
-        author={item.author}
-        duration={item.duration}
-        level={item.level}
-        updated={item.updated}
-        rating={item.rating}
+        title={item.title}
+        author={item['instructor.user.name']}
+        duration={item.totalHours}
+        level={item.status}
+        updated={item.updatedAt}
+        rating={item.ratedNumber}
       />
     </TouchableOpacity>
   );

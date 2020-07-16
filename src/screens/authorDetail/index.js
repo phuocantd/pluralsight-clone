@@ -1,20 +1,35 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import _ from 'lodash';
 
 import {globalStyles} from 'global/styles';
 import {COURSEDETAIL} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
-import {softwareDevelopment} from 'data/home';
+// import {softwareDevelopment} from 'data/home';
 import Description from 'components/description';
 import ListCourse from 'components/lists/courses';
+import {getInstructor} from 'api/instructor';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default function AuthorDetail({navigation}) {
+export default function AuthorDetail({navigation, route}) {
+  const {id} = route.params;
   const {colors} = React.useContext(ThemeContext);
+  const [author, setAuthor] = useState({});
 
-  const handleDetailCourse = () => navigation.navigate(COURSEDETAIL);
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await getInstructor(id);
+      setAuthor(_.get(res, 'data.payload', {}));
+    };
+
+    loadData();
+  }, [id]);
+
+  const handleDetailCourse = idCourse =>
+    navigation.navigate(COURSEDETAIL, {id: idCourse});
 
   return (
     <View
@@ -25,26 +40,27 @@ export default function AuthorDetail({navigation}) {
       <ListCourse
         headerComponent={
           <View style={styles.container}>
-            <Image
-              style={styles.postrait}
-              source={{
-                uri:
-                  'https://pluralsight.imgix.net/author/lg/deborah-kurata-v1.jpg?w=200',
-              }}
-            />
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('ImageView', {
+                  file: {fileName: author.name, uri: author.avatar},
+                })
+              }>
+              <Image style={styles.postrait} source={{uri: author.avatar}} />
+            </TouchableOpacity>
             <Text
               style={StyleSheet.compose(
                 styles.name,
                 colors.text,
               )}>
-              Deborah Kurata
+              {author.name}
             </Text>
             <Text
               style={StyleSheet.compose(
                 {alignSelf: 'center', marginBottom: 10},
                 colors.text,
               )}>
-              Plurasight Author
+              {`Major: ${author.major}`}
             </Text>
             <Button title="Follow" onPress={() => console.log('Follow')} />
             <Text
@@ -59,7 +75,7 @@ export default function AuthorDetail({navigation}) {
               )}>
               Follow to be notified when new courses are published
             </Text>
-            <Description description="Deborah Kurata is a software developer, consultant, conference speaker, and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with the Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)." />
+            <Description description={author.intro} />
             <View style={{flexDirection: 'row', marginTop: 20}}>
               <IconFeather name="link-2" style={colors.icon} size={20} />
               <Text
@@ -67,7 +83,17 @@ export default function AuthorDetail({navigation}) {
                   {marginLeft: 10},
                   colors.text,
                 )}>
-                http://msmvps.com/blogs/deborahk
+                {author.email}
+              </Text>
+            </View>
+            <View style={{flexDirection: 'row', marginTop: 10}}>
+              <IconFeather name="phone" style={colors.icon} size={20} />
+              <Text
+                style={StyleSheet.compose(
+                  {marginLeft: 10},
+                  colors.text,
+                )}>
+                {author.phone}
               </Text>
             </View>
             <View style={{flexDirection: 'row', marginTop: 10}}>
@@ -86,16 +112,18 @@ export default function AuthorDetail({navigation}) {
               />
               <IconFontAwesome name="twitter" style={colors.icon} size={30} />
             </View>
-            <Text
-              style={StyleSheet.compose(
-                {fontSize: 20, marginVertical: 30},
-                colors.text,
-              )}>
-              Course
-            </Text>
+            {!_.isEmpty(author.courses) && (
+              <Text
+                style={StyleSheet.compose(
+                  {fontSize: 20, marginVertical: 30},
+                  colors.text,
+                )}>
+                Course
+              </Text>
+            )}
           </View>
         }
-        items={softwareDevelopment.listCourse}
+        items={author.courses}
         handleDetail={handleDetailCourse}
       />
     </View>

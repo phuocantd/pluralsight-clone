@@ -9,14 +9,20 @@ export default function Description({description}) {
 
   const [isExpand, setIsExpand] = useState(false);
 
+  if (!description) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <Text
         style={StyleSheet.compose(
           styles.text,
           colors.text,
-        )}>
-        {isExpand ? description : description.substring(0, 150)}
+        )}
+        numberOfLines={isExpand ? 4 : 100}>
+        {description}
+        {/* {isExpand ? description : description.substring(0, 150)} */}
       </Text>
       <TouchableOpacity
         style={StyleSheet.compose(
