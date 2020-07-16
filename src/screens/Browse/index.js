@@ -17,23 +17,29 @@ import {
   LOGIN,
   SKILL,
   FEATURE,
+  LISTCOURSE,
 } from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 import {AuthContext} from 'tools/context/auth';
-import {imageScroll, listPath, listSkill, listTopAuthor} from 'data/browse';
-import ImageButton from 'components/imageButtonMedium';
-import ScrollImage from 'components/scrollImage';
-import SkillScroll from 'components/scrollHorizontal/skills';
-import PathScroll from 'components/scrollHorizontal/paths';
+// import {imageScroll, listPath, listSkill} from 'data/browse';
+// import ImageButton from 'components/imageButtonMedium';
+// import ScrollImage from 'components/scrollImage';
+// import SkillScroll from 'components/scrollHorizontal/skills';
+// import PathScroll from 'components/scrollHorizontal/paths';
 import AuthorScroll from 'components/scrollHorizontal/authors';
 import {getInstructors} from 'api/instructor';
 import {getCategories} from 'api/category';
 import Axios from 'axios';
+import Loading from 'src/components/Loading';
+import {getTopSell, getTopNew, getTopRate} from 'src/api/course';
+import CourseScroll from 'components/scrollHorizontal/courses';
 
 export default function Browse({navigation}) {
   // const [data, setData] = useState({authors: []});
-  const [dataAuthors, setDataAuthors] = useState([]);
-  const [dataCategories, setDataCategories] = useState([]);
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  // const [dataAuthors, setDataAuthors] = useState([]);
+  // const [dataCategories, setDataCategories] = useState([]);
 
   const {colors} = useContext(ThemeContext);
   const {state} = useContext(AuthContext);
@@ -45,35 +51,56 @@ export default function Browse({navigation}) {
   const loadData = async () => {
     // const resAuthor = await getInstructors();
     // const resCategories = await getCategories();
-    const arrApi = [];
-    arrApi.push(getInstructors(), getCategories());
+    const arrApi = [
+      getInstructors(),
+      getCategories(),
+      getTopSell(10, 1),
+      getTopNew(10, 1),
+      getTopRate(10, 1),
+    ];
     Axios.all(arrApi)
-      .then(([resAuthor, resCategories]) => {
-        // console.log(
-        //   'teacher:',
-        //   _.get(resAuthor, 'data.payload', []),
-        //   '\n\n\n\n\n',
-        //   _.get(resCategories, 'data.payload', []),
-        // );
-        setDataAuthors(_.get(resAuthor, 'data.payload', []));
-        setDataCategories(_.get(resCategories, 'data.payload', []));
+      .then(([resAuthor, resCategories, resTopSell, resTopnew, resTopRate]) => {
+        const author = _.get(resAuthor, 'data.payload', []);
+        const category = _.get(resCategories, 'data.payload', []);
+        const topSell = _.get(resTopSell, 'data.payload', []);
+        const topNew = _.get(resTopnew, 'data.payload', []);
+        const topRate = _.get(resTopRate, 'data.payload', []);
+        setData({
+          author,
+          category,
+          topSell,
+          topNew,
+          topRate,
+        });
+        setLoading(false);
+        // setDataAuthors(_.get(resAuthor, 'data.payload', []));
+        // setDataCategories(_.get(resCategories, 'data.payload', []));
       })
       .catch(err => console.log('ERR:', err));
   };
 
-  const handleFeature = () => navigation.navigate(FEATURE);
+  // const handleFeature = () => navigation.navigate(FEATURE);
 
-  const seeAllPath = (title, items) =>
-    navigation.navigate(PATHS, {items, title});
+  // const seeAllPath = (title, items) =>
+  //   navigation.navigate(PATHS, {items, title});
 
-  const handleDetailPath = () =>
-    navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
+  // const handleDetailPath = () =>
+  //   navigation.navigate(PATHDETAIL, {title: 'Angular denver 2019'});
 
   const handleDetailAuthor = id => navigation.navigate(AUTHORDETAIL, {id});
 
   const handleSignin = () => navigation.navigate(LOGIN);
 
-  const handleDetailSkill = title => navigation.navigate(SKILL, {title});
+  const handleSeeAll = (title, items) =>
+    navigation.navigate(LISTCOURSE, {items, title});
+
+  const handleDetailCourse = (screen, id) => navigation.navigate(screen, {id});
+
+  // const handleDetailSkill = title => navigation.navigate(SKILL, {title});
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <View
@@ -118,34 +145,34 @@ export default function Browse({navigation}) {
             </TouchableOpacity>
           </View>
         )}
-        <ImageButton
-          style={{marginHorizontal: 10, marginTop: 10}}
-          handleDetail={handleFeature}
-          url="https://cdn.cjr.org/wp-content/uploads/2019/07/AdobeStock_165953143-686x371.jpeg"
-          title="new releases"
+        <CourseScroll
+          title="Khóa học bán chạy"
+          items={_.get(data, 'topSell', [])}
+          handleSeeAll={handleSeeAll}
+          handleDetail={handleDetailCourse}
         />
-        <ImageButton
-          style={{marginHorizontal: 10, marginTop: 10}}
-          handleDetail={handleFeature}
-          url="https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg"
-          title="recommended for you"
+        <CourseScroll
+          title="Khóa học mới"
+          items={_.get(data, 'topNew', [])}
+          handleSeeAll={handleSeeAll}
+          handleDetail={handleDetailCourse}
         />
-        <ScrollImage items={imageScroll} />
-        <SkillScroll
-          title={listSkill.title}
-          items={listSkill.list}
-          handleDetail={handleDetailSkill}
+        <CourseScroll
+          title="Khóa học đánh giá cao"
+          items={_.get(data, 'topRate', [])}
+          handleSeeAll={handleSeeAll}
+          handleDetail={handleDetailCourse}
         />
-        <PathScroll
+        {/* <PathScroll
           handleSeeAll={seeAllPath}
           handleDetail={handleDetailPath}
-          title={listPath.title}
-          items={listPath.list}
-        />
+          title="Danh mục"
+          items={_.get(data, 'category', [])}
+        /> */}
         <AuthorScroll
           handleDetail={handleDetailAuthor}
           title="Tác giả"
-          items={dataAuthors}
+          items={_.get(data, 'author', [])}
         />
       </ScrollView>
     </View>

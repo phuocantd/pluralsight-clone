@@ -36,11 +36,7 @@ export default function PathScroll({title, items, handleSeeAll, handleDetail}) {
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {items.map(item => (
-          <Path
-            key={Math.random().toString()}
-            item={item}
-            handleDetail={handleDetail}
-          />
+          <Path key={item.id} item={item} handleDetail={handleDetail} />
         ))}
       </ScrollView>
     </View>

@@ -13,16 +13,20 @@ import Description from 'components/description';
 import ListCourse from 'components/lists/courses';
 import {getInstructor} from 'api/instructor';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import Loading from 'src/components/Loading';
 
 export default function AuthorDetail({navigation, route}) {
   const {id} = route.params;
   const {colors} = React.useContext(ThemeContext);
+
+  const [loading, setLoading] = useState(true);
   const [author, setAuthor] = useState({});
 
   useEffect(() => {
     const loadData = async () => {
       const res = await getInstructor(id);
       setAuthor(_.get(res, 'data.payload', {}));
+      setLoading(false);
     };
 
     loadData();
@@ -30,6 +34,10 @@ export default function AuthorDetail({navigation, route}) {
 
   const handleDetailCourse = idCourse =>
     navigation.navigate(COURSEDETAIL, {id: idCourse});
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <View
