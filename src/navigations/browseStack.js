@@ -28,7 +28,7 @@ import SettingsScreen from 'screens/setting';
 import ContactScreen from 'screens/contact';
 import FeedbackScreen from 'screens/feedback';
 import AuthorDetailScreen from 'screens/authorDetail';
-import CourseDetailScreen from 'screens/courseDetail';
+import CourseDetailScreen from 'src/screens/courseDetail';
 import SkillScreen from 'screens/skill';
 import FeatureScreen from 'screens/features';
 import ListCourseScreen from 'screens/ListCourse';

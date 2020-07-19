@@ -15,7 +15,7 @@ import {OptionHeaderRight} from 'global/navigation';
 import {ThemeContext} from 'tools/context/theme';
 import HomeScreen from 'screens/Home';
 import ListCourseScreen from 'screens/ListCourse';
-import CourseDetailScreen from 'screens/courseDetail';
+import CourseDetailScreen from 'src/screens/courseDetail';
 import ProfileScreen from 'screens/Profile';
 import SettingsScreen from 'screens/setting';
 import ContactScreen from 'screens/contact';
