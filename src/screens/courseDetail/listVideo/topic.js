@@ -7,17 +7,21 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import _ from 'lodash';
 
 import {ThemeContext} from 'tools/context/theme';
 import Period from './period';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default function Topic({item, index, handleMarkDown}) {
   const {colors} = useContext(ThemeContext);
 
   const handleBookMark = () => {
-    handleMarkDown(index);
+    handleMarkDown && handleMarkDown(index);
     console.log(item);
   };
+
+  console.log({item});
 
   return (
     <View>
@@ -35,7 +39,7 @@ export default function Topic({item, index, handleMarkDown}) {
               )}>
               {index}
             </Text>
-            {item.isMarkdown && (
+            {/* {item.isMarkdown && (
               <IconEntypo
                 name="bookmark"
                 size={20}
@@ -44,7 +48,7 @@ export default function Topic({item, index, handleMarkDown}) {
                   colors.text,
                 )}
               />
-            )}
+            )} */}
           </View>
           <View style={styles.nameDetail}>
             <Text
@@ -54,7 +58,7 @@ export default function Topic({item, index, handleMarkDown}) {
               )}>
               {item.name}
             </Text>
-            <Text style={colors.text}>{item.total}</Text>
+            <Text style={colors.text}>{item.sumHours}h</Text>
           </View>
         </View>
         <Menu style={styles.threeDot} onSelect={value => console.log(value)}>
@@ -87,9 +91,13 @@ export default function Topic({item, index, handleMarkDown}) {
           </MenuOptions>
         </Menu>
       </View>
-      {item.detail.map(period => (
-        <Period key={Math.random().toString()} item={period} />
-      ))}
+      {item &&
+        item.lesson &&
+        _.get(item, 'lesson', []).map(lesson => (
+          <TouchableOpacity key={lesson.id}>
+            <Period item={lesson} />
+          </TouchableOpacity>
+        ))}
     </View>
   );
 }

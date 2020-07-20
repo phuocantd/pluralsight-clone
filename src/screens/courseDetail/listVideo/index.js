@@ -5,7 +5,7 @@ import {ThemeContext} from 'tools/context/theme';
 import Contents from './contents';
 import Transcript from './transcript';
 
-export default function MyTabs({isContent}) {
+export default function MyTabs({isContent, sections}) {
   const {colors} = React.useContext(ThemeContext);
   return (
     <View
@@ -13,7 +13,7 @@ export default function MyTabs({isContent}) {
         {paddingHorizontal: 20},
         colors.container,
       )}>
-      {isContent ? <Contents /> : <Transcript />}
+      {isContent ? <Contents sections={sections} /> : <Transcript />}
     </View>
   );
 }

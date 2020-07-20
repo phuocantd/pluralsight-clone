@@ -1,29 +1,33 @@
-import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import _ from 'lodash';
 
 import Topic from './topic';
-import {listVideoCourse} from 'data/courseDetail';
 
-export default function Contents() {
-  const [data, setData] = useState(listVideoCourse);
+export default function Contents({sections}) {
+  // const [data, setData] = useState(listVideoCourse);
 
-  const handleMarkDown = index => {
-    const newData = data.map((item, idx) =>
-      index === idx ? {...item, isMarkdown: !item.isMarkdown} : item,
-    );
-    setData(newData);
-  };
+  // const handleMarkDown = index => {
+  //   const newData = data.map((item, idx) =>
+  //     index === idx ? {...item, isMarkdown: !item.isMarkdown} : item,
+  //   );
+  //   setData(newData);
+  // };
+
+  console.log({sections});
 
   return (
     <View style={styles.container}>
-      {data.map((item, index) => (
-        <Topic
-          key={Math.random().toString()}
-          index={index}
-          item={item}
-          handleMarkDown={handleMarkDown}
-        />
-      ))}
+      {sections &&
+        !_.isEmpty(sections) &&
+        sections.map((item, index) => (
+          <Topic
+            key={item.id}
+            index={index}
+            item={item}
+            // handleMarkDown={handleMarkDown}
+          />
+        ))}
     </View>
   );
 }

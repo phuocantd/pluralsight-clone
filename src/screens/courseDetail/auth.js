@@ -45,6 +45,7 @@ export default function CourseDetail({navigation, id}) {
   if (loading) {
     return <Loading />;
   }
+  console.log('data detail:', data);
   return (
     <View
       style={StyleSheet.compose(
@@ -136,7 +137,10 @@ export default function CourseDetail({navigation, id}) {
             </View>
           </View>
         </View>
-        <ListVideo isContent={isContent} />
+        <ListVideo
+          isContent={isContent}
+          sections={_.get(data, 'section', [])}
+        />
       </ScrollView>
     </View>
   );
