@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,6 +7,8 @@ import {
   Keyboard,
 } from 'react-native';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import _ from 'lodash';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
@@ -14,43 +16,65 @@ import Recent from 'components/recent';
 import NotFound from './notFound';
 import ResultSearch from './result';
 
-const recents = [
-  {
-    id: '1',
-    text: 'react',
-    success: true,
-  },
-  {
-    id: '2',
-    text: 'zxczxc',
-    success: false,
-  },
-];
+// const recents = [
+//   {
+//     id: '1',
+//     text: 'react',
+//     success: true,
+//   },
+//   {
+//     id: '2',
+//     text: 'zxczxc',
+//     success: false,
+//   },
+// ];
 
 export default function Search() {
   const {colors, mode} = React.useContext(ThemeContext);
 
   const [searchValue, setSearchValue] = useState('');
-  const [listRecent, setListRecent] = useState(recents);
+  const [listRecent, setListRecent] = useState([]);
   const [isRecent, setIsRecent] = useState(true);
   const [isSuccess, setIsSuccess] = useState(true);
 
-  const handleEnter = () => {
+  useEffect(() => {
+    loadRecent();
+  }, []);
+
+  const loadRecent = async () => {
+    const recents = await AsyncStorage.getItem('search-recents');
+    console.log('load recents', JSON.parse(recents));
+    setListRecent(JSON.parse(recents) || []);
+  };
+
+  const handleSearch = (key, cb) => {
+    setTimeout(() => {
+      console.log('key', key);
+      cb && cb();
+    }, 3000);
+  };
+
+  const handleEnter = async () => {
     if (searchValue !== '') {
-      setListRecent([
+      const recents = [
         {id: Math.random().toString(), text: searchValue},
         ...listRecent,
-      ]);
+      ];
+      await AsyncStorage.setItem('search-recents', JSON.stringify(recents));
       Keyboard.dismiss();
-      setIsRecent(false);
-      setIsSuccess(true);
+      handleSearch(searchValue, () => {
+        setListRecent(recents);
+        setIsRecent(false);
+        setIsSuccess(false);
+        console.log('await');
+      });
     }
   };
 
   const handleSelectRecent = recent => {
     setSearchValue(recent);
-    setIsSuccess(false);
     setIsRecent(false);
+    setIsSuccess(false);
   };
 
   return (

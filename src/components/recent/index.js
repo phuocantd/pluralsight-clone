@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {ThemeContext} from 'tools/context/theme';
 
@@ -12,11 +13,16 @@ export default function Recent({list, setList, handleSelectRecent}) {
       style,
       colors.text,
     );
+
+  const handleClear = async () => {
+    setList([]);
+    await AsyncStorage.removeItem('search-recents');
+  };
   return (
     <View>
       <View style={styles.header}>
         <Text style={composeText(styles.recentText)}>Recent searches</Text>
-        <TouchableOpacity onPress={() => setList([])}>
+        <TouchableOpacity onPress={handleClear}>
           <Text
             style={StyleSheet.compose(
               styles.clear,
