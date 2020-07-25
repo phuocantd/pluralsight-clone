@@ -11,7 +11,7 @@ export default function Skill({item, handleDetail}) {
         styles.item,
         colors.background3,
       )}
-      onPress={() => handleDetail(item.name)}>
+      onPress={() => handleDetail(item.name, item.id)}>
       <Text
         style={StyleSheet.compose(
           styles.name,

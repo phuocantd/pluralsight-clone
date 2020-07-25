@@ -7,3 +7,10 @@ export const getCategories = () =>
 
 export const getCategory = id =>
   axios({method: 'GET', url: `${URL}/category/${id}`});
+
+export const getCategoryDetail = id =>
+  axios({
+    method: 'post',
+    url: `${URL}/course/search`,
+    data: {keyword: '', opt: {category: [id]}, limit: 10, offset: 1},
+  });

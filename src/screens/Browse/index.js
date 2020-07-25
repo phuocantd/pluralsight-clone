@@ -11,12 +11,12 @@ import _ from 'lodash';
 
 import {globalStyles} from 'global/styles';
 import {
-  PATHS,
-  PATHDETAIL,
+  // PATHS,
+  // PATHDETAIL,
   AUTHORDETAIL,
   LOGIN,
   SKILL,
-  FEATURE,
+  // FEATURE,
   LISTCOURSE,
 } from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
@@ -33,6 +33,7 @@ import Axios from 'axios';
 import Loading from 'src/components/Loading';
 import {getTopSell, getTopNew, getTopRate} from 'src/api/course';
 import CourseScroll from 'components/scrollHorizontal/courses';
+import CategoryScroll from 'components/scrollHorizontal/skills';
 
 export default function Browse({navigation}) {
   // const [data, setData] = useState({authors: []});
@@ -96,7 +97,8 @@ export default function Browse({navigation}) {
 
   const handleDetailCourse = (screen, id) => navigation.navigate(screen, {id});
 
-  // const handleDetailSkill = title => navigation.navigate(SKILL, {title});
+  const handleDetailCategory = (title, id) =>
+    navigation.navigate(SKILL, {title, id});
 
   if (loading) {
     return <Loading />;
@@ -169,6 +171,11 @@ export default function Browse({navigation}) {
           title="Danh mục"
           items={_.get(data, 'category', [])}
         /> */}
+        <CategoryScroll
+          title="Danh mục"
+          items={_.get(data, 'category', [])}
+          handleDetail={handleDetailCategory}
+        />
         <AuthorScroll
           handleDetail={handleDetailAuthor}
           title="Tác giả"
