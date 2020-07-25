@@ -29,3 +29,10 @@ export const getCourseDetail = (id, userId) =>
     method: 'get',
     url: `${URL}/course/get-course-detail/${id}/${userId}`,
   });
+
+export const search = keyword =>
+  axios({
+    method: 'post',
+    url: `${URL}/course/search`,
+    data: {keyword, limit: 10, offset: 1},
+  });

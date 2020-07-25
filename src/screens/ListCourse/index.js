@@ -11,7 +11,7 @@ export default function ListCourseScreen({route, navigation}) {
 
   const {title, items} = route.params;
 
-  const handleDetailCourse = () => navigation.navigate(COURSEDETAIL);
+  const handleDetailCourse = id => navigation.navigate(COURSEDETAIL, {id});
 
   return (
     <View

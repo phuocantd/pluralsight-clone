@@ -14,28 +14,16 @@ import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
 import Recent from 'components/recent';
 import NotFound from './notFound';
-import ResultSearch from './result';
+import ResultSearch from './ResultSearch';
+import {search} from 'api/course';
 
-// const recents = [
-//   {
-//     id: '1',
-//     text: 'react',
-//     success: true,
-//   },
-//   {
-//     id: '2',
-//     text: 'zxczxc',
-//     success: false,
-//   },
-// ];
-
-export default function Search() {
+export default function Search({navigation}) {
   const {colors, mode} = React.useContext(ThemeContext);
 
   const [searchValue, setSearchValue] = useState('');
   const [listRecent, setListRecent] = useState([]);
   const [isRecent, setIsRecent] = useState(true);
-  const [isSuccess, setIsSuccess] = useState(true);
+  const [listResult, setListResult] = useState([]);
 
   useEffect(() => {
     loadRecent();
@@ -47,11 +35,12 @@ export default function Search() {
     setListRecent(JSON.parse(recents) || []);
   };
 
-  const handleSearch = (key, cb) => {
-    setTimeout(() => {
-      console.log('key', key);
-      cb && cb();
-    }, 3000);
+  const handleSearch = async (key, cb) => {
+    try {
+      const res = await search(key);
+      setListResult(_.get(res, 'data.payload.rows', []) || []);
+    } catch (error) {}
+    cb && cb();
   };
 
   const handleEnter = async () => {
@@ -65,16 +54,15 @@ export default function Search() {
       handleSearch(searchValue, () => {
         setListRecent(recents);
         setIsRecent(false);
-        setIsSuccess(false);
-        console.log('await');
       });
     }
   };
 
   const handleSelectRecent = recent => {
-    setSearchValue(recent);
-    setIsRecent(false);
-    setIsSuccess(false);
+    handleSearch(recent, () => {
+      setSearchValue(recent);
+      setIsRecent(false);
+    });
   };
 
   return (
@@ -117,6 +105,7 @@ export default function Search() {
           onPress={() => {
             setSearchValue('');
             setIsRecent(true);
+            setListResult([]);
           }}>
           {searchValue !== '' && (
             <IconMaterialIcons name="clear" style={colors.text} size={23} />
@@ -134,8 +123,8 @@ export default function Search() {
           ) : (
             <View />
           )
-        ) : isSuccess ? (
-          <ResultSearch />
+        ) : !_.isEmpty(listResult) ? (
+          <ResultSearch list={listResult} navigation={navigation} />
         ) : (
           <NotFound name={searchValue} />
         )}

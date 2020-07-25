@@ -35,10 +35,9 @@ export default function Info({
         style={StyleSheet.compose(
           styles.info,
           colors.text,
-        )}>{`${duration}h ${format(
-        new Date(updated),
-        'dd/MM/yyyy',
-      )} ${level}`}</Text>
+        )}>{`${duration}h ${format(new Date(updated), 'dd/MM/yyyy')} ${
+        level ? level : ''
+      }`}</Text>
       <Rate rate={rating} />
     </View>
   );
