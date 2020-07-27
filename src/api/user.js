@@ -89,3 +89,6 @@ export const updateProfileAPI = (token, name, avatar, phone) =>
     },
     data: {name, avatar, phone},
   });
+
+export const getRecommend = userId =>
+  axios({method: 'get', url: `${URL}/user/recommend-course/${userId}/10/1`});

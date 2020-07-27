@@ -24,6 +24,7 @@ export default function CourseDetail({navigation, id}) {
 
   const [data, setData] = useState({});
   const [isContent, setIsContent] = useState(true);
+  const [curLesson, setCurLesson] = useState({});
 
   useEffect(() => {
     loadData();
@@ -32,8 +33,12 @@ export default function CourseDetail({navigation, id}) {
 
   const loadData = async () => {
     try {
+      console.log('loading');
       const res = await getCourseDetail(id, profile.id);
       setData(_.get(res, 'data.payload', {}));
+      const sections = _.get(res, 'data.payload.section[0]', {}) || {};
+      setCurLesson(_.get(sections, 'lesson[0]', {}) || {});
+      console.log('hae', sections);
       setLoading(false);
     } catch (error) {
       console.log('ERR:', error);
@@ -42,10 +47,12 @@ export default function CourseDetail({navigation, id}) {
 
   const handleBack = () => navigation.goBack();
 
+  const handlePressLesson = lesson => setCurLesson(lesson);
+
   if (loading) {
     return <Loading />;
   }
-  console.log('data detail:', data);
+  console.log('data detail:', data, curLesson);
   return (
     <View
       style={StyleSheet.compose(
@@ -53,7 +60,12 @@ export default function CourseDetail({navigation, id}) {
         colors.background2,
       )}>
       <View>
-        <Video image={data.imageUrl} handleBack={handleBack} />
+        <Video
+          lesson={curLesson}
+          image={data.imageUrl}
+          handleBack={handleBack}
+          url={curLesson.videoUrl}
+        />
       </View>
       <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
         <View style={{marginHorizontal: 20}}>
@@ -139,7 +151,9 @@ export default function CourseDetail({navigation, id}) {
         </View>
         <ListVideo
           isContent={isContent}
+          lesson={curLesson}
           sections={_.get(data, 'section', [])}
+          handlePressLesson={handlePressLesson}
         />
       </ScrollView>
     </View>

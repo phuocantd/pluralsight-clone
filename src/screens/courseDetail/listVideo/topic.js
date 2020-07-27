@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import {
   Menu,
@@ -11,17 +11,21 @@ import _ from 'lodash';
 
 import {ThemeContext} from 'tools/context/theme';
 import Period from './period';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default function Topic({item, index, handleMarkDown}) {
+export default function Topic({
+  item,
+  index,
+  handleMarkDown,
+  handlePressLesson,
+}) {
   const {colors} = useContext(ThemeContext);
 
   const handleBookMark = () => {
     handleMarkDown && handleMarkDown(index);
-    console.log(item);
+    // console.log(item);
   };
 
-  console.log({item});
+  // console.log({item});
 
   return (
     <View>
@@ -94,7 +98,9 @@ export default function Topic({item, index, handleMarkDown}) {
       {item &&
         item.lesson &&
         _.get(item, 'lesson', []).map(lesson => (
-          <TouchableOpacity key={lesson.id}>
+          <TouchableOpacity
+            key={lesson.id}
+            onPress={() => handlePressLesson(lesson)}>
             <Period item={lesson} />
           </TouchableOpacity>
         ))}

@@ -23,6 +23,7 @@
     "lodash": "^4.17.19",
     "react": "16.11.0",
     "react-native": "0.62.2",
+    "react-native-charts-wrapper": "^0.5.7",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-popup-menu": "^0.15.7",
     "react-native-progress": "^4.1.2",
@@ -32,6 +33,7 @@
     "react-native-tab-view": "^2.14.0",
     "react-native-vector-icons": "6.6.0",
     "react-native-video": "^4.4.5",
+    "react-native-video-player": "^0.10.1",
     "react-native-webview": "^10.3.2",
     "react-native-youtube-iframe": "^1.2.4"
   },

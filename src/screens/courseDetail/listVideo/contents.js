@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import Topic from './topic';
 
-export default function Contents({sections}) {
+export default function Contents({sections, handlePressLesson}) {
   // const [data, setData] = useState(listVideoCourse);
 
   // const handleMarkDown = index => {
@@ -14,7 +14,7 @@ export default function Contents({sections}) {
   //   setData(newData);
   // };
 
-  console.log({sections});
+  // console.log({sections});
 
   return (
     <View style={styles.container}>
@@ -25,6 +25,7 @@ export default function Contents({sections}) {
             key={item.id}
             index={index}
             item={item}
+            handlePressLesson={handlePressLesson}
             // handleMarkDown={handleMarkDown}
           />
         ))}

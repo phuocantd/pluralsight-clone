@@ -1,14 +1,11 @@
 import React from 'react';
-import {
-  ImageBackground,
-  StyleSheet,
-  TouchableOpacity,
-  Share,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, Share, View} from 'react-native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconEntypo from 'react-native-vector-icons/Entypo';
+import VideoPlayer from 'react-native-video-player';
+// import Video from 'react-native-video';
 
-export default function ButtonControl({image, handleBack}) {
+export default function ButtonControl({image, handleBack, url, lesson}) {
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -28,20 +25,35 @@ export default function ButtonControl({image, handleBack}) {
       console.log(error.message);
     }
   };
+
   return (
-    <ImageBackground style={styles.image} source={{uri: image}}>
-      <TouchableOpacity
-        style={styles.circleIcon}
-        onPress={() => console.log('Play')}>
-        <IconFontAwesome name="play" size={50} color="#fff" />
-      </TouchableOpacity>
+    <View>
+      <VideoPlayer
+        video={{
+          uri: url,
+        }}
+        videoWidth={1600}
+        videoHeight={900}
+        thumbnail={{uri: image}}
+      />
+      {/* <Video
+        key={lesson.id}
+        autoplay={true}
+        controls={false}
+        disableFocus={true}
+        resizeMode="stretch"
+        style={styles.backgroundVideo}
+        source={{
+          uri: url,
+        }}
+      /> */}
       <TouchableOpacity style={styles.downIcon} onPress={handleBack}>
         <IconFontAwesome name="chevron-down" color="#fff" size={30} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.share} onPress={onShare}>
         <IconEntypo name="share" color="#fff" size={30} />
       </TouchableOpacity>
-    </ImageBackground>
+    </View>
   );
 }
 
@@ -59,4 +71,9 @@ const styles = StyleSheet.create({
   },
   downIcon: {position: 'absolute', left: 20, top: 20},
   share: {position: 'absolute', top: 20, right: 20},
+  backgroundVideo: {
+    borderWidth: 1,
+    width: '100%',
+    height: 225,
+  },
 });

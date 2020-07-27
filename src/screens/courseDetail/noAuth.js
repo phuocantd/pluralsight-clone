@@ -21,7 +21,7 @@ export default function CourseDetail({navigation, id}) {
   const [loading, setLoading] = useState(true);
 
   const [data, setData] = useState({});
-  const [isContent, setIsContent] = useState(true);
+  // const [isContent, setIsContent] = useState(true);
 
   useEffect(() => {
     loadData();
@@ -50,7 +50,7 @@ export default function CourseDetail({navigation, id}) {
         colors.background2,
       )}>
       <View>
-        <Video image={data.imageUrl} handleBack={handleBack} />
+        <Video image={data.imageUrl} handleBack={handleBack} noPlay />
       </View>
       <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
         <View style={{marginHorizontal: 20}}>

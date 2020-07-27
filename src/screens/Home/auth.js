@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useEffect, useContext} from 'react';
 import {Image, StyleSheet, ScrollView} from 'react-native';
 import axios from 'axios';
 import _ from 'lodash';
 
 import {LISTCOURSE} from 'global/constants';
 import CourseScroll from 'components/scrollHorizontal/courses';
-import {getTopSell, getTopNew, getTopRate} from 'api/course';
+import {getRecommend} from 'api/user';
 import Loading from 'src/components/Loading';
+import {Stores} from 'src/tools/context/stores';
 
 export default function AuthHome({navigation}) {
+  const {profile} = useContext(Stores);
+
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
 
@@ -17,14 +21,13 @@ export default function AuthHome({navigation}) {
   }, []);
 
   const loadData = async () => {
-    const arrReq = [getTopSell(10, 1), getTopNew(10, 1), getTopRate(10, 1)];
+    const arrReq = [getRecommend(profile.id)];
     axios
       .all(arrReq)
-      .then(([resTopSell, resTopnew, resTopRate]) => {
-        const topSell = _.get(resTopSell, 'data.payload', []);
-        const topNew = _.get(resTopnew, 'data.payload', []);
-        const topRate = _.get(resTopRate, 'data.payload', []);
-        setData({topSell, topNew, topRate});
+      .then(([resRecommend]) => {
+        console.log('recommend', recommend);
+        const recommend = _.get(resRecommend, 'data.payload', []);
+        setData({recommend});
         setLoading(false);
       })
       .catch(err => console.log('ERR:', err));
@@ -49,11 +52,12 @@ export default function AuthHome({navigation}) {
         }}
       />
       <CourseScroll
-        title="Khóa học bán chạy"
-        items={_.get(data, 'topSell', [])}
+        title="Đề xuất cho bạn"
+        items={_.get(data, 'recommend', [])}
         handleSeeAll={handleSeeAll}
         handleDetail={handleDetailCourse}
       />
+      {/*
       <CourseScroll
         title="Khóa học mới"
         items={_.get(data, 'topNew', [])}
@@ -65,7 +69,7 @@ export default function AuthHome({navigation}) {
         items={_.get(data, 'topRate', [])}
         handleSeeAll={handleSeeAll}
         handleDetail={handleDetailCourse}
-      />
+      /> */}
       {/* <CourseScroll
         title={securityProfessional.title}
         items={securityProfessional.listCourse}

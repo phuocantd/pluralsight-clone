@@ -33,7 +33,7 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={DOWNLOADS}
         component={DownloadsStack}
         options={{
@@ -45,7 +45,7 @@ export default function BottomTabNavigator() {
             />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name={BROWSE}
         component={BrowseStack}
