@@ -11,8 +11,9 @@ import {
 import {COURSEDETAIL} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 import InfoCourse from './info';
+import InfoCourse2 from './info2';
 
-export default function Course({item, handleDetail}) {
+export default function Course({item, handleDetail, self}) {
   const {colors} = React.useContext(ThemeContext);
 
   return (
@@ -22,7 +23,10 @@ export default function Course({item, handleDetail}) {
         colors.background3,
       )}
       onPress={() => handleDetail(COURSEDETAIL, item.id)}>
-      <Image style={styles.image} source={{uri: item.imageUrl}} />
+      <Image
+        style={styles.image}
+        source={{uri: self ? item.courseImage : item.imageUrl}}
+      />
       <Menu style={styles.threeDot} onSelect={value => console.log(value)}>
         <MenuTrigger>
           <IconEntypo
@@ -51,14 +55,18 @@ export default function Course({item, handleDetail}) {
         </MenuOptions>
       </Menu>
 
-      <InfoCourse
-        title={item.title}
-        author={item['instructor.user.name']}
-        duration={item.totalHours}
-        level={item.status}
-        updated={item.updatedAt}
-        rating={item.ratedNumber}
-      />
+      {self ? (
+        <InfoCourse2 title={item.courseTitle} author={item.instructorName} />
+      ) : (
+        <InfoCourse
+          title={item.title}
+          author={item['instructor.user.name']}
+          duration={item.totalHours}
+          level={item.status}
+          updated={item.updatedAt}
+          rating={item.ratedNumber}
+        />
+      )}
     </TouchableOpacity>
   );
 }

@@ -23,7 +23,6 @@
     "lodash": "^4.17.19",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-charts-wrapper": "^0.5.7",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-popup-menu": "^0.15.7",
     "react-native-progress": "^4.1.2",

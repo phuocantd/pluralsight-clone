@@ -92,3 +92,26 @@ export const updateProfileAPI = (token, name, avatar, phone) =>
 
 export const getRecommend = userId =>
   axios({method: 'get', url: `${URL}/user/recommend-course/${userId}/10/1`});
+
+export const getIntro = () =>
+  axios({method: 'GET', url: `${URL}/user/intro-page`});
+
+export const getProgress = token =>
+  axios({
+    method: 'get',
+    url: `${URL}/user/get-process-courses`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+export const getFavourite = token =>
+  axios({
+    method: 'get',
+    url: `${URL}/user/get-favorite-courses`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });

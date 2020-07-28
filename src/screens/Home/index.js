@@ -20,7 +20,7 @@ export default function Home({navigation}) {
         colors.container,
       )}>
       {state.isAuth ? (
-        <AuthHome navigation={navigation} />
+        <AuthHome navigation={navigation} colors={colors} />
       ) : (
         <NoAuthHome navigation={navigation} />
       )}

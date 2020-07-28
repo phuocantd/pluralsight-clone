@@ -10,7 +10,13 @@ import {
 import {ThemeContext} from 'tools/context/theme';
 import Course from 'components/course/vertical';
 
-export default function Section({title, items, handleSeeAll, handleDetail}) {
+export default function Section({
+  title,
+  items,
+  handleSeeAll,
+  handleDetail,
+  self,
+}) {
   const {colors} = useContext(ThemeContext);
 
   return (
@@ -23,19 +29,26 @@ export default function Section({title, items, handleSeeAll, handleDetail}) {
           )}>
           {title}
         </Text>
-        <TouchableOpacity onPress={() => handleSeeAll(title, items)}>
-          <Text
-            style={StyleSheet.compose(
-              styles.seeAll,
-              colors.text,
-            )}>
-            {'See all >'}
-          </Text>
-        </TouchableOpacity>
+        {handleSeeAll && (
+          <TouchableOpacity onPress={() => handleSeeAll(title, items)}>
+            <Text
+              style={StyleSheet.compose(
+                styles.seeAll,
+                colors.text,
+              )}>
+              {'See all >'}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {items.map(item => (
-          <Course key={item.id} item={item} handleDetail={handleDetail} />
+          <Course
+            self={self}
+            key={item.id}
+            item={item}
+            handleDetail={handleDetail}
+          />
         ))}
       </ScrollView>
     </View>
