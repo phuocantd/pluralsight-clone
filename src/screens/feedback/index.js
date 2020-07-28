@@ -5,45 +5,67 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ToastAndroid,
+  Alert,
+  Keyboard,
 } from 'react-native';
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu';
-import IconAntDesign from 'react-native-vector-icons/AntDesign';
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+// import {
+//   Menu,
+//   MenuOptions,
+//   MenuOption,
+//   MenuTrigger,
+// } from 'react-native-popup-menu';
+// import IconAntDesign from 'react-native-vector-icons/AntDesign';
+// import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import _ from 'lodash';
 
 import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
 import {AuthContext} from '../../tools/context/auth';
+import {sendFeedback} from 'src/api/feedback';
 
 export default function Feedback({navigation}) {
   const {colors} = useContext(ThemeContext);
   const {state} = useContext(AuthContext);
 
-  const [email, setEmail] = useState('');
-  const [feedback, setFeedback] = useState('');
-  const [typeFeedback, setTypeFeedback] = useState('General feedback');
-  const [toggleCheckBox, setToggleCheckBox] = useState(true);
+  // const [email, setEmail] = useState('');
+  // const [feedback, setFeedback] = useState('');
+  // const [typeFeedback, setTypeFeedback] = useState('General feedback');
+  // const [toggleCheckBox, setToggleCheckBox] = useState(true);
+  const [subject, setSubject] = useState('');
+  const [content, setContent] = useState('');
 
   useLayoutEffect(() => {
+    const handleSendFeedback = async () => {
+      Keyboard.dismiss();
+      try {
+        const res = await sendFeedback(state.token, subject, content);
+        if (_.get(res, 'data.message', '') === 'OK') {
+          ToastAndroid.show('Phản hồi thành công', ToastAndroid.SHORT);
+        } else {
+          throw 'Fail';
+        }
+      } catch (error) {
+        ToastAndroid.show('Phản hồi thất bại', ToastAndroid.SHORT);
+      }
+    };
     navigation.setOptions({
       title: 'Send Feedback',
       headerRight: () => (
-        <IconMaterialIcons
-          style={StyleSheet.compose(
-            styles.send,
-            colors.icon,
-          )}
-          name="send"
-          size={20}
-        />
+        <TouchableOpacity onPress={() => handleSendFeedback()}>
+          <IconMaterialIcons
+            style={StyleSheet.compose(
+              styles.send,
+              colors.icon,
+            )}
+            name="send"
+            size={20}
+          />
+        </TouchableOpacity>
       ),
     });
-  }, [navigation, colors]);
+  }, [navigation, colors, subject, content]);
 
   const composeText = style =>
     StyleSheet.compose(
@@ -58,7 +80,7 @@ export default function Feedback({navigation}) {
         colors.container,
       )}>
       <View style={styles.content}>
-        {!state.isAuth && (
+        {/* {!state.isAuth && (
           <TextInput
             style={StyleSheet.flatten([
               styles.input,
@@ -70,8 +92,8 @@ export default function Feedback({navigation}) {
             placeholder="Your email address"
             placeholderTextColor={colors.placeHolder.color}
           />
-        )}
-        <Menu onSelect={value => setTypeFeedback(value)}>
+        )} */}
+        {/* <Menu onSelect={value => setTypeFeedback(value)}>
           <MenuTrigger>
             <View style={styles.feedback}>
               <Text style={composeText(styles.txtFeedback)}>
@@ -102,21 +124,33 @@ export default function Feedback({navigation}) {
               text="Account or billing issue"
             />
           </MenuOptions>
-        </Menu>
+        </Menu> */}
         <TextInput
-          multiline
-          value={feedback}
-          onChangeText={value => setFeedback(value)}
+          // multiline
+          value={subject}
+          onChangeText={value => setSubject(value)}
           style={StyleSheet.flatten([
             styles.input,
             colors.bgInput,
             colors.text,
           ])}
-          placeholder="Your feedback"
+          placeholder="Your subject"
           placeholderTextColor={colors.placeHolder.color}
         />
-        <Text style={composeText(styles.count)}>{feedback.length} / 2000</Text>
-        <TouchableOpacity
+        <TextInput
+          // multiline
+          value={content}
+          onChangeText={value => setContent(value)}
+          style={StyleSheet.flatten([
+            styles.input,
+            colors.bgInput,
+            colors.text,
+          ])}
+          placeholder="Your content"
+          placeholderTextColor={colors.placeHolder.color}
+        />
+        <Text style={composeText(styles.count)}>{content.length} / 2000</Text>
+        {/* <TouchableOpacity
           style={styles.checkbox}
           onPress={() =>
             toggleCheckBox ? setToggleCheckBox(false) : setToggleCheckBox(true)
@@ -133,7 +167,7 @@ export default function Feedback({navigation}) {
           <Text style={composeText(styles.txtCheckbox)}>
             Would you like to be contacted about this by a member of the team?{' '}
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -149,6 +183,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 10,
     fontSize: 18,
+    marginTop: 10,
   },
   count: {
     fontSize: 14,
