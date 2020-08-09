@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useContext} from 'react';
 import {
   View,
@@ -7,22 +9,23 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import _ from 'lodash';
 
 import {globalStyles} from 'global/styles';
 import {AuthContext} from 'tools/context/auth';
 import {ThemeContext} from 'tools/context/theme';
 import PasswordInput from 'components/passwordInput';
+import {register} from 'api/user';
 
 export default function Login({navigation}) {
   const {colors} = useContext(ThemeContext);
 
   const [userName, setUserName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const {state, authContext} = useContext(AuthContext);
+  const {state} = useContext(AuthContext);
 
   React.useEffect(() => {
     if (state.isAuth) {
@@ -30,8 +33,52 @@ export default function Login({navigation}) {
     }
   }, [state, navigation]);
 
-  const handleSignup = () => {
-    authContext.signUp('phuocantd-register');
+  const validationEmail = () => {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+
+  const validationPhone = () => {
+    const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    return regex.test(phone);
+  };
+
+  const validate = () => {
+    if (
+      userName === '' ||
+      email === '' ||
+      phone === '' ||
+      password === '' ||
+      confirmPassword === '' ||
+      !validationPhone() ||
+      !validationEmail() ||
+      password !== confirmPassword
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  const handleSignup = async () => {
+    // authContext.signUp('phuocantd-register');
+    try {
+      if (!validate()) {
+        throw 'Thông tin đăng kí không hợp lệ';
+      }
+
+      const res = await register(userName, email, phone, password);
+      if (_.get(res, 'data.message', '') === 'OK') {
+        alert('Bạn vui lòng vào mail để kích hoạt tài khoản');
+      } else {
+        throw 'FAIL';
+      }
+    } catch (error) {
+      console.log('ERR:', error);
+      alert(
+        `${error ||
+          _.get(error, 'response.data.message', 'Đăng kí thất bại!!!')}`,
+      );
+    }
   };
 
   const composeLabel = StyleSheet.compose(
@@ -52,35 +99,42 @@ export default function Login({navigation}) {
         colors.container,
       )}>
       <View style={styles.center}>
-        <Text style={composeLabel}>Email</Text>
+        <Text style={composeLabel}>Username</Text>
         <TextInput
           style={composeInput}
           value={userName}
           onChangeText={text => setUserName(text)}
         />
-        <Text style={composeLabel}>First name</Text>
+        <Text style={composeLabel}>Email</Text>
         <TextInput
           style={composeInput}
-          value={firstName}
-          onChangeText={text => setFirstName(text)}
+          value={email}
+          onChangeText={text => setEmail(text)}
         />
-        <Text style={composeLabel}>Last name</Text>
-        <TextInput
-          style={composeInput}
-          value={lastName}
-          onChangeText={text => setLastName(text)}
-        />
+        {email !== '' && !validationEmail() && (
+          <Text style={{color: '#f00', fontSize: 14}}>Email không hợp lệ</Text>
+        )}
         <Text style={composeLabel}>Phone</Text>
         <TextInput
           keyboardType="numeric"
           style={composeInput}
           value={phone}
-          onChangeText={text => setUserName(setPhone)}
+          onChangeText={text => setPhone(text)}
         />
+        {phone !== '' && !validationPhone() && (
+          <Text style={{color: '#f00', fontSize: 14}}>
+            Số điện thoại không hợp lệ
+          </Text>
+        )}
         <Text style={composeLabel}>Password</Text>
         <PasswordInput value={password} onChange={setPassword} />
         <Text style={composeLabel}>Confirm password</Text>
         <PasswordInput value={confirmPassword} onChange={setConfirmPassword} />
+        {password !== confirmPassword && (
+          <Text style={{color: '#f00', fontSize: 14}}>
+            Password is not match
+          </Text>
+        )}
         <TouchableOpacity
           style={StyleSheet.compose(
             styles.btn,
