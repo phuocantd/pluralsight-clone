@@ -4,10 +4,11 @@ import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import {ThemeContext} from 'tools/context/theme';
-import {LOGIN, REGISTER, FORGOTPASSWORD} from 'global/constants';
+import {LOGIN, REGISTER, FORGOTPASSWORD, ACTIVEEMAIL} from 'global/constants';
 import LoginScreen from 'screens/Login';
 import RegisterScreen from 'screens/Register';
 import ForgotPasswordScreen from 'screens/ForgotPassword';
+import ActiveEmail from 'src/screens/ActitveEmail';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,11 @@ export default function AuthStack() {
         name={FORGOTPASSWORD}
         component={ForgotPasswordScreen}
         options={{title: 'Forgot Password'}}
+      />
+      <Stack.Screen
+        name={ACTIVEEMAIL}
+        component={ActiveEmail}
+        options={{title: 'Active Email'}}
       />
     </Stack.Navigator>
   );

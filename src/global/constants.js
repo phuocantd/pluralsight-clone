@@ -25,6 +25,7 @@ export const AUTHORSSEARCHRESULT = 'AuthorsSearchResult';
 export const LOGIN = 'Login';
 export const REGISTER = 'Register';
 export const FORGOTPASSWORD = 'ForgotPassword';
+export const ACTIVEEMAIL = 'ActiveEmail';
 
 export const PROFILE = 'Profile';
 export const UPDATEPROFILE = 'UpdateProfile';

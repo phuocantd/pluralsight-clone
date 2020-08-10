@@ -13,19 +13,21 @@ import _ from 'lodash';
 
 import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
-import {forgotPassword} from 'api/user';
+import {sendActivateEmail} from 'api/user';
 
-export default function ForgotPassword({navigation}) {
+export default function ActiveEmail({navigation}) {
   const {colors} = React.useContext(ThemeContext);
 
   const [email, setEmail] = useState('');
 
-  const handleForgot = async () => {
+  const handleActive = async () => {
     try {
-      const res = await forgotPassword(email);
-      alert(_.get(res, 'data.message', 'Quên mật khẩu thành công'));
+      const res = await sendActivateEmail(email);
+      alert(_.get(res, 'data.message', 'Kích hoạt tài khoản thành công'));
     } catch (err) {
-      alert(_.get(err, 'response.data.message', 'Quên mật khẩu thất bại'));
+      alert(
+        _.get(err, 'response.data.message', 'Kích hoạt tài khoản thất bại'),
+      );
     }
   };
 
@@ -42,8 +44,7 @@ export default function ForgotPassword({navigation}) {
               styles.title,
               colors.text,
             )}>
-            Enter your email address and we'll send you a link to reset your
-            password
+            Enter your email address and we'll send you a link to actitve email
           </Text>
           <Text
             style={StyleSheet.compose(
@@ -62,7 +63,7 @@ export default function ForgotPassword({navigation}) {
             onChangeText={text => setEmail(text)}
           />
           <TouchableOpacity
-            onPress={handleForgot}
+            onPress={handleActive}
             style={StyleSheet.compose(
               styles.btn,
               colors.bgBtn,

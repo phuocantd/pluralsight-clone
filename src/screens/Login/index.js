@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import {globalStyles} from 'global/styles';
-import {REGISTER, FORGOTPASSWORD} from 'global/constants';
+import {REGISTER, FORGOTPASSWORD, ACTIVEEMAIL} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 import PasswordInput from 'components/passwordInput';
 import {AuthContext} from 'tools/context/auth';
@@ -108,13 +108,15 @@ export default function Login({navigation}) {
               styles.border,
               colors.btn,
             )}>
-            <TouchableOpacity style={styles.btnLabel}>
+            <TouchableOpacity
+              style={styles.btnLabel}
+              onPress={navigation.navigate(ACTIVEEMAIL)}>
               <Text
                 style={StyleSheet.compose(
                   styles.labelText,
                   colors.textBtn,
                 )}>
-                use single sign-on (sso)
+                Active Email
               </Text>
             </TouchableOpacity>
           </View>

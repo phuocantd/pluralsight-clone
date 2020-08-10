@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import _ from 'lodash';
 
 import {ThemeContext} from 'tools/context/theme';
 import Course from 'components/course/vertical';
@@ -18,6 +19,9 @@ export default function Section({
   self,
 }) {
   const {colors} = useContext(ThemeContext);
+  if (!items || _.isEmpty(items)) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>

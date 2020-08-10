@@ -14,6 +14,7 @@ export default function Info({
   rating,
 }) {
   const {colors} = React.useContext(ThemeContext);
+  console.log('rating', rating);
   return (
     <View style={styles.container}>
       <Text
@@ -31,13 +32,17 @@ export default function Info({
         )}>
         {author}
       </Text>
-      <Text
-        style={StyleSheet.compose(
-          styles.info,
-          colors.text,
-        )}>{`${duration}h ${format(new Date(updated), 'dd/MM/yyyy')} ${
-        level ? level : ''
-      }`}</Text>
+      {updated && (
+        <Text
+          style={StyleSheet.compose(
+            styles.info,
+            colors.text,
+          )}>
+          {`${duration}h ${format(new Date(updated), 'dd/MM/yyyy')} ${
+            level ? level : ''
+          }`}
+        </Text>
+      )}
       <Rate rate={rating} />
     </View>
   );

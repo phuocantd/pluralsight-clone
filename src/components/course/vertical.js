@@ -7,6 +7,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import _ from 'lodash';
 
 import {COURSEDETAIL} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
@@ -59,11 +60,11 @@ export default function Course({item, handleDetail, self}) {
         <InfoCourse2 title={item.courseTitle} author={item.instructorName} />
       ) : (
         <InfoCourse
-          title={item.title}
-          author={item['instructor.user.name']}
-          duration={item.totalHours}
-          level={item.status}
-          updated={item.updatedAt}
+          title={item.title || ''}
+          author={_.get(item, 'instructor.user.name', '')}
+          duration={item.totalHours || ''}
+          level={item.status || ''}
+          updated={item.updatedAt || new Date()}
           rating={item.ratedNumber}
         />
       )}

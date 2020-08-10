@@ -15,7 +15,7 @@ export default function Rate({rate}) {
           .map((item, idx) => (
             <Icon key={idx} name="star" color="#FAD000" size={13} />
           ))}
-        {Array(5 - rate)
+        {Array(10 - rate)
           .fill(null)
           .map((item, idx) => (
             <Icon key={idx} name="star-o" color="#FAD000" size={13} />
