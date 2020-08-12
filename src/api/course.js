@@ -34,5 +34,12 @@ export const search = keyword =>
   axios({
     method: 'post',
     url: `${URL}/course/search`,
-    data: {keyword, limit: 10, offset: 1},
+    data: {keyword},
+  });
+
+export const search2 = (keyword, limit, offset) =>
+  axios({
+    method: 'post',
+    url: `${URL}/course/searchV2`,
+    data: {keyword, limit, offset},
   });

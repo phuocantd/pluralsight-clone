@@ -14,31 +14,38 @@ import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
 import Recent from 'components/recent';
 import NotFound from './notFound';
-import ResultSearch from './ResultSearch';
-import {search} from 'api/course';
+// import ResultSearch from './ResultSearch';
+import {search2} from 'api/course';
+import Result from './result';
 
-export default function Search({navigation}) {
+export default function Search({}) {
   const {colors, mode} = React.useContext(ThemeContext);
 
   const [searchValue, setSearchValue] = useState('');
   const [listRecent, setListRecent] = useState([]);
+  const [data, setData] = useState({});
   const [isRecent, setIsRecent] = useState(true);
-  const [listResult, setListResult] = useState([]);
+  // const [listResult, setListResult] = useState([]);
 
   useEffect(() => {
     loadRecent();
   }, []);
 
   const loadRecent = async () => {
-    const recents = await AsyncStorage.getItem('search-recents');
-    console.log('load recents', JSON.parse(recents));
-    setListRecent(JSON.parse(recents) || []);
+    try {
+      const recents = await AsyncStorage.getItem('search-recents');
+      console.log('load recents', JSON.parse(recents));
+      setIsRecent(JSON.parse(recents) || []);
+    } catch (error) {
+      console.log(error);
+      setIsRecent([]);
+    }
   };
 
   const handleSearch = async (key, cb) => {
     try {
-      const res = await search(key);
-      setListResult(_.get(res, 'data.payload.rows', []) || []);
+      const res = await search2(key, 10, 0);
+      setData(_.get(res, 'data.payload', {}) || {});
     } catch (error) {}
     cb && cb();
   };
@@ -63,6 +70,16 @@ export default function Search({navigation}) {
       setSearchValue(recent);
       setIsRecent(false);
     });
+  };
+
+  const isEmptyData = () => {
+    const totalCourses = _.get(data, 'courses.total', 0);
+    const totalInstructors = _.get(data, 'instructors.total', 0);
+
+    if (totalCourses === 0 && totalInstructors === 0) {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -105,7 +122,7 @@ export default function Search({navigation}) {
           onPress={() => {
             setSearchValue('');
             setIsRecent(true);
-            setListResult([]);
+            setData({});
           }}>
           {searchValue !== '' && (
             <IconMaterialIcons name="clear" style={colors.text} size={23} />
@@ -123,11 +140,12 @@ export default function Search({navigation}) {
           ) : (
             <View />
           )
-        ) : !_.isEmpty(listResult) ? (
-          <ResultSearch list={listResult} navigation={navigation} />
+        ) : !isEmptyData() ? (
+          <Result data={data} />
         ) : (
           <NotFound name={searchValue} />
         )}
+        {/* <ResultSearch list={listResult} navigation={navigation} /> */}
       </View>
     </View>
   );

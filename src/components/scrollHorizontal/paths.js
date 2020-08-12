@@ -29,7 +29,7 @@ export default function PathScroll({title, items, handleSeeAll, handleDetail}) {
                 styles.seeAll,
                 colors.text,
               )}>
-              See all {'>'}
+              Xem thêm {'>'}
             </Text>
           )}
         </TouchableOpacity>

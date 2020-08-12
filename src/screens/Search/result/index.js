@@ -5,19 +5,20 @@ import {StyleSheet} from 'react-native';
 import {
   ALLSEARCHRESULT,
   COURSESSEARCHRESULT,
-  PATHSSEARCHRESULT,
+  // PATHSSEARCHRESULT,
   AUTHORSSEARCHRESULT,
 } from 'global/constants';
 import AllResult from './all';
 import CoursesResult from './courses';
-import PathsResult from './paths';
+// import PathsResult from './paths';
 import AuthorsResult from './authors';
 
 const Tab = createMaterialTopTabNavigator();
 
 import {ThemeContext} from 'tools/context/theme';
 
-export default function TabResult() {
+export default function TabResult({data}) {
+  console.log('result search', data);
   const {colors} = React.useContext(ThemeContext);
   return (
     <Tab.Navigator
@@ -40,11 +41,11 @@ export default function TabResult() {
         component={CoursesResult}
         options={{title: 'Courses'}}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={PATHSSEARCHRESULT}
         component={PathsResult}
         options={{title: 'Paths'}}
-      />
+      /> */}
       <Tab.Screen
         name={AUTHORSSEARCHRESULT}
         component={AuthorsResult}

@@ -110,7 +110,7 @@ export default function Login({navigation}) {
             )}>
             <TouchableOpacity
               style={styles.btnLabel}
-              onPress={navigation.navigate(ACTIVEEMAIL)}>
+              onPress={() => navigation.navigate(ACTIVEEMAIL)}>
               <Text
                 style={StyleSheet.compose(
                   styles.labelText,

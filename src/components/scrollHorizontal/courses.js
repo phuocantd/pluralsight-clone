@@ -40,7 +40,7 @@ export default function Section({
                 styles.seeAll,
                 colors.text,
               )}>
-              {'See all >'}
+              {'Xem thêm >'}
             </Text>
           </TouchableOpacity>
         )}

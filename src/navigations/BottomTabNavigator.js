@@ -6,10 +6,10 @@ import IconFontisto from 'react-native-vector-icons/Fontisto';
 const Tab = createBottomTabNavigator();
 
 import HomeStack from './homeStack';
-import DownloadsStack from './downloadsStack';
+// import DownloadsStack from './downloadsStack';
 import BrowseStack from './browseStack';
 import SearchStack from './searchStack';
-import {HOME, DOWNLOADS, BROWSE, SEARCH} from 'global/constants';
+import {HOME, BROWSE, SEARCH} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 
 export default function BottomTabNavigator() {

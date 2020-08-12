@@ -22,6 +22,8 @@ export default function Profile({navigation}) {
     });
   };
 
+  console.log('state', state);
+
   return (
     <View
       style={StyleSheet.compose(

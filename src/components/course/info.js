@@ -3,7 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import {format} from 'date-fns';
 
 import {ThemeContext} from 'tools/context/theme';
-import Rate from '../rate';
+// import Rate from '../rate';
 
 export default function Info({
   title,
@@ -43,7 +43,14 @@ export default function Info({
           }`}
         </Text>
       )}
-      <Rate rate={rating} />
+      {/* <Rate rate={rating} /> */}
+      <Text
+        style={StyleSheet.compose(
+          styles.info,
+          colors.text,
+        )}>
+        Rate: {rating}
+      </Text>
     </View>
   );
 }

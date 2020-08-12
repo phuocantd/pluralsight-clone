@@ -6,6 +6,7 @@ import {ThemeContext} from 'tools/context/theme';
 
 export default function Rate({rate}) {
   const {colors} = React.useContext(ThemeContext);
+  console.log('rate', rate);
 
   return (
     <View style={styles.rate}>
@@ -15,7 +16,7 @@ export default function Rate({rate}) {
           .map((item, idx) => (
             <Icon key={idx} name="star" color="#FAD000" size={13} />
           ))}
-        {Array(10 - rate)
+        {Array(20 - rate)
           .fill(null)
           .map((item, idx) => (
             <Icon key={idx} name="star-o" color="#FAD000" size={13} />
