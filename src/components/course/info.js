@@ -6,6 +6,7 @@ import {ThemeContext} from 'tools/context/theme';
 // import Rate from '../rate';
 
 export default function Info({
+  learnWhat,
   title,
   author,
   duration,
@@ -30,7 +31,7 @@ export default function Info({
           styles.info,
           colors.text,
         )}>
-        {author}
+        {author || learnWhat}
       </Text>
       {updated && (
         <Text

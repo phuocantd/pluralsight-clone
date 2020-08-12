@@ -5,7 +5,12 @@ import {globalStyles} from 'global/styles';
 import {ThemeContext} from 'tools/context/theme';
 import Course from 'components/course/horizontal';
 
-export default function ListCourse({items, handleDetail, headerComponent}) {
+export default function ListCourse({
+  items,
+  handleDetail,
+  headerComponent,
+  search,
+}) {
   const {colors} = React.useContext(ThemeContext);
 
   return (
@@ -19,7 +24,7 @@ export default function ListCourse({items, handleDetail, headerComponent}) {
         data={items}
         ListHeaderComponent={headerComponent}
         renderItem={({item}) => (
-          <Course item={item} handleDetail={handleDetail} />
+          <Course search={search} item={item} handleDetail={handleDetail} />
         )}
         keyExtractor={(item, index) => index.toString()}
         ItemSeparatorComponent={() => (

@@ -3,16 +3,21 @@ import {View, FlatList, StyleSheet} from 'react-native';
 
 import {ThemeContext} from 'tools/context/theme';
 import Author from 'components/author/horizontal';
+import Author2 from 'components/author/search';
 
-export default function ListPath({items, handleDetail}) {
+export default function ListAuthor({items, handleDetail, search}) {
   const {colors} = React.useContext(ThemeContext);
   return (
     <FlatList
       style={styles.list}
       data={items}
-      renderItem={({item}) => (
-        <Author item={item} handleDetail={handleDetail} />
-      )}
+      renderItem={({item}) =>
+        search ? (
+          <Author2 item={item} handleDetail={() => handleDetail(item.id)} />
+        ) : (
+          <Author item={item} handleDetail={handleDetail} />
+        )
+      }
       keyExtractor={(item, index) => index.toString()}
       ItemSeparatorComponent={() => (
         <View

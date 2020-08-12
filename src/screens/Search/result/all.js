@@ -7,6 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo';
+import _ from 'lodash';
 
 import {globalStyles} from 'global/styles';
 import {
@@ -22,8 +23,10 @@ import Course from 'components/course/horizontal';
 import Path from 'components/path/horizontal';
 import Author from 'components/author/horizontal';
 
-export default function All({navigation}) {
+export default function All({navigation, data}) {
   const {colors} = React.useContext(ThemeContext);
+
+  console.log('all', data);
 
   const composeText = style =>
     StyleSheet.compose(
