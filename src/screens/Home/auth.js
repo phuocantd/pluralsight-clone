@@ -1,5 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Image, StyleSheet, ScrollView, View, Text} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  RefreshControl,
+} from 'react-native';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -15,6 +22,7 @@ export default function AuthHome({navigation, colors}) {
   const {state} = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
+  const [isRefresh, setIsRefresh] = useState(false);
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -22,7 +30,7 @@ export default function AuthHome({navigation, colors}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadData = async () => {
+  const loadData = async cb => {
     const arrReq = [
       getRecommend(profile.id),
       getIntro(),
@@ -38,8 +46,18 @@ export default function AuthHome({navigation, colors}) {
         const progress = _.get(resProgress, 'data.payload', []) || [];
         setData({recommend, intro, favourite, progress});
         setLoading(false);
+        cb && cb();
       })
       .catch(err => console.log('ERR:', err));
+  };
+
+  const onRefresh = () => {
+    setIsRefresh(true);
+    setLoading(true);
+    loadData(() => {
+      setIsRefresh(false);
+      setLoading(false);
+    });
   };
 
   const handleSeeAll = (title, items) =>
@@ -50,9 +68,12 @@ export default function AuthHome({navigation, colors}) {
   if (loading) {
     return <Loading />;
   }
-  console.log('home', data);
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl refreshing={isRefresh} onRefresh={onRefresh} />
+      }>
       <Image
         style={styles.image}
         source={{

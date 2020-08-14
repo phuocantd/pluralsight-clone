@@ -3,7 +3,6 @@ import {View, Text, StyleSheet} from 'react-native';
 import {format} from 'date-fns';
 
 import {ThemeContext} from 'tools/context/theme';
-import Rate from 'src/components/rate';
 
 export default function MoreInfo({level, updated, duration, rating}) {
   const {colors} = React.useContext(ThemeContext);
@@ -16,8 +15,9 @@ export default function MoreInfo({level, updated, duration, rating}) {
     <View style={styles.container}>
       <Text style={compose}>{level}</Text>
       <Text style={compose}>{format(new Date(updated), 'dd/MM/yyyy')}</Text>
-      <Text style={compose}>{duration}</Text>
-      <Rate rate={rating} />
+      <Text style={compose}>{duration}h</Text>
+      {/* <Rate rate={rating} /> */}
+      <Text style={compose}>Rating: {rating}</Text>
     </View>
   );
 }

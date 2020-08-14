@@ -16,6 +16,8 @@ import {
   FEATURE,
   LISTCOURSE,
   UPDATEPROFILE,
+  RATING,
+  LISTRATE,
 } from 'global/constants';
 import {OptionHeaderRight} from 'global/navigation';
 import {ThemeContext} from 'tools/context/theme';
@@ -33,6 +35,8 @@ import SkillScreen from 'screens/skill';
 import FeatureScreen from 'screens/features';
 import ListCourseScreen from 'screens/ListCourse';
 import UpdateProfileScreen from 'screens/updateProfile';
+import Rating from 'screens/Rating';
+import ListRate from 'src/screens/ListRate';
 
 const Stack = createStackNavigator();
 
@@ -96,6 +100,8 @@ export default function BrowseStack() {
         component={ListCourseScreen}
         options={{title: ''}}
       />
+      <Stack.Screen name={RATING} component={Rating} />
+      <Stack.Screen name={LISTRATE} component={ListRate} />
     </Stack.Navigator>
   );
 }

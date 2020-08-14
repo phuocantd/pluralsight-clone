@@ -43,3 +43,21 @@ export const search2 = (keyword, limit, offset) =>
     url: `${URL}/course/searchV2`,
     data: {keyword, limit, offset},
   });
+
+export const ratingCourse = (
+  token,
+  courseId,
+  formalityPoint,
+  contentPoint,
+  presentationPoint,
+  content,
+) =>
+  axios({
+    method: 'post',
+    url: `${URL}/course/rating-course`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    data: {courseId, formalityPoint, contentPoint, presentationPoint, content},
+  });

@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+  Alert,
+} from 'react-native';
 import _ from 'lodash';
 
 import {ThemeContext} from 'tools/context/theme';
@@ -21,6 +28,7 @@ export default function CourseDetail({navigation, id}) {
   // const {id} = route.params;
 
   const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState(false);
 
   const [data, setData] = useState({});
   const [isContent, setIsContent] = useState(true);
@@ -31,28 +39,44 @@ export default function CourseDetail({navigation, id}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadData = async () => {
+  const loadData = async cb => {
     try {
-      console.log('loading');
       const res = await getCourseDetail(id, profile.id);
       setData(_.get(res, 'data.payload', {}));
       const sections = _.get(res, 'data.payload.section[0]', {}) || {};
       setCurLesson(_.get(sections, 'lesson[0]', {}) || {});
-      console.log('hae', sections);
       setLoading(false);
+      console.log('course detail', _.get(res, 'data.payload', {}));
+      cb && cb();
     } catch (error) {
       console.log('ERR:', error);
+      Alert.alert(
+        'Warning',
+        _.get(error, 'response.data.message', 'Truy cập không thành công'),
+        [{text: 'Exit', onPress: () => navigation.goBack()}],
+      );
     }
+  };
+
+  const onRefresh = () => {
+    setRefresh(true);
+    setLoading(true);
+    loadData(() => {
+      setRefresh(false);
+      setLoading(false);
+    });
   };
 
   const handleBack = () => navigation.goBack();
 
-  const handlePressLesson = lesson => setCurLesson(lesson);
+  const handlePressLesson = lesson => {
+    console.log('lesson', lesson);
+    setCurLesson(lesson);
+  };
 
   if (loading) {
     return <Loading />;
   }
-  console.log('data detail:', data, curLesson);
   return (
     <View
       style={StyleSheet.compose(
@@ -62,12 +86,17 @@ export default function CourseDetail({navigation, id}) {
       <View>
         <Video
           lesson={curLesson}
-          image={data.imageUrl}
+          image={_.get(data, 'imageUrl', null)}
           handleBack={handleBack}
-          url={curLesson.videoUrl}
+          url={_.get(curLesson, 'videoUrl', null)}
         />
       </View>
-      <ScrollView style={styles.info} stickyHeaderIndices={[1]}>
+      <ScrollView
+        style={styles.info}
+        stickyHeaderIndices={[1]}
+        refreshControl={
+          <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+        }>
         <View style={{marginHorizontal: 20}}>
           <Text
             style={StyleSheet.compose(
@@ -76,15 +105,6 @@ export default function CourseDetail({navigation, id}) {
             )}>
             {data.title}
           </Text>
-          {/* <View style={styles.authors}>
-            {data.authors.map(author => (
-              <AuthorInfo
-                key={Math.random().toString()}
-                name={author.name}
-                image={author.image}
-              />
-            ))}
-          </View> */}
           <View style={styles.moreInfo}>
             <MoreInfo
               level={data.status}
@@ -100,7 +120,11 @@ export default function CourseDetail({navigation, id}) {
             <Description description={data.description} />
           </View>
           <View>
-            <ButtonItem />
+            <ButtonItem
+              id={_.get(data, 'id', '')}
+              ratings={_.get(data, 'ratings', [])}
+              navigation={navigation}
+            />
           </View>
         </View>
         <View>

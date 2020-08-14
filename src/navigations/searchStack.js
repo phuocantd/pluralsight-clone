@@ -1,12 +1,21 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {SEARCH, PATHDETAIL, AUTHORDETAIL, COURSEDETAIL} from 'global/constants';
+import {
+  SEARCH,
+  PATHDETAIL,
+  AUTHORDETAIL,
+  COURSEDETAIL,
+  RATING,
+  LISTRATE,
+} from 'global/constants';
 import {ThemeContext} from 'tools/context/theme';
 import SearchScreen from 'screens/Search';
 import PathDetailScreen from 'screens/pathDetail';
 import AuthorDetailScreen from 'screens/authorDetail';
 import CourseDetailScreen from 'screens/courseDetail';
+import Rating from 'screens/Rating';
+import ListRate from 'src/screens/ListRate';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +53,8 @@ export default function SearchStack() {
         component={CourseDetailScreen}
         options={{headerShown: false}}
       />
+      <Stack.Screen name={RATING} component={Rating} />
+      <Stack.Screen name={LISTRATE} component={ListRate} />
     </Stack.Navigator>
   );
 }

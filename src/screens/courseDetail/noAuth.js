@@ -85,7 +85,11 @@ export default function CourseDetail({navigation, id}) {
             <Description description={data.description} />
           </View>
           <View>
-            <ButtonItem />
+            <ButtonItem
+              id={_.get(data, 'id', '')}
+              navigation={navigation}
+              ratings={_.get(data, 'ratings', [])}
+            />
           </View>
         </View>
         {/* <View>

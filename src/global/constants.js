@@ -33,3 +33,5 @@ export const UPDATEPROFILE = 'UpdateProfile';
 export const SETTINGS = 'Settings';
 export const FEEDBACK = 'Feedback';
 export const CONTACT = 'Contact';
+export const RATING = 'Rating';
+export const LISTRATE = 'List rate';

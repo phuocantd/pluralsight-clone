@@ -1,11 +1,17 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Share, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Share,
+  View,
+  ImageBackground,
+} from 'react-native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import VideoPlayer from 'react-native-video-player';
 // import Video from 'react-native-video';
 
-export default function ButtonControl({image, handleBack, url, lesson}) {
+export default function Video({image, handleBack, url, lesson}) {
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -28,14 +34,18 @@ export default function ButtonControl({image, handleBack, url, lesson}) {
 
   return (
     <View>
-      <VideoPlayer
-        video={{
-          uri: url,
-        }}
-        videoWidth={1600}
-        videoHeight={900}
-        thumbnail={{uri: image}}
-      />
+      {url ? (
+        <VideoPlayer
+          video={{
+            uri: url,
+          }}
+          videoWidth={1600}
+          videoHeight={900}
+          thumbnail={{uri: image}}
+        />
+      ) : (
+        <ImageBackground source={{uri: image}} style={styles.image} />
+      )}
       {/* <Video
         key={lesson.id}
         autoplay={true}

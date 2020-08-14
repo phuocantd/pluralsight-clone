@@ -10,6 +10,8 @@ import {
   CONTACT,
   FEEDBACK,
   UPDATEPROFILE,
+  RATING,
+  LISTRATE,
 } from 'global/constants';
 import {OptionHeaderRight} from 'global/navigation';
 import {ThemeContext} from 'tools/context/theme';
@@ -21,6 +23,8 @@ import SettingsScreen from 'screens/setting';
 import ContactScreen from 'screens/contact';
 import FeedbackScreen from 'screens/feedback';
 import UpdateProfileScreen from 'screens/updateProfile';
+import Rating from 'screens/Rating';
+import ListRate from 'src/screens/ListRate';
 
 const Stack = createStackNavigator();
 
@@ -54,6 +58,8 @@ export default function HomeStack() {
         component={CourseDetailScreen}
         options={{headerShown: false}}
       />
+      <Stack.Screen name={RATING} component={Rating} />
+      <Stack.Screen name={LISTRATE} component={ListRate} />
     </Stack.Navigator>
   );
 }

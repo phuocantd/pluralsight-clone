@@ -15,7 +15,6 @@ export default function Info({
   rating,
 }) {
   const {colors} = React.useContext(ThemeContext);
-  console.log('rating', rating);
   return (
     <View style={styles.container}>
       <Text
